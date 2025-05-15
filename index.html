@@ -49,9 +49,9 @@
             --button-bg-end: var(--accent-color); 
             --footer-text-color: rgba(255, 255, 255, 0.9);
 
-            --ad-placeholder-bg: #f0f0f0;
-            --ad-placeholder-text: #aaa;
-            --ad-placeholder-border: #ddd;
+            /* Ad Placeholder Styling (basic) - will be overridden by ad itself */
+            /* We can keep min-height for layout spacing if ad doesn't load */
+            --ad-placeholder-min-height: 250px; /* For 300x250 ad */
         }
 
         * {
@@ -88,19 +88,14 @@
             align-items: center;
         }
         
-        .ad-placeholder {
+        .ad-container { /* Changed from ad-placeholder to ad-container */
             width: 100%;
-            min-height: 90px; 
-            background-color: var(--ad-placeholder-bg);
-            border: 1px dashed var(--ad-placeholder-border);
-            display: flex;
-            align-items: center;
+            display: flex; /* To center the 300px ad within the container */
             justify-content: center;
-            margin: 15px 0;
-            font-size: 0.9em;
-            color: var(--ad-placeholder-text);
-            border-radius: 8px;
-            text-align: center;
+            align-items: center;
+            margin: 20px 0;
+            min-height: var(--ad-placeholder-min-height); /* Reserve space even if ad fails */
+            /* border: 1px dashed #ccc; */ /* Optional: for debugging ad space */
         }
 
         .container {
@@ -113,8 +108,8 @@
             animation: popInSmooth 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.2s both; 
             position: relative;
             z-index: 1;
-            margin-top: 10px; 
-            margin-bottom: 10px; 
+            /* margin-top: 10px;  Removed, ad-container handles spacing */
+            /* margin-bottom: 10px; Removed, ad-container handles spacing */
         }
 
         @keyframes popInSmooth {
@@ -252,20 +247,31 @@
                 padding: 13px 22px;
                 font-size: 1em;
             }
+            .ad-container {
+                min-height: 250px; /* Ensure space on mobile too */
+            }
         }
     </style>
 </head>
 <body>
     <div class="page-wrapper">
-        <!-- Placeholder for Top Ad -->
-        <div class="ad-placeholder top">
-            Top Ad Placeholder (e.g., 320x100)
+        <!-- Top Ad Slot -->
+        <div class="ad-container ad-top">
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : '58d55d5d48a6447673ab2f1bb1c7de82',
+                    'format' : 'iframe',
+                    'height' : 250,
+                    'width' : 300,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="//maintaintournamentslick.com/58d55d5d48a6447673ab2f1bb1c7de82/invoke.js"></script>
         </div>
 
         <div class="container">
             <div class="greeting-icon">💖</div> 
             <h1 id="mainHeading">Hey Friend! 👋</h1>
-            <!-- Message text will be populated by JavaScript -->
             <p id="messageText" class="message"></p> 
             
             <div class="input-group">
@@ -279,9 +285,18 @@
             </button>
         </div>
 
-        <!-- Placeholder for Bottom Ad -->
-        <div class="ad-placeholder bottom">
-            Bottom Ad Placeholder (e.g., 300x250)
+        <!-- Bottom Ad Slot -->
+        <div class="ad-container ad-bottom">
+            <script type="text/javascript">
+                atOptions = { // You might use a different key for a second ad unit
+                    'key' : '58d55d5d48a6447673ab2f1bb1c7de82', // Using same key for example
+                    'format' : 'iframe',
+                    'height' : 250,
+                    'width' : 300,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="//maintaintournamentslick.com/58d55d5d48a6447673ab2f1bb1c7de82/invoke.js"></script>
         </div>
 
         <p class="footer-note">Spread kindness, one message at a time! 💌</p>
@@ -290,9 +305,8 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const urlParams = new URLSearchParams(window.location.search);
-            const receivedFromName = urlParams.get('name'); // Naam jo URL se aaya (sender ka)
+            const receivedFromName = urlParams.get('name'); 
             
-            // HTML elements
             const pageTitleElement = document.querySelector('title');
             const ogTitleMeta = document.querySelector('meta[property="og:title"]');
             const ogDescriptionMeta = document.querySelector('meta[property="og:description"]');
@@ -300,13 +314,12 @@
             const currentUserNameInput = document.getElementById('currentUserNameInput');
             const shareButton = document.getElementById('shareButton');
             const mainHeadingElement = document.getElementById('mainHeading');
-            const messageTextElement = document.getElementById('messageText'); // The <p> tag for the message
+            const messageTextElement = document.getElementById('messageText'); 
             const greetingIconElement = document.querySelector('.greeting-icon');
 
-            // Default messages
             const defaultPageTitle = "A Friendly Hello Just For You! 😊";
-            const defaultOgTitle = "A Friendly Hello Just For You! 👋"; // Used for OG tags
-            const defaultOgDescription = "Someone special is thinking of you and sent a little message. Click to see! ✨"; // Used for OG tags
+            const defaultOgTitle = "A Friendly Hello Just For You! 👋"; 
+            const defaultOgDescription = "Someone special is thinking of you and sent a little message. Click to see! ✨"; 
             const defaultMainHeading = "Hey Friend! 👋";
             const defaultMessageText = `
                 Just a little hello to say you crossed my mind! 😊 Missing our chats and the good times. Hope you're doing awesome! ✨
@@ -327,23 +340,17 @@
                 `;
                 
                 if (pageTitleElement) pageTitleElement.textContent = `${decodedName} sent you a friendly hello!`;
-                
-                // Dynamically update OG tags IF a name is present in the URL.
-                // This helps if this specific link (with ?name=) gets shared again by the recipient.
-                // However, the primary OG tags fetched by crawlers will be those from the canonicalUrl.
                 if (ogTitleMeta) ogTitleMeta.setAttribute('content', `Message from ${decodedName}! 👋`);
                 if (ogDescriptionMeta) ogDescriptionMeta.setAttribute('content', `${decodedName} is thinking of you! Click to see.`);
 
                 currentUserNameInput.placeholder = "Enter *your* name to send a new message!";
 
             } else {
-                // Set default content when no name is in the URL (sender's view or fresh open)
                 mainHeadingElement.innerHTML = defaultMainHeading;
                 messageTextElement.innerHTML = defaultMessageText;
                 greetingIconElement.innerHTML = '💖';
 
                 if (pageTitleElement) pageTitleElement.textContent = defaultPageTitle;
-                // Ensure OG tags are set to default (they are already in HTML, but this is for JS consistency)
                 if (ogTitleMeta) ogTitleMeta.setAttribute('content', defaultOgTitle);
                 if (ogDescriptionMeta) ogDescriptionMeta.setAttribute('content', defaultOgDescription);
             }
