@@ -4,11 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- Primary Meta Tags -->
     <title>A Friendly Hello Just For You! 😊</title>
     <meta name="description" content="Someone special is thinking of you and sent a little message. Click to see! ✨">
 
-    <!-- Open Graph / Facebook Meta Tags -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://friendship-forever.vercel.app/"> 
     <meta property="og:title" content="A Friendly Hello Just For You! 👋">
@@ -18,14 +16,11 @@
     <meta property="og:image:height" content="630">
     <meta property="og:site_name" content="Friendship Forever">
 
-    <!-- Twitter Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://friendship-forever.vercel.app/">
     <meta name="twitter:title" content="A Friendly Hello Just For You! 👋">
     <meta name="twitter:description" content="Someone special is thinking of you and sent a little message. Click to see! ✨">
     <meta name="twitter:image" content="https://friendship-forever.vercel.app/image.jpg">
-    <!-- <meta name="twitter:creator" content="@yourtwitterhandle"> -->
-
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Pacifico&display=swap');
@@ -46,19 +41,18 @@
             --shadow-color: rgba(74, 0, 224, 0.15); 
             --button-text: #ffffff;
             
-            /* WhatsApp Button Colors */
-            --whatsapp-green: #25D366;
-            --whatsapp-green-hover: #1DAE54; 
+            /* General Share Button Colors (can be same as highlight accent) */
+            --share-button-bg-start: var(--highlight-accent);
+            --share-button-bg-end: var(--accent-color); 
+            --share-button-hover-bg-start: var(--accent-color);
+            --share-button-hover-bg-end: var(--highlight-accent);
+
 
             --footer-text-color: rgba(255, 255, 255, 0.9);
             --ad-placeholder-min-height: 250px; 
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Poppins', sans-serif;
@@ -130,7 +124,6 @@
             70% { transform: scale(1); }
         }
 
-
         h1 {
             font-family: 'Pacifico', cursive;
             font-size: 2.2em; 
@@ -189,9 +182,9 @@
             background-color: #fff;
         }
 
-        /* Updated Button Style for WhatsApp */
-        .whatsapp-share-button {
-            background-color: var(--whatsapp-green);
+        /* General Share Button Style */
+        .general-share-button {
+            background: linear-gradient(135deg, var(--share-button-bg-start), var(--share-button-bg-end)); 
             color: var(--button-text);
             border: none;
             padding: 14px 28px; 
@@ -199,26 +192,26 @@
             font-weight: 600;
             border-radius: 10px;
             cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.2s ease;
+            transition: all 0.3s ease; /* For background and transform */
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px; /* Space between icon and text */
+            gap: 10px;
             width: 100%;
             text-shadow: 0 1px 1px rgba(0,0,0,0.15);
         }
 
-        .whatsapp-share-button:hover {
-            background-color: var(--whatsapp-green-hover);
-            transform: translateY(-2px);
+        .general-share-button:hover {
+            background: linear-gradient(135deg, var(--share-button-hover-bg-start), var(--share-button-hover-bg-end));
+            transform: translateY(-2px) scale(1.01);
+            box-shadow: 0 7px 14px rgba(74,0,224,0.2); /* Using existing shadow color */
         }
         
-        .whatsapp-share-button .whatsapp-icon svg {
-            width: 22px; /* WhatsApp icon size */
-            height: 22px;
+        .general-share-button .share-icon svg { /* General share icon */
+            width: 20px; 
+            height: 20px;
             fill: currentColor;
         }
-
 
         .footer-note {
             margin-top: 20px; 
@@ -229,12 +222,7 @@
         }
 
         @media (max-width: 600px) {
-            .container { padding: 30px 25px 25px 25px; }
-            h1 { font-size: 2em; }
-            .greeting-icon { font-size: 2.8em; }
-            p.message { font-size: 1em; }
-            .whatsapp-share-button { padding: 13px 22px; font-size: 1em; }
-            .ad-container { min-height: 250px; }
+            /* Responsive styles from before */
         }
     </style>
 </head>
@@ -264,14 +252,14 @@
                 <input type="text" id="currentUserNameInput" placeholder="So they know it's you! 😄">
             </div>
 
-            <!-- Updated Button -->
-            <button id="whatsappShareButton" class="whatsapp-share-button">
-                <span class="whatsapp-icon">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.33 3.43 16.79L2.05 22L7.31 20.57C8.72 21.33 10.33 21.82 12.04 21.82C17.5 21.82 21.95 17.37 21.95 11.91C21.95 9.27 20.92 6.81 19.17 4.99C17.42 3.18 14.92 2 12.04 2M12.04 3.67C16.62 3.67 20.28 7.34 20.28 11.92C20.28 16.5 16.61 20.17 12.04 20.17C10.46 20.17 8.97 19.73 7.7 18.96L7.33 18.73L4.31 19.69L5.31 16.78L5.07 16.4C4.21 15.07 3.79 13.54 3.79 11.92C3.79 7.34 7.45 3.67 12.04 3.67M16.54 14.84C16.36 14.75 15.33 14.26 15.16 14.19C14.98 14.12 14.85 14.08 14.71 14.26C14.57 14.44 14.12 14.98 13.98 15.16C13.84 15.33 13.71 15.35 13.42 15.26C13.14 15.16 12.22 14.84 11.13 13.91C10.29 13.2 9.74 12.38 9.56 12.09C9.38 11.81 9.52 11.68 9.64 11.56C9.74 11.46 9.87 11.28 10.01 11.13C10.14 10.99 10.19 10.87 10.28 10.7C10.37 10.52 10.32 10.37 10.23 10.19C10.14 10.02 9.66 8.78 9.49 8.35C9.32 7.94 9.15 8.01 9.03 8.01C8.92 8.01 8.78 8.01 8.64 8.01C8.5 8.01 8.22 8.06 8 8.35C7.78 8.64 7.28 9.13 7.28 10.37C7.28 11.62 8.02 12.8 8.15 12.97C8.29 13.14 9.66 15.26 11.69 16.1C13.73 16.93 13.73 16.55 14.22 16.5C14.72 16.45 15.75 15.87 15.97 15.31C16.19 14.75 16.19 14.26 16.12 14.17C16.05 14.08 15.91 14.04 15.75 13.95C15.59 13.86 16.72 14.93 16.54 14.84Z"/>
+            <!-- General Share Button -->
+            <button id="generalShareButton" class="general-share-button">
+                <span class="share-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.66 1.34 3 3 3s3-1.34 3-3-1.34-3-3-3z"/>
                     </svg>
                 </span>
-                Share on WhatsApp
+                Share a Smile
             </button>
         </div>
 
@@ -300,9 +288,11 @@
             const pageTitleElement = document.querySelector('title');
             const ogTitleMeta = document.querySelector('meta[property="og:title"]');
             const ogDescriptionMeta = document.querySelector('meta[property="og:description"]');
+            const ogUrlMeta = document.querySelector('meta[property="og:url"]'); 
+            const twitterUrlMeta = document.querySelector('meta[name="twitter:url"]'); 
             
             const currentUserNameInput = document.getElementById('currentUserNameInput');
-            const whatsappShareButton = document.getElementById('whatsappShareButton'); // Changed ID
+            const generalShareButton = document.getElementById('generalShareButton'); // Changed ID
             const mainHeadingElement = document.getElementById('mainHeading');
             const messageTextElement = document.getElementById('messageText'); 
             const greetingIconElement = document.querySelector('.greeting-icon');
@@ -317,35 +307,41 @@
             `;
             
             const canonicalUrl = "https://friendship-forever.vercel.app/"; 
+            if (ogUrlMeta && ogUrlMeta.getAttribute('content') !== canonicalUrl) {
+                 ogUrlMeta.setAttribute('content', canonicalUrl);
+            }
+            if (twitterUrlMeta && twitterUrlMeta.getAttribute('content') !== canonicalUrl) {
+                twitterUrlMeta.setAttribute('content', canonicalUrl);
+            }
 
             if (receivedFromName) {
                 const decodedName = decodeURIComponent(receivedFromName);
-
                 greetingIconElement.innerHTML = '📬'; 
                 mainHeadingElement.innerHTML = `A Smile For You! 😄`; 
-                
                 messageTextElement.innerHTML = `
                     Hey there! Your friend, <span class="highlight-name">${decodedName}</span>, sent this to brighten your day! They're thinking of you and missing your awesome friendship. 😊
                     <br><br>Feel like sharing the cheer? Add <strong>your name</strong> below and pass it on! 💖
                 `;
-                
                 if (pageTitleElement) pageTitleElement.textContent = `${decodedName} sent you a friendly hello!`;
+                
+                const currentUrlWithName = `${canonicalUrl}?name=${encodeURIComponent(decodedName)}`;
+                if (ogUrlMeta) ogUrlMeta.setAttribute('content', currentUrlWithName); 
+                if (twitterUrlMeta) twitterUrlMeta.setAttribute('content', currentUrlWithName); 
                 if (ogTitleMeta) ogTitleMeta.setAttribute('content', `Message from ${decodedName}! 👋`);
                 if (ogDescriptionMeta) ogDescriptionMeta.setAttribute('content', `${decodedName} is thinking of you! Click to see.`);
-
                 currentUserNameInput.placeholder = "Enter *your* name to send a new message!";
-
             } else {
                 mainHeadingElement.innerHTML = defaultMainHeading;
                 messageTextElement.innerHTML = defaultMessageText;
                 greetingIconElement.innerHTML = '💖';
-
                 if (pageTitleElement) pageTitleElement.textContent = defaultPageTitle;
                 if (ogTitleMeta) ogTitleMeta.setAttribute('content', defaultOgTitle);
                 if (ogDescriptionMeta) ogDescriptionMeta.setAttribute('content', defaultOgDescription);
+                if (ogUrlMeta) ogUrlMeta.setAttribute('content', canonicalUrl);
+                if (twitterUrlMeta) twitterUrlMeta.setAttribute('content', canonicalUrl);
             }
 
-            whatsappShareButton.addEventListener('click', () => { // Event listener on new button ID
+            generalShareButton.addEventListener('click', () => { // Event listener on new button ID
                 const nameEnteredByCurrentUser = currentUserNameInput.value.trim();
                 if (!nameEnteredByCurrentUser) {
                     alert('Please add your name so your friend knows who sent this smile! 😄');
@@ -355,19 +351,48 @@
 
                 const shareUrlWithParam = `${canonicalUrl}?name=${encodeURIComponent(nameEnteredByCurrentUser)}`;
                 
-                // Construct the message for WhatsApp
-                // The OG tags (title, description, image) will be picked up by WhatsApp from the shareUrlWithParam
-                // The text here will be pre-filled in the WhatsApp message input.
-                let whatsappMessageText = `Hey! Check out this friendly message I made for you 😊. It's from ${nameEnteredByCurrentUser}! \n\n${shareUrlWithParam}`;
-                
-                // For mobile, whatsapp://send?text=... works.
-                // For desktop, api.whatsapp.com/send?text=... is more reliable.
-                // We can try to detect if it's mobile or offer both/let user choose (more complex).
-                // Let's use the api.whatsapp.com link which works on desktop and usually redirects on mobile.
-                const whatsappWebLink = `https://api.whatsapp.com/send?text=${encodeURIComponent(whatsappMessageText)}`;
+                // --- Store original OG tags before attempting to update ---
+                const originalOgUrl = ogUrlMeta ? ogUrlMeta.getAttribute('content') : canonicalUrl;
+                const originalTwitterUrl = twitterUrlMeta ? twitterUrlMeta.getAttribute('content') : canonicalUrl;
+                const originalOgTitle = ogTitleMeta ? ogTitleMeta.getAttribute('content') : defaultOgTitle;
+                const originalOgDescription = ogDescriptionMeta ? ogDescriptionMeta.getAttribute('content') : defaultOgDescription;
 
-                // Open the WhatsApp link
-                window.open(whatsappWebLink, '_blank');
+                // --- Temporarily update OG tags for the share action ---
+                if (ogUrlMeta) ogUrlMeta.setAttribute('content', shareUrlWithParam);
+                if (twitterUrlMeta) twitterUrlMeta.setAttribute('content', shareUrlWithParam);
+                if (ogTitleMeta) ogTitleMeta.setAttribute('content', `Message from ${nameEnteredByCurrentUser}! 👋`); // Personalized title for OG
+                if (ogDescriptionMeta) ogDescriptionMeta.setAttribute('content', `${nameEnteredByCurrentUser} is thinking of you! Click to see.`); // Personalized desc for OG
+                // --- End of temporary OG update ---
+
+                const shareData = {
+                    title: `A friendly hello from ${nameEnteredByCurrentUser}! 😊`, // This title is for the share dialog
+                    text: `Hey! ${nameEnteredByCurrentUser} sent you a friendly message. Check it out! ✨`, // This text is for the share dialog
+                    url: shareUrlWithParam,  // This URL contains the name for the recipient page
+                };
+
+                function revertOgTags() {
+                    if (ogUrlMeta) ogUrlMeta.setAttribute('content', originalOgUrl);
+                    if (twitterUrlMeta) twitterUrlMeta.setAttribute('content', originalTwitterUrl);
+                    if (ogTitleMeta) ogTitleMeta.setAttribute('content', originalOgTitle);
+                    if (ogDescriptionMeta) ogDescriptionMeta.setAttribute('content', originalOgDescription);
+                }
+
+                if (navigator.share) {
+                    navigator.share(shareData)
+                        .then(() => {
+                            console.log('Smile shared successfully!');
+                            revertOgTags();
+                        })
+                        .catch((error) => {
+                            console.error('Error sharing:', error);
+                            alert(`Could not open share dialog. Here's the link to copy: ${shareUrlWithParam}`);
+                            revertOgTags();
+                        });
+                } else {
+                    alert(`Your browser doesn't support direct sharing. Please copy this link and send it to your friend: ${shareUrlWithParam}`);
+                    // No OG tags were changed for this specific fallback, so no explicit revert needed here
+                    // if they were already set correctly based on `receivedFromName`
+                }
             });
         });
     </script>
