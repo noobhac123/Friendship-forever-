@@ -3,19 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Missing Our Friendship Chain</title>
+    <title>A Chain of Cherished Memories</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Caveat:wght@400;700&display=swap');
 
         :root {
-            --primary-color: #6a11cb;
-            --secondary-color: #2575fc;
+            --primary-color: #6a11cb; /* Deep Purple */
+            --secondary-color: #2575fc; /* Bright Blue */
+            --accent-color: #ff6f91; /* Playful Pink/Coral for accents */
             --text-color: #333;
             --light-text-color: #f0f0f0;
             --card-bg: #ffffff;
             --shadow-color: rgba(0, 0, 0, 0.1);
             --button-hover-bg: #4a0c9b;
-            --highlight-color: #ffc107; /* A bright color for highlighting names */
+            --highlight-bg: #e9f2ff; /* Light blueish background for name */
         }
 
         body {
@@ -34,60 +35,69 @@
 
         .container {
             background-color: var(--card-bg);
-            padding: 30px 40px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px var(--shadow-color);
+            padding: 35px 45px; /* Slightly more padding */
+            border-radius: 20px; /* More rounded */
+            box-shadow: 0 12px 35px var(--shadow-color);
             text-align: center;
-            max-width: 500px;
+            max-width: 550px; /* Slightly wider */
             width: 90%;
-            animation: fadeIn 0.8s ease-out;
+            animation: fadeInScale 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes fadeInScale {
+            0% { opacity: 0; transform: translateY(30px) scale(0.95); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
         }
 
         h1 {
-            font-size: 2.0em; /* Slightly smaller to accommodate longer text */
+            font-family: 'Caveat', cursive; /* A more handwritten, warm font for heading */
+            font-size: 2.8em;
             color: var(--primary-color);
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             font-weight: 700;
+            line-height: 1.2;
         }
         
         .highlight-name {
             color: var(--secondary-color);
             font-weight: 700;
-            background-color: #e9f2ff; /* Light blueish background for name */
-            padding: 2px 6px;
-            border-radius: 4px;
+            background-color: var(--highlight-bg);
+            padding: 3px 8px;
+            border-radius: 5px;
+            display: inline-block; /* Ensures padding and bg color work well */
         }
 
         p {
-            font-size: 1.05em; /* Adjusted for readability */
-            line-height: 1.7;
+            font-size: 1.1em;
+            line-height: 1.8; /* More spacing for readability */
             margin-bottom: 25px;
-            color: #555;
+            color: #444; /* Slightly darker for better contrast on white */
+        }
+        
+        .message-icon {
+            font-size: 1.5em;
+            margin-right: 8px;
+            color: var(--accent-color);
         }
 
         .input-group {
-            margin-bottom: 25px;
+            margin-bottom: 30px;
         }
 
         label {
             display: block;
-            font-size: 0.9em;
-            color: #777;
-            margin-bottom: 8px;
+            font-size: 0.95em;
+            color: #666;
+            margin-bottom: 10px;
             text-align: left;
             font-weight: 600;
         }
 
         input[type="text"] {
-            width: calc(100% - 22px); /* Account for padding and border */
-            padding: 12px 10px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
+            width: calc(100% - 24px); 
+            padding: 14px 12px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
             font-size: 1em;
             font-family: 'Poppins', sans-serif;
             transition: border-color 0.3s ease, box-shadow 0.3s ease;
@@ -96,43 +106,47 @@
         input[type="text"]:focus {
             outline: none;
             border-color: var(--secondary-color);
-            box-shadow: 0 0 0 3px rgba(37, 117, 252, 0.25);
+            box-shadow: 0 0 0 4px rgba(37, 117, 252, 0.2);
         }
 
         button {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            background: linear-gradient(135deg, var(--accent-color) 0%, var(--primary-color) 100%);
             color: var(--light-text-color);
             border: none;
-            padding: 15px 30px;
-            font-size: 1.1em;
+            padding: 16px 35px;
+            font-size: 1.15em;
             font-weight: 600;
-            border-radius: 8px;
+            border-radius: 10px;
             cursor: pointer;
-            transition: background 0.3s ease, transform 0.2s ease;
+            transition: all 0.3s ease;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: 10px;
             width: 100%;
             box-sizing: border-box;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
         }
 
         button:hover {
-            background: linear-gradient(135deg, var(--button-hover-bg) 0%, #1e63d1 100%);
-            transform: translateY(-2px);
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.15);
         }
         
         button svg {
-            width: 20px;
-            height: 20px;
+            width: 22px;
+            height: 22px;
             fill: currentColor;
         }
 
         .footer-note {
-            margin-top: 30px;
+            margin-top: 35px;
             font-size: 0.9em;
             color: var(--light-text-color);
-            opacity: 0.8;
+            opacity: 0.85;
+            font-family: 'Caveat', cursive;
+            font-size: 1.3em;
         }
 
         /* Responsive adjustments */
@@ -142,14 +156,17 @@
                 width: 95%;
             }
             h1 {
-                font-size: 1.7em;
+                font-size: 2.2em;
             }
             p {
-                font-size: 0.95em;
+                font-size: 1em;
             }
             button {
-                padding: 12px 20px;
-                font-size: 1em;
+                padding: 14px 25px;
+                font-size: 1.05em;
+            }
+            .footer-note {
+                font-size: 1.1em;
             }
         }
     </style>
@@ -157,21 +174,23 @@
 <body>
 
     <div class="container">
-        <h1 id="mainHeading">Missing Our Friendship!</h1>
-        <p id="messageText">Hey there! Life feels a little less bright without our usual chats and laughs. Just wanted to let you know I'm thinking of you and missing our awesome friendship. ❤️</p>
+        <h1 id="mainHeading">Old Times, Golden Memories!</h1>
+        <p id="messageText">
+            <span class="message-icon">💌</span>Hey there, amazing friend! Remember those carefree childhood days, the endless laughter that made our stomachs hurt, the secret handshakes, and all those unforgettable adventures we dived into? Life spins its tales, but true friendships like ours, filled with love and countless memories, are the real treasures. Thinking of you and our special bond. ✨
+        </p>
         
         <div class="input-group">
-            <label for="currentUserNameInput">Your Name (This name will be shared):</label>
+            <label for="currentUserNameInput">Your Name (to share this feeling):</label>
             <input type="text" id="currentUserNameInput" placeholder="Enter your name here">
         </div>
 
         <button id="shareButton">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.66 1.34 3 3 3s3-1.34 3-3-1.34-3-3-3z"/></svg>
-            Share this Message
+            Pass on the Warmth
         </button>
     </div>
 
-    <p class="footer-note">Spread the love! Made for special friends.</p>
+    <p class="footer-note">Keep the chain of friendship & memories glowing!</p>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -181,33 +200,45 @@
             const currentUserNameInput = document.getElementById('currentUserNameInput');
             const shareButton = document.getElementById('shareButton');
             const mainHeading = document.getElementById('mainHeading');
-            const messageText = document.getElementById('messageText');
+            const messageTextElement = document.getElementById('messageText'); // Renamed for clarity
+
+            const defaultMessage = `
+                <span class="message-icon">💌</span>Hey there, amazing friend! Remember those carefree childhood days, the endless laughter that made our stomachs hurt, the secret handshakes, and all those unforgettable adventures we dived into? Life spins its tales, but true friendships like ours, filled with love and countless memories, are the real treasures. Thinking of you and our special bond. ✨
+                <br><br>Want to send this wave of nostalgia to another cherished friend? Enter <strong>your name</strong> below and share!
+            `;
 
             if (receivedFromName) {
                 // This page is being viewed by someone who received a link
-                mainHeading.innerHTML = `A Message For You!`;
-                messageText.innerHTML = `Hey! <span class="highlight-name">${decodeURIComponent(receivedFromName)}</span> sent you this message because they're thinking of you and missing your friendship! 😊<br><br>Want to send a similar thought to someone else? Enter <strong>your name</strong> below and click share!`;
+                mainHeading.innerHTML = `A Special Message For You!`;
+                messageTextElement.innerHTML = `
+                    <span class="message-icon">📬</span>Guess what? <span class="highlight-name">${decodeURIComponent(receivedFromName)}</span> is sending a big warm hug through this message! They're reminiscing about all the fun, the childhood pranks, the shared dreams, and the incredible friendship you both cherish. You're being missed! 😊
+                    <br><br>Touched? Why not keep this beautiful chain of memories and friendship going? Enter <strong>your name</strong> below and share this feeling with another special person in your life!
+                `;
             } else {
                 // This is the initial page, or someone opened it directly
-                // Default message is already set in HTML
+                messageTextElement.innerHTML = defaultMessage;
             }
 
             shareButton.addEventListener('click', () => {
                 const currentSenderName = currentUserNameInput.value.trim();
                 if (!currentSenderName) {
-                    alert('Please enter your name so your friend knows who sent this!');
+                    alert('Please enter your name so your friend knows who sent this lovely thought!');
                     currentUserNameInput.focus();
                     return;
                 }
 
-                // The link that will be shared. It ALWAYS includes the name from the input field.
                 const shareUrl = `${window.location.origin}${window.location.pathname}?name=${encodeURIComponent(currentSenderName)}`;
                 
-                // Generic share text, personalized with the current sender's name
-                const shareDialogText = `Hey! Just wanted to say I'm missing our friendship. Thinking of you! - ${currentSenderName}`;
+                let shareDialogTitle = "Thinking of Our Awesome Friendship & Memories!";
+                let shareDialogText = `Hey! Just reminiscing about our amazing friendship, all the laughter and memories. Thinking of you! - ${currentSenderName}`;
+
+                if (receivedFromName) { // If this user received a link, they are now forwarding it
+                    shareDialogTitle = "Passing on the Friendship & Memory Chain!";
+                    shareDialogText = `Hey! Sending some love & thinking of our great times and special friendship. Keep the chain going! - ${currentSenderName}`;
+                }
                 
                 const shareData = {
-                    title: 'A Friendly Hello!', // Changed title slightly for subsequent shares
+                    title: shareDialogTitle,
                     text: shareDialogText,
                     url: shareUrl,
                 };
@@ -217,7 +248,7 @@
                         .then(() => console.log('Message shared successfully!'))
                         .catch((error) => {
                             console.error('Error sharing:', error);
-                            alert(`Could not open share dialog. You can copy this link: ${shareUrl}`);
+                            alert(`Could not open share dialog. You can copy this link to share: ${shareUrl}`);
                         });
                 } else {
                     alert(`Your browser doesn't support direct sharing. Please copy this link and send it to your friend: ${shareUrl}`);
