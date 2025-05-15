@@ -6,8 +6,26 @@
     
     <!-- Primary Meta Tags -->
     <title>A Friendly Hello Just For You! 😊</title>
-    <!-- Basic description for search engines and some fallbacks -->
-    <meta name="description" content="Send a friendly message to your friends and let them know you're thinking of them.">
+    <meta name="description" content="Someone special is thinking of you and sent a little message. Click to see! ✨">
+
+    <!-- Open Graph / Facebook Meta Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://friendship-forever.vercel.app/"> 
+    <meta property="og:title" content="A Friendly Hello Just For You! 👋">
+    <meta property="og:description" content="Someone special is thinking of you and sent a little message. Click to see! ✨">
+    <meta property="og:image" content="https://friendship-forever.vercel.app/image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="Friendship Forever">
+
+    <!-- Twitter Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://friendship-forever.vercel.app/">
+    <meta name="twitter:title" content="A Friendly Hello Just For You! 👋">
+    <meta name="twitter:description" content="Someone special is thinking of you and sent a little message. Click to see! ✨">
+    <meta name="twitter:image" content="https://friendship-forever.vercel.app/image.jpg">
+    <!-- <meta name="twitter:creator" content="@yourtwitterhandle"> -->
+
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Pacifico&display=swap');
@@ -31,7 +49,9 @@
             --button-bg-end: var(--accent-color); 
             --footer-text-color: rgba(255, 255, 255, 0.9);
 
-            --ad-placeholder-min-height: 250px; 
+            /* Ad Placeholder Styling (basic) - will be overridden by ad itself */
+            /* We can keep min-height for layout spacing if ad doesn't load */
+            --ad-placeholder-min-height: 250px; /* For 300x250 ad */
         }
 
         * {
@@ -68,13 +88,14 @@
             align-items: center;
         }
         
-        .ad-container { 
+        .ad-container { /* Changed from ad-placeholder to ad-container */
             width: 100%;
-            display: flex; 
+            display: flex; /* To center the 300px ad within the container */
             justify-content: center;
             align-items: center;
             margin: 20px 0;
-            min-height: var(--ad-placeholder-min-height); 
+            min-height: var(--ad-placeholder-min-height); /* Reserve space even if ad fails */
+            /* border: 1px dashed #ccc; */ /* Optional: for debugging ad space */
         }
 
         .container {
@@ -87,6 +108,8 @@
             animation: popInSmooth 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.2s both; 
             position: relative;
             z-index: 1;
+            /* margin-top: 10px;  Removed, ad-container handles spacing */
+            /* margin-bottom: 10px; Removed, ad-container handles spacing */
         }
 
         @keyframes popInSmooth {
@@ -206,13 +229,27 @@
             text-shadow: 0 1px 2px rgba(0,0,0,0.2);
         }
 
+        /* Responsive adjustments */
         @media (max-width: 600px) {
-            .container { padding: 30px 25px 25px 25px; }
-            h1 { font-size: 2em; }
-            .greeting-icon { font-size: 2.8em; }
-            p.message { font-size: 1em; }
-            button { padding: 13px 22px; font-size: 1em; }
-            .ad-container { min-height: 250px; }
+            .container {
+                padding: 30px 25px 25px 25px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            .greeting-icon {
+                font-size: 2.8em;
+            }
+            p.message {
+                font-size: 1em;
+            }
+            button {
+                padding: 13px 22px;
+                font-size: 1em;
+            }
+            .ad-container {
+                min-height: 250px; /* Ensure space on mobile too */
+            }
         }
     </style>
 </head>
@@ -251,8 +288,8 @@
         <!-- Bottom Ad Slot -->
         <div class="ad-container ad-bottom">
             <script type="text/javascript">
-                atOptions = { 
-                    'key' : '58d55d5d48a6447673ab2f1bb1c7de82', 
+                atOptions = { // You might use a different key for a second ad unit
+                    'key' : '58d55d5d48a6447673ab2f1bb1c7de82', // Using same key for example
                     'format' : 'iframe',
                     'height' : 250,
                     'width' : 300,
@@ -267,14 +304,12 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // console.log("DEBUG: DOMContentLoaded fired. Page script starting."); // Debug logs removed for cleaner final code
-
             const urlParams = new URLSearchParams(window.location.search);
-            const receivedFromName = urlParams.get('name');
-            // console.log("DEBUG: Received 'name' from URL parameter: ", receivedFromName); 
+            const receivedFromName = urlParams.get('name'); 
             
             const pageTitleElement = document.querySelector('title');
-            // OG and Twitter Meta tags are no longer queried as they are removed from HTML
+            const ogTitleMeta = document.querySelector('meta[property="og:title"]');
+            const ogDescriptionMeta = document.querySelector('meta[property="og:description"]');
             
             const currentUserNameInput = document.getElementById('currentUserNameInput');
             const shareButton = document.getElementById('shareButton');
@@ -283,6 +318,8 @@
             const greetingIconElement = document.querySelector('.greeting-icon');
 
             const defaultPageTitle = "A Friendly Hello Just For You! 😊";
+            const defaultOgTitle = "A Friendly Hello Just For You! 👋"; 
+            const defaultOgDescription = "Someone special is thinking of you and sent a little message. Click to see! ✨"; 
             const defaultMainHeading = "Hey Friend! 👋";
             const defaultMessageText = `
                 Just a little hello to say you crossed my mind! 😊 Missing our chats and the good times. Hope you're doing awesome! ✨
@@ -293,7 +330,6 @@
 
             if (receivedFromName) {
                 const decodedName = decodeURIComponent(receivedFromName);
-                // console.log("DEBUG: 'name' parameter found. Decoded name: ", decodedName);
 
                 greetingIconElement.innerHTML = '📬'; 
                 mainHeadingElement.innerHTML = `A Smile For You! 😄`; 
@@ -302,58 +338,51 @@
                     Hey there! Your friend, <span class="highlight-name">${decodedName}</span>, sent this to brighten your day! They're thinking of you and missing your awesome friendship. 😊
                     <br><br>Feel like sharing the cheer? Add <strong>your name</strong> below and pass it on! 💖
                 `;
-                // console.log("DEBUG: Message text updated for recipient with name.");
                 
                 if (pageTitleElement) pageTitleElement.textContent = `${decodedName} sent you a friendly hello!`;
-                
+                if (ogTitleMeta) ogTitleMeta.setAttribute('content', `Message from ${decodedName}! 👋`);
+                if (ogDescriptionMeta) ogDescriptionMeta.setAttribute('content', `${decodedName} is thinking of you! Click to see.`);
+
                 currentUserNameInput.placeholder = "Enter *your* name to send a new message!";
 
             } else {
-                // console.log("DEBUG: No 'name' parameter found. Setting default content.");
                 mainHeadingElement.innerHTML = defaultMainHeading;
                 messageTextElement.innerHTML = defaultMessageText;
                 greetingIconElement.innerHTML = '💖';
 
                 if (pageTitleElement) pageTitleElement.textContent = defaultPageTitle;
-                // console.log("DEBUG: Default message and titles set.");
+                if (ogTitleMeta) ogTitleMeta.setAttribute('content', defaultOgTitle);
+                if (ogDescriptionMeta) ogDescriptionMeta.setAttribute('content', defaultOgDescription);
             }
 
             shareButton.addEventListener('click', () => {
-                // console.log("DEBUG: Share button clicked.");
                 const nameEnteredByCurrentUser = currentUserNameInput.value.trim();
-                // console.log("DEBUG: Name entered by current user: ", nameEnteredByCurrentUser);
-
                 if (!nameEnteredByCurrentUser) {
                     alert('Please add your name so your friend knows who sent this smile! 😄');
                     currentUserNameInput.focus();
                     return;
                 }
 
-                const shareUrlWithParam = `${canonicalUrl}?name=${encodeURIComponent(nameEnteredByCurrentUser)}`;
-                // console.log("DEBUG: Generated share URL with param: ", shareUrlWithParam);
+                const shareUrl = `${canonicalUrl}?name=${encodeURIComponent(nameEnteredByCurrentUser)}`;
                 
-                // For navigator.share, the title and text are what the user sees in the share UI
-                // not what social media crawlers use for link previews (those were from OG tags).
                 let shareDialogTitle = "Sending a Smile Your Way! 😊"; 
                 let shareDialogText = `Hey! Just sending a little smile because you crossed my mind. Thinking of you! ✨ - From ${nameEnteredByCurrentUser}`;
                 
                 const shareData = {
                     title: shareDialogTitle, 
                     text: shareDialogText,   
-                    url: shareUrlWithParam,          
+                    url: shareUrl,           
                 };
-                // console.log("DEBUG: Share data prepared: ", shareData);
 
                 if (navigator.share) {
                     navigator.share(shareData)
-                        .then(() => { /* console.log('DEBUG: Smile shared successfully via navigator.share!'); */ })
+                        .then(() => console.log('Smile shared successfully!'))
                         .catch((error) => {
-                            // console.error('DEBUG: Error sharing via navigator.share:', error);
-                            alert(`Could not open share dialog. Here's the link to copy: ${shareUrlWithParam}`);
+                            console.error('Error sharing:', error);
+                            alert(`Could not open share dialog. Here's the link to copy: ${shareUrl}`);
                         });
                 } else {
-                    // console.log("DEBUG: navigator.share not supported. Alerting with link.");
-                    alert(`Your browser doesn't support direct sharing. Please copy this link: ${shareUrlWithParam}`);
+                    alert(`Your browser doesn't support direct sharing. Please copy this link: ${shareUrl}`);
                 }
             });
         });
