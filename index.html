@@ -10,20 +10,24 @@
 
     <!-- Open Graph / Facebook Meta Tags -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://friendship-forever.vercel.app/"> 
+    <!-- IMPORTANT: Replace with your ACTUAL live URL where this page will be hosted -->
+    <meta property="og:url" content="https://friendship-forever.vercel.app//miss_you.html"> 
     <meta property="og:title" content="A Friendly Hello Just For You! 👋">
     <meta property="og:description" content="Someone special is thinking of you and sent a little message. Click to see! ✨">
-    <meta property="og:image" content="https://friendship-forever.vercel.app/image.jpg">
+    <!-- IMPORTANT: Replace with the absolute URL to your image.jpg on your live server -->
+    <meta property="og:image" content="https://friendship-forever.vercel.app//image.jpg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:site_name" content="Friendship Forever">
+    <meta property="og:site_name" content="Friendly Thoughts">
 
     <!-- Twitter Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="https://friendship-forever.vercel.app/">
+    <!-- IMPORTANT: Replace with your ACTUAL live URL where this page will be hosted -->
+    <meta name="twitter:url" content="https://friendship-forever.vercel.app//miss_you.html">
     <meta name="twitter:title" content="A Friendly Hello Just For You! 👋">
     <meta name="twitter:description" content="Someone special is thinking of you and sent a little message. Click to see! ✨">
-    <meta name="twitter:image" content="https://friendship-forever.vercel.app/image.jpg">
+    <!-- IMPORTANT: Replace with the absolute URL to your image.jpg on your live server -->
+    <meta name="twitter:image" content="https://friendship-forever.vercel.app//image.jpg">
     <!-- <meta name="twitter:creator" content="@yourtwitterhandle"> -->
 
 
@@ -49,9 +53,9 @@
             --button-bg-end: var(--accent-color); 
             --footer-text-color: rgba(255, 255, 255, 0.9);
 
-            /* Ad Placeholder Styling (basic) - will be overridden by ad itself */
-            /* We can keep min-height for layout spacing if ad doesn't load */
-            --ad-placeholder-min-height: 250px; /* For 300x250 ad */
+            --ad-placeholder-bg: #f0f0f0;
+            --ad-placeholder-text: #aaa;
+            --ad-placeholder-border: #ddd;
         }
 
         * {
@@ -88,14 +92,19 @@
             align-items: center;
         }
         
-        .ad-container { /* Changed from ad-placeholder to ad-container */
+        .ad-placeholder {
             width: 100%;
-            display: flex; /* To center the 300px ad within the container */
-            justify-content: center;
+            min-height: 90px; 
+            background-color: var(--ad-placeholder-bg);
+            border: 1px dashed var(--ad-placeholder-border);
+            display: flex;
             align-items: center;
-            margin: 20px 0;
-            min-height: var(--ad-placeholder-min-height); /* Reserve space even if ad fails */
-            /* border: 1px dashed #ccc; */ /* Optional: for debugging ad space */
+            justify-content: center;
+            margin: 15px 0;
+            font-size: 0.9em;
+            color: var(--ad-placeholder-text);
+            border-radius: 8px;
+            text-align: center;
         }
 
         .container {
@@ -108,8 +117,8 @@
             animation: popInSmooth 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.2s both; 
             position: relative;
             z-index: 1;
-            /* margin-top: 10px;  Removed, ad-container handles spacing */
-            /* margin-bottom: 10px; Removed, ad-container handles spacing */
+            margin-top: 10px; 
+            margin-bottom: 10px; 
         }
 
         @keyframes popInSmooth {
@@ -247,32 +256,22 @@
                 padding: 13px 22px;
                 font-size: 1em;
             }
-            .ad-container {
-                min-height: 250px; /* Ensure space on mobile too */
-            }
         }
     </style>
 </head>
 <body>
     <div class="page-wrapper">
-        <!-- Top Ad Slot -->
-        <div class="ad-container ad-top">
-            <script type="text/javascript">
-                atOptions = {
-                    'key' : '58d55d5d48a6447673ab2f1bb1c7de82',
-                    'format' : 'iframe',
-                    'height' : 250,
-                    'width' : 300,
-                    'params' : {}
-                };
-            </script>
-            <script type="text/javascript" src="//maintaintournamentslick.com/58d55d5d48a6447673ab2f1bb1c7de82/invoke.js"></script>
+        <!-- Placeholder for Top Ad -->
+        <div class="ad-placeholder top">
+            Top Ad Placeholder (e.g., 320x100)
         </div>
 
         <div class="container">
             <div class="greeting-icon">💖</div> 
             <h1 id="mainHeading">Hey Friend! 👋</h1>
-            <p id="messageText" class="message"></p> 
+            <p id="messageText" class="message">
+                Just a little hello to say you crossed my mind! 😊 Missing our chats and the good times. Hope you're doing awesome! ✨
+            </p>
             
             <div class="input-group">
                 <label for="currentUserNameInput">Your Name:</label>
@@ -285,18 +284,9 @@
             </button>
         </div>
 
-        <!-- Bottom Ad Slot -->
-        <div class="ad-container ad-bottom">
-            <script type="text/javascript">
-                atOptions = { // You might use a different key for a second ad unit
-                    'key' : '58d55d5d48a6447673ab2f1bb1c7de82', // Using same key for example
-                    'format' : 'iframe',
-                    'height' : 250,
-                    'width' : 300,
-                    'params' : {}
-                };
-            </script>
-            <script type="text/javascript" src="//maintaintournamentslick.com/58d55d5d48a6447673ab2f1bb1c7de82/invoke.js"></script>
+        <!-- Placeholder for Bottom Ad -->
+        <div class="ad-placeholder bottom">
+            Bottom Ad Placeholder (e.g., 300x250)
         </div>
 
         <p class="footer-note">Spread kindness, one message at a time! 💌</p>
@@ -307,66 +297,79 @@
             const urlParams = new URLSearchParams(window.location.search);
             const receivedFromName = urlParams.get('name'); 
             
+            // Meta tag elements (for potential dynamic updates, though initial HTML values are primary for crawlers)
             const pageTitleElement = document.querySelector('title');
             const ogTitleMeta = document.querySelector('meta[property="og:title"]');
             const ogDescriptionMeta = document.querySelector('meta[property="og:description"]');
-            
+            const ogUrlMeta = document.querySelector('meta[property="og:url"]');
+            const twitterUrlMeta = document.querySelector('meta[name="twitter:url"]');
+
+
             const currentUserNameInput = document.getElementById('currentUserNameInput');
             const shareButton = document.getElementById('shareButton');
-            const mainHeadingElement = document.getElementById('mainHeading');
-            const messageTextElement = document.getElementById('messageText'); 
+            const mainHeading = document.getElementById('mainHeading');
+            const messageTextElement = document.getElementById('messageText');
             const greetingIconElement = document.querySelector('.greeting-icon');
 
-            const defaultPageTitle = "A Friendly Hello Just For You! 😊";
-            const defaultOgTitle = "A Friendly Hello Just For You! 👋"; 
-            const defaultOgDescription = "Someone special is thinking of you and sent a little message. Click to see! ✨"; 
-            const defaultMainHeading = "Hey Friend! 👋";
-            const defaultMessageText = `
+            const defaultMessageInitial = `
                 Just a little hello to say you crossed my mind! 😊 Missing our chats and the good times. Hope you're doing awesome! ✨
                 <br><br>Want to send a smile to another friend? Add your name below! 👇
             `;
             
-            const canonicalUrl = "https://friendship-forever.vercel.app/"; 
+            // Construct the canonical URL for OG tags (page URL without query parameters)
+            // IMPORTANT: This relies on the HTML file being at the root or a known path.
+            // If your HTML file name changes from 'miss_you.html', update it here or in the meta tags.
+            const canonicalPageName = "miss_you.html"; // Or your actual HTML file name
+            const canonicalUrl = `${window.location.origin}/${canonicalPageName}`; 
+
+            // Update og:url and twitter:url to be the canonical one.
+            // This helps social platforms fetch a consistent URL for metadata.
+            if (ogUrlMeta) ogUrlMeta.setAttribute('content', canonicalUrl);
+            if (twitterUrlMeta) twitterUrlMeta.setAttribute('content', canonicalUrl);
+
 
             if (receivedFromName) {
                 const decodedName = decodeURIComponent(receivedFromName);
-
+                mainHeading.innerHTML = `A Smile For You, <span class="highlight-name">${decodedName}</span>! 😄`;
                 greetingIconElement.innerHTML = '📬'; 
-                mainHeadingElement.innerHTML = `A Smile For You! 😄`; 
-                
                 messageTextElement.innerHTML = `
-                    Hey there! Your friend, <span class="highlight-name">${decodedName}</span>, sent this to brighten your day! They're thinking of you and missing your awesome friendship. 😊
+                    Hey <span class="highlight-name">${decodedName}</span>! Your friend sent this to brighten your day! They're thinking of you and missing your awesome friendship. 😊
                     <br><br>Feel like sharing the cheer? Add <strong>your name</strong> below and pass it on! 💖
                 `;
                 
+                // Update page title for the browser tab (doesn't affect OG tags for initial scrape)
                 if (pageTitleElement) pageTitleElement.textContent = `${decodedName} sent you a friendly hello!`;
+                // OG title and description can be updated for this view, but initial scrape uses HTML values
                 if (ogTitleMeta) ogTitleMeta.setAttribute('content', `Message from ${decodedName}! 👋`);
                 if (ogDescriptionMeta) ogDescriptionMeta.setAttribute('content', `${decodedName} is thinking of you! Click to see.`);
+
 
                 currentUserNameInput.placeholder = "Enter *your* name to send a new message!";
 
             } else {
-                mainHeadingElement.innerHTML = defaultMainHeading;
-                messageTextElement.innerHTML = defaultMessageText;
-                greetingIconElement.innerHTML = '💖';
+                messageTextElement.innerHTML = defaultMessageInitial;
+                if (pageTitleElement) pageTitleElement.textContent = "A Friendly Hello Just For You! 😊";
+                // Ensure OG tags revert to default if no name (already set in HTML, but good for consistency)
+                if (ogTitleMeta) ogTitleMeta.setAttribute('content', "A Friendly Hello Just For You! 👋");
+                if (ogDescriptionMeta) ogDescriptionMeta.setAttribute('content', "Someone special is thinking of you and sent a little message. Click to see! ✨");
 
-                if (pageTitleElement) pageTitleElement.textContent = defaultPageTitle;
-                if (ogTitleMeta) ogTitleMeta.setAttribute('content', defaultOgTitle);
-                if (ogDescriptionMeta) ogDescriptionMeta.setAttribute('content', defaultOgDescription);
             }
 
             shareButton.addEventListener('click', () => {
-                const nameEnteredByCurrentUser = currentUserNameInput.value.trim();
-                if (!nameEnteredByCurrentUser) {
+                const currentSenderName = currentUserNameInput.value.trim();
+                if (!currentSenderName) {
                     alert('Please add your name so your friend knows who sent this smile! 😄');
                     currentUserNameInput.focus();
                     return;
                 }
 
-                const shareUrl = `${canonicalUrl}?name=${encodeURIComponent(nameEnteredByCurrentUser)}`;
+                // The URL shared will have the sender's name as a parameter
+                // It uses the canonicalUrl (base page) + the name parameter
+                const shareUrl = `${canonicalUrl}?name=${encodeURIComponent(currentSenderName)}`;
                 
-                let shareDialogTitle = "Sending a Smile Your Way! 😊"; 
-                let shareDialogText = `Hey! Just sending a little smile because you crossed my mind. Thinking of you! ✨ - From ${nameEnteredByCurrentUser}`;
+                // This text is for the share dialog (WhatsApp, Messenger, etc.)
+                let shareDialogTitle = "Sending a Smile Your Way! 😊"; // Default, some platforms might use this
+                let shareDialogText = `Hey! Just sending a little smile because you crossed my mind. Thinking of you! ✨ - From ${currentSenderName}`;
                 
                 const shareData = {
                     title: shareDialogTitle, 
