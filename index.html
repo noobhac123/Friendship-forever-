@@ -45,13 +45,13 @@
             --input-focus-border: var(--accent-color);
             --shadow-color: rgba(74, 0, 224, 0.15); 
             --button-text: #ffffff;
-            --button-bg-start: var(--highlight-accent);
-            --button-bg-end: var(--accent-color); 
-            --footer-text-color: rgba(255, 255, 255, 0.9);
+            
+            /* WhatsApp Button Colors */
+            --whatsapp-green: #25D366;
+            --whatsapp-green-hover: #1DAE54; 
 
-            /* Ad Placeholder Styling (basic) - will be overridden by ad itself */
-            /* We can keep min-height for layout spacing if ad doesn't load */
-            --ad-placeholder-min-height: 250px; /* For 300x250 ad */
+            --footer-text-color: rgba(255, 255, 255, 0.9);
+            --ad-placeholder-min-height: 250px; 
         }
 
         * {
@@ -88,14 +88,13 @@
             align-items: center;
         }
         
-        .ad-container { /* Changed from ad-placeholder to ad-container */
+        .ad-container { 
             width: 100%;
-            display: flex; /* To center the 300px ad within the container */
+            display: flex; 
             justify-content: center;
             align-items: center;
             margin: 20px 0;
-            min-height: var(--ad-placeholder-min-height); /* Reserve space even if ad fails */
-            /* border: 1px dashed #ccc; */ /* Optional: for debugging ad space */
+            min-height: var(--ad-placeholder-min-height); 
         }
 
         .container {
@@ -108,8 +107,6 @@
             animation: popInSmooth 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.2s both; 
             position: relative;
             z-index: 1;
-            /* margin-top: 10px;  Removed, ad-container handles spacing */
-            /* margin-bottom: 10px; Removed, ad-container handles spacing */
         }
 
         @keyframes popInSmooth {
@@ -192,8 +189,9 @@
             background-color: #fff;
         }
 
-        button {
-            background: linear-gradient(135deg, var(--button-bg-start), var(--button-bg-end)); 
+        /* Updated Button Style for WhatsApp */
+        .whatsapp-share-button {
+            background-color: var(--whatsapp-green);
             color: var(--button-text);
             border: none;
             padding: 14px 28px; 
@@ -201,25 +199,26 @@
             font-weight: 600;
             border-radius: 10px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: background-color 0.3s ease, transform 0.2s ease;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 9px;
+            gap: 10px; /* Space between icon and text */
             width: 100%;
             text-shadow: 0 1px 1px rgba(0,0,0,0.15);
         }
 
-        button:hover {
-            transform: translateY(-2px) scale(1.01);
-            box-shadow: 0 7px 14px rgba(74, 0, 224, 0.2);
+        .whatsapp-share-button:hover {
+            background-color: var(--whatsapp-green-hover);
+            transform: translateY(-2px);
         }
         
-        button svg {
-            width: 19px;
-            height: 19px;
+        .whatsapp-share-button .whatsapp-icon svg {
+            width: 22px; /* WhatsApp icon size */
+            height: 22px;
             fill: currentColor;
         }
+
 
         .footer-note {
             margin-top: 20px; 
@@ -229,27 +228,13 @@
             text-shadow: 0 1px 2px rgba(0,0,0,0.2);
         }
 
-        /* Responsive adjustments */
         @media (max-width: 600px) {
-            .container {
-                padding: 30px 25px 25px 25px;
-            }
-            h1 {
-                font-size: 2em;
-            }
-            .greeting-icon {
-                font-size: 2.8em;
-            }
-            p.message {
-                font-size: 1em;
-            }
-            button {
-                padding: 13px 22px;
-                font-size: 1em;
-            }
-            .ad-container {
-                min-height: 250px; /* Ensure space on mobile too */
-            }
+            .container { padding: 30px 25px 25px 25px; }
+            h1 { font-size: 2em; }
+            .greeting-icon { font-size: 2.8em; }
+            p.message { font-size: 1em; }
+            .whatsapp-share-button { padding: 13px 22px; font-size: 1em; }
+            .ad-container { min-height: 250px; }
         }
     </style>
 </head>
@@ -279,17 +264,22 @@
                 <input type="text" id="currentUserNameInput" placeholder="So they know it's you! 😄">
             </div>
 
-            <button id="shareButton">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.66 1.34 3 3 3s3-1.34 3-3-1.34-3-3-3z"/></svg>
-                Share a Smile
+            <!-- Updated Button -->
+            <button id="whatsappShareButton" class="whatsapp-share-button">
+                <span class="whatsapp-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.33 3.43 16.79L2.05 22L7.31 20.57C8.72 21.33 10.33 21.82 12.04 21.82C17.5 21.82 21.95 17.37 21.95 11.91C21.95 9.27 20.92 6.81 19.17 4.99C17.42 3.18 14.92 2 12.04 2M12.04 3.67C16.62 3.67 20.28 7.34 20.28 11.92C20.28 16.5 16.61 20.17 12.04 20.17C10.46 20.17 8.97 19.73 7.7 18.96L7.33 18.73L4.31 19.69L5.31 16.78L5.07 16.4C4.21 15.07 3.79 13.54 3.79 11.92C3.79 7.34 7.45 3.67 12.04 3.67M16.54 14.84C16.36 14.75 15.33 14.26 15.16 14.19C14.98 14.12 14.85 14.08 14.71 14.26C14.57 14.44 14.12 14.98 13.98 15.16C13.84 15.33 13.71 15.35 13.42 15.26C13.14 15.16 12.22 14.84 11.13 13.91C10.29 13.2 9.74 12.38 9.56 12.09C9.38 11.81 9.52 11.68 9.64 11.56C9.74 11.46 9.87 11.28 10.01 11.13C10.14 10.99 10.19 10.87 10.28 10.7C10.37 10.52 10.32 10.37 10.23 10.19C10.14 10.02 9.66 8.78 9.49 8.35C9.32 7.94 9.15 8.01 9.03 8.01C8.92 8.01 8.78 8.01 8.64 8.01C8.5 8.01 8.22 8.06 8 8.35C7.78 8.64 7.28 9.13 7.28 10.37C7.28 11.62 8.02 12.8 8.15 12.97C8.29 13.14 9.66 15.26 11.69 16.1C13.73 16.93 13.73 16.55 14.22 16.5C14.72 16.45 15.75 15.87 15.97 15.31C16.19 14.75 16.19 14.26 16.12 14.17C16.05 14.08 15.91 14.04 15.75 13.95C15.59 13.86 16.72 14.93 16.54 14.84Z"/>
+                    </svg>
+                </span>
+                Share on WhatsApp
             </button>
         </div>
 
         <!-- Bottom Ad Slot -->
         <div class="ad-container ad-bottom">
             <script type="text/javascript">
-                atOptions = { // You might use a different key for a second ad unit
-                    'key' : '58d55d5d48a6447673ab2f1bb1c7de82', // Using same key for example
+                atOptions = { 
+                    'key' : '58d55d5d48a6447673ab2f1bb1c7de82', 
                     'format' : 'iframe',
                     'height' : 250,
                     'width' : 300,
@@ -312,7 +302,7 @@
             const ogDescriptionMeta = document.querySelector('meta[property="og:description"]');
             
             const currentUserNameInput = document.getElementById('currentUserNameInput');
-            const shareButton = document.getElementById('shareButton');
+            const whatsappShareButton = document.getElementById('whatsappShareButton'); // Changed ID
             const mainHeadingElement = document.getElementById('mainHeading');
             const messageTextElement = document.getElementById('messageText'); 
             const greetingIconElement = document.querySelector('.greeting-icon');
@@ -355,7 +345,7 @@
                 if (ogDescriptionMeta) ogDescriptionMeta.setAttribute('content', defaultOgDescription);
             }
 
-            shareButton.addEventListener('click', () => {
+            whatsappShareButton.addEventListener('click', () => { // Event listener on new button ID
                 const nameEnteredByCurrentUser = currentUserNameInput.value.trim();
                 if (!nameEnteredByCurrentUser) {
                     alert('Please add your name so your friend knows who sent this smile! 😄');
@@ -363,27 +353,21 @@
                     return;
                 }
 
-                const shareUrl = `${canonicalUrl}?name=${encodeURIComponent(nameEnteredByCurrentUser)}`;
+                const shareUrlWithParam = `${canonicalUrl}?name=${encodeURIComponent(nameEnteredByCurrentUser)}`;
                 
-                let shareDialogTitle = "Sending a Smile Your Way! 😊"; 
-                let shareDialogText = `Hey! Just sending a little smile because you crossed my mind. Thinking of you! ✨ - From ${nameEnteredByCurrentUser}`;
+                // Construct the message for WhatsApp
+                // The OG tags (title, description, image) will be picked up by WhatsApp from the shareUrlWithParam
+                // The text here will be pre-filled in the WhatsApp message input.
+                let whatsappMessageText = `Hey! Check out this friendly message I made for you 😊. It's from ${nameEnteredByCurrentUser}! \n\n${shareUrlWithParam}`;
                 
-                const shareData = {
-                    title: shareDialogTitle, 
-                    text: shareDialogText,   
-                    url: shareUrl,           
-                };
+                // For mobile, whatsapp://send?text=... works.
+                // For desktop, api.whatsapp.com/send?text=... is more reliable.
+                // We can try to detect if it's mobile or offer both/let user choose (more complex).
+                // Let's use the api.whatsapp.com link which works on desktop and usually redirects on mobile.
+                const whatsappWebLink = `https://api.whatsapp.com/send?text=${encodeURIComponent(whatsappMessageText)}`;
 
-                if (navigator.share) {
-                    navigator.share(shareData)
-                        .then(() => console.log('Smile shared successfully!'))
-                        .catch((error) => {
-                            console.error('Error sharing:', error);
-                            alert(`Could not open share dialog. Here's the link to copy: ${shareUrl}`);
-                        });
-                } else {
-                    alert(`Your browser doesn't support direct sharing. Please copy this link: ${shareUrl}`);
-                }
+                // Open the WhatsApp link
+                window.open(whatsappWebLink, '_blank');
             });
         });
     </script>
