@@ -3,260 +3,235 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Echoes of Our Friendship</title>
+    <title>A Little Hello</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Caveat:wght@400;700&family=Dancing+Script:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Pacifico&display=swap');
 
         :root {
-            --primary-color: #4e54c8; /* A softer, more nostalgic purple */
-            --secondary-color: #8f94fb; /* Lighter, complementary purple/blue */
-            --accent-color: #f7b733; /* Warm yellow/gold for highlights */
-            --text-color: #333;
-            --light-text-color: #fdfdfd;
-            --card-bg: rgba(255, 255, 255, 0.95); /* Slightly transparent white */
-            --shadow-color: rgba(0, 0, 0, 0.15);
-            --button-hover-bg: #3a3f9a;
-            --highlight-bg: #e6e7ff; 
+            --bg-start: #6DD5FA;
+            --bg-end: #FF758C; /* Brighter, more cheerful gradient */
+            --card-bg: #ffffff;
+            --text-primary: #333;
+            --text-secondary: #555;
+            --accent-color: #FF758C; /* Matches gradient end for cohesion */
+            --input-border: #e0e0e0;
+            --input-focus-border: #6DD5FA;
+            --shadow-color: rgba(0, 0, 0, 0.08);
+            --button-text: #fff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
-            margin: 0;
-            padding: 20px;
+            font-family: 'Montserrat', sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             min-height: 100vh;
-            /* Animated Gradient Background */
-            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab, #4e54c8, #8f94fb);
-            background-size: 400% 400%;
-            animation: gradientBG 25s ease infinite;
-            color: var(--text-color);
-            box-sizing: border-box;
-            overflow-x: hidden; /* Prevent horizontal scroll from animations */
-        }
-
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            background: linear-gradient(135deg, var(--bg-start), var(--bg-end));
+            padding: 20px;
+            color: var(--text-primary);
+            overflow-x: hidden;
         }
         
-        /* Optional: Floating stars/particles */
-        .particles {
+        /* Subtle animated background pattern (optional, can be removed if too much) */
+        body::before {
+            content: '';
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            pointer-events: none; /* So they don't interfere with clicks */
-            z-index: -1; /* Behind content */
+            background-image: 
+                radial-gradient(circle at 20% 20%, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0) 20%),
+                radial-gradient(circle at 80% 70%, rgba(255,255,255,0.07) 0%, rgba(255,255,255,0) 25%);
+            background-repeat: no-repeat;
+            animation: subtleShine 15s infinite alternate ease-in-out;
+            z-index: 0;
         }
 
-        .particle {
-            position: absolute;
-            background-color: rgba(255, 255, 255, 0.3); /* Light, semi-transparent */
-            border-radius: 50%;
-            animation: float 20s infinite ease-in-out;
-            opacity: 0; /* Start invisible, fade in */
-        }
-
-        @keyframes float {
-            0% { transform: translateY(0) translateX(0) scale(1); opacity: 0; }
-            25% { opacity: 0.7; }
-            50% { transform: translateY(-100px) translateX(50px) scale(1.2); opacity: 0.5; }
-            75% { opacity: 0.7; }
-            100% { transform: translateY(0) translateX(0) scale(1); opacity: 0; }
+        @keyframes subtleShine {
+            0% { background-position: 0% 0%, 100% 100%; }
+            100% { background-position: 100% 100%, 0% 0%; }
         }
 
 
         .container {
             background-color: var(--card-bg);
-            padding: 40px 50px;
-            border-radius: 25px;
-            box-shadow: 0 15px 40px var(--shadow-color);
+            padding: 40px;
+            border-radius: 24px; /* Softer, larger radius */
+            box-shadow: 0 10px 40px var(--shadow-color), 0 0 0 10px rgba(255,255,255,0.3); /* Outer glow effect */
             text-align: center;
-            max-width: 600px; 
-            width: 90%;
-            animation: fadeInScale 1s cubic-bezier(0.165, 0.84, 0.44, 1) both;
-            position: relative; /* For z-index if needed */
+            max-width: 480px; 
+            width: 95%;
+            animation: popIn 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+            position: relative;
             z-index: 1;
+            overflow: hidden; /* For any internal decorative elements */
         }
 
-        @keyframes fadeInScale {
-            0% { opacity: 0; transform: translateY(40px) scale(0.9); }
-            100% { opacity: 1; transform: translateY(0) scale(1); }
+        @keyframes popIn {
+            0% { opacity: 0; transform: scale(0.8) translateY(20px); }
+            100% { opacity: 1; transform: scale(1) translateY(0); }
         }
+        
+        .friendship-icon {
+            font-size: 3.5em;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+            display: inline-block;
+            animation: bounceIcon 2s infinite ease-in-out;
+        }
+
+        @keyframes bounceIcon {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-10px);}
+            60% {transform: translateY(-5px);}
+        }
+
 
         h1 {
-            font-family: 'Dancing Script', cursive; /* Elegant, flowing script */
-            font-size: 3em;
-            color: var(--primary-color);
-            margin-bottom: 25px;
-            font-weight: 700;
-            line-height: 1.1;
+            font-family: 'Pacifico', cursive; /* Playful, friendly script */
+            font-size: 2.5em;
+            color: var(--accent-color);
+            margin-bottom: 15px;
+            font-weight: 400; /* Pacifico is inherently bold */
         }
         
         .highlight-name {
-            color: var(--accent-color); /* Using accent for more pop */
-            font-weight: 700;
-            background-color: var(--highlight-bg);
-            padding: 4px 10px;
-            border-radius: 6px;
-            display: inline-block;
-            font-family: 'Poppins', sans-serif; /* Keep name easily readable */
-            font-size: 0.9em; /* Relative to parent p, so it stands out but not too large */
-            vertical-align: middle;
+            font-weight: 600;
+            color: var(--bg-start); /* Using a color from the gradient */
+            padding: 2px 6px;
+            border-radius: 4px;
+            background-color: rgba(109, 213, 250, 0.1); /* Light background for name */
         }
 
-        p {
-            font-size: 1.15em;
-            line-height: 1.9; 
+        p.message {
+            font-size: 1.1em;
+            line-height: 1.7; 
             margin-bottom: 30px;
-            color: #3a3a3a; 
+            color: var(--text-secondary);
+            font-weight: 400;
         }
         
-        .message-icon {
-            font-size: 1.6em;
-            margin-right: 10px;
-            color: var(--accent-color);
-            vertical-align: middle;
-        }
-
         .input-group {
-            margin-bottom: 35px;
+            margin-bottom: 30px;
+            text-align: left;
         }
 
         label {
             display: block;
-            font-size: 1em;
-            color: #555;
-            margin-bottom: 12px;
-            text-align: left;
+            font-size: 0.9em;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
             font-weight: 600;
         }
 
         input[type="text"] {
-            width: calc(100% - 28px); 
-            padding: 16px 14px;
-            border: 1px solid #bbb;
+            width: 100%; 
+            padding: 14px 16px;
+            border: 1px solid var(--input-border);
             border-radius: 12px;
-            font-size: 1.05em;
-            font-family: 'Poppins', sans-serif;
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            font-size: 1em;
+            font-family: 'Montserrat', sans-serif;
+            transition: all 0.3s ease;
+            background-color: #f9f9f9;
         }
 
         input[type="text"]:focus {
             outline: none;
-            border-color: var(--secondary-color);
-            box-shadow: 0 0 0 4px rgba(143, 148, 251, 0.3);
+            border-color: var(--input-focus-border);
+            box-shadow: 0 0 0 3px rgba(109, 213, 250, 0.3);
+            background-color: #fff;
         }
 
         button {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            color: var(--light-text-color);
+            background: linear-gradient(135deg, var(--bg-start), var(--accent-color));
+            color: var(--button-text);
             border: none;
-            padding: 18px 40px;
-            font-size: 1.2em;
+            padding: 16px 30px;
+            font-size: 1.1em;
             font-weight: 600;
             border-radius: 12px;
             cursor: pointer;
-            transition: all 0.35s ease;
+            transition: all 0.3s ease;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
+            gap: 10px;
             width: 100%;
-            box-sizing: border-box;
-            text-shadow: 0 1px 3px rgba(0,0,0,0.25);
+            text-shadow: 0 1px 1px rgba(0,0,0,0.1);
         }
 
         button:hover {
-            background: linear-gradient(135deg, var(--button-hover-bg) 0%, var(--primary-color) 100%);
-            transform: translateY(-4px) scale(1.03);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
         }
         
         button svg {
-            width: 24px;
-            height: 24px;
+            width: 20px;
+            height: 20px;
             fill: currentColor;
         }
 
         .footer-note {
-            margin-top: 40px;
-            font-size: 1em;
-            color: var(--light-text-color);
-            opacity: 0.9;
-            font-family: 'Caveat', cursive;
-            font-size: 1.4em;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+            margin-top: 30px;
+            font-size: 0.9em;
+            color: rgba(255,255,255,0.8); /* Light for contrast on gradient */
+            font-weight: 300;
         }
 
         /* Responsive adjustments */
         @media (max-width: 600px) {
             .container {
                 padding: 30px 25px;
-                width: 95%;
+                box-shadow: 0 8px 30px var(--shadow-color), 0 0 0 8px rgba(255,255,255,0.25);
             }
             h1 {
-                font-size: 2.4em;
+                font-size: 2.2em;
             }
-            p {
-                font-size: 1.05em;
+            .friendship-icon {
+                font-size: 3em;
+            }
+            p.message {
+                font-size: 1em;
             }
             button {
-                padding: 15px 30px;
-                font-size: 1.1em;
-            }
-            .footer-note {
-                font-size: 1.2em;
+                padding: 14px 25px;
+                font-size: 1em;
             }
         }
     </style>
 </head>
 <body>
-    <div class="particles" id="particleContainer"></div>
 
     <div class="container">
-        <h1 id="mainHeading">An Echo from a Distant Heart</h1>
-        <p id="messageText">
-            <span class="message-icon">🕰️</span>Hey, my dear friend. It feels like ages since we last truly connected, doesn't it? Sometimes life pulls us in different directions, but the threads of true friendship remain. Lately, I've been swept away by a wave of nostalgia, remembering our shared laughter, the secrets whispered, the dreams we painted together, and all those moments that defined 'us'. It's a bittersweet feeling, missing those times, and especially, missing you. Hope this little note finds you well and brings a smile.
+        <div class="friendship-icon">💖</div> <!-- You can use other emojis like 🤗, ✨, 👋 -->
+        <h1 id="mainHeading">Thinking of You!</h1>
+        <p id="messageText" class="message">
+            Hey! Just a little note to say you crossed my mind. Missing our chats and good times. Hope you're doing great! 😊
         </p>
         
         <div class="input-group">
-            <label for="currentUserNameInput">Your Name (to send this echo onward):</label>
-            <input type="text" id="currentUserNameInput" placeholder="Enter your name here">
+            <label for="currentUserNameInput">Your Name:</label>
+            <input type="text" id="currentUserNameInput" placeholder="So they know it's you!">
         </div>
 
         <button id="shareButton">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.66 1.34 3 3 3s3-1.34 3-3-1.34-3-3-3z"/></svg>
-            Share this Feeling
+            Send a Wave
         </button>
     </div>
 
-    <p class="footer-note">Let the echoes of friendship travel far...</p>
+    <p class="footer-note">Spread a little joy!</p>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Particle Animation
-            const particleContainer = document.getElementById('particleContainer');
-            const numParticles = 30; // Adjust for more/less particles
-            for (let i = 0; i < numParticles; i++) {
-                let particle = document.createElement('div');
-                particle.classList.add('particle');
-                particle.style.left = `${Math.random() * 100}%`;
-                particle.style.top = `${Math.random() * 100}%`;
-                const size = Math.random() * 5 + 2; // Size between 2px and 7px
-                particle.style.width = `${size}px`;
-                particle.style.height = `${size}px`;
-                particle.style.animationDelay = `${Math.random() * 20}s`; // Stagger animation start
-                particle.style.animationDuration = `${Math.random() * 15 + 10}s`; // Vary duration
-                particleContainer.appendChild(particle);
-            }
-
-
             const urlParams = new URLSearchParams(window.location.search);
             const receivedFromName = urlParams.get('name'); 
 
@@ -264,17 +239,19 @@
             const shareButton = document.getElementById('shareButton');
             const mainHeading = document.getElementById('mainHeading');
             const messageTextElement = document.getElementById('messageText');
+            const friendshipIconElement = document.querySelector('.friendship-icon');
 
             const defaultMessageInitial = `
-                <span class="message-icon">🕰️</span>Hey, my dear friend. It feels like ages since we last truly connected, doesn't it? Sometimes life pulls us in different directions, but the threads of true friendship remain. Lately, I've been swept away by a wave of nostalgia, remembering our shared laughter, the secrets whispered, the dreams we painted together, and all those moments that defined 'us'. It's a bittersweet feeling, missing those times, and especially, missing you. Hope this little note finds you well and brings a smile.
-                <br><br>If this resonates, perhaps you'd like to send a similar echo to someone you've been missing? Enter <strong>your name</strong> and share.
+                Hey! Just a little note to say you crossed my mind. Missing our chats and good times. Hope you're doing great! 😊
+                <br><br>Want to send a friendly wave to someone else? Pop your name in below!
             `;
 
             if (receivedFromName) {
-                mainHeading.innerHTML = `A Heartfelt Echo For You!`;
+                mainHeading.innerHTML = `A Hello From Afar!`;
+                friendshipIconElement.innerHTML = '👋'; // Change icon for received message
                 messageTextElement.innerHTML = `
-                    <span class="message-icon">💌</span>Someone special, <span class="highlight-name">${decodeURIComponent(receivedFromName)}</span>, has been thinking of you and the precious bond you share. They're missing the good old days, the easy laughter, and the unique connection that time and distance can't erase. This is a little reminder of how much your friendship is cherished.
-                    <br><br>Feeling the warmth? You can keep this chain of heartfelt connections going. Enter <strong>your name</strong> below and send this echo to another friend you hold dear.
+                    Hi there! <span class="highlight-name">${decodeURIComponent(receivedFromName)}</span> was just thinking of you and sent this little wave. You're on their mind! 
+                    <br><br>Feel like passing on the good vibes? Add your name and share the cheer!
                 `;
             } else {
                 messageTextElement.innerHTML = defaultMessageInitial;
@@ -283,19 +260,18 @@
             shareButton.addEventListener('click', () => {
                 const currentSenderName = currentUserNameInput.value.trim();
                 if (!currentSenderName) {
-                    alert('Please enter your name, so your friend knows who this heartfelt message is from!');
+                    alert('Please pop in your name so your friend knows who sent this!');
                     currentUserNameInput.focus();
                     return;
                 }
 
                 const shareUrl = `${window.location.origin}${window.location.pathname}?name=${encodeURIComponent(currentSenderName)}`;
                 
-                let shareDialogTitle = "Thinking of You, Old Friend!";
-                let shareDialogText = `Hey! Just sending a little note to say I've been thinking of you and our friendship. Missing our times together! - ${currentSenderName}`;
+                let shareDialogTitle = "Just a Friendly Hello!";
+                let shareDialogText = `Hey! Sending a little wave and thinking of you! - ${currentSenderName}`;
 
                 if (receivedFromName) { 
-                    shareDialogTitle = "Passing on a Wave of Nostalgia!";
-                    shareDialogText = `Hey! This beautiful message reminded me of our friendship. Thinking of you and hoping you're well! - ${currentSenderName}`;
+                    shareDialogTitle = "Passing on the Good Vibes!";
                 }
                 
                 const shareData = {
@@ -309,10 +285,10 @@
                         .then(() => console.log('Message shared successfully!'))
                         .catch((error) => {
                             console.error('Error sharing:', error);
-                            alert(`Could not open share dialog. You can copy this link to share: ${shareUrl}`);
+                            alert(`Could not open share dialog. Here's the link to copy: ${shareUrl}`);
                         });
                 } else {
-                    alert(`Your browser doesn't support direct sharing. Please copy this link and send it to your friend: ${shareUrl}`);
+                    alert(`Your browser doesn't support direct sharing. Please copy this link: ${shareUrl}`);
                 }
             });
         });
