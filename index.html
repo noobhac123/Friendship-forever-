@@ -6,26 +6,8 @@
     
     <!-- Primary Meta Tags -->
     <title>A Friendly Hello Just For You! 😊</title>
-    <meta name="description" content="Someone special is thinking of you and sent a little message. Click to see! ✨">
-
-    <!-- Open Graph / Facebook Meta Tags -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://friendship-forever.vercel.app/"> 
-    <meta property="og:title" content="A Friendly Hello Just For You! 👋">
-    <meta property="og:description" content="Someone special is thinking of you and sent a little message. Click to see! ✨">
-    <meta property="og:image" content="https://friendship-forever.vercel.app/image.jpg">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta property="og:site_name" content="Friendship Forever">
-
-    <!-- Twitter Meta Tags -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="https://friendship-forever.vercel.app/">
-    <meta name="twitter:title" content="A Friendly Hello Just For You! 👋">
-    <meta name="twitter:description" content="Someone special is thinking of you and sent a little message. Click to see! ✨">
-    <meta name="twitter:image" content="https://friendship-forever.vercel.app/image.jpg">
-    <!-- <meta name="twitter:creator" content="@yourtwitterhandle"> -->
-
+    <!-- Basic description for search engines and some fallbacks -->
+    <meta name="description" content="Send a friendly message to your friends and let them know you're thinking of them.">
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Pacifico&display=swap');
@@ -285,17 +267,14 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            console.log("DEBUG: DOMContentLoaded fired. Page script starting.");
+            // console.log("DEBUG: DOMContentLoaded fired. Page script starting."); // Debug logs removed for cleaner final code
 
             const urlParams = new URLSearchParams(window.location.search);
             const receivedFromName = urlParams.get('name');
-            console.log("DEBUG: Received 'name' from URL parameter: ", receivedFromName);
+            // console.log("DEBUG: Received 'name' from URL parameter: ", receivedFromName); 
             
             const pageTitleElement = document.querySelector('title');
-            const ogTitleMeta = document.querySelector('meta[property="og:title"]');
-            const ogDescriptionMeta = document.querySelector('meta[property="og:description"]');
-            const ogUrlMeta = document.querySelector('meta[property="og:url"]'); 
-            const twitterUrlMeta = document.querySelector('meta[name="twitter:url"]'); 
+            // OG and Twitter Meta tags are no longer queried as they are removed from HTML
             
             const currentUserNameInput = document.getElementById('currentUserNameInput');
             const shareButton = document.getElementById('shareButton');
@@ -304,8 +283,6 @@
             const greetingIconElement = document.querySelector('.greeting-icon');
 
             const defaultPageTitle = "A Friendly Hello Just For You! 😊";
-            const defaultOgTitle = "A Friendly Hello Just For You! 👋"; 
-            const defaultOgDescription = "Someone special is thinking of you and sent a little message. Click to see! ✨"; 
             const defaultMainHeading = "Hey Friend! 👋";
             const defaultMessageText = `
                 Just a little hello to say you crossed my mind! 😊 Missing our chats and the good times. Hope you're doing awesome! ✨
@@ -313,18 +290,10 @@
             `;
             
             const canonicalUrl = "https://friendship-forever.vercel.app/"; 
-            // Set initial canonical URL for OG tags if not already correct from HTML
-            if (ogUrlMeta && ogUrlMeta.getAttribute('content') !== canonicalUrl) {
-                 ogUrlMeta.setAttribute('content', canonicalUrl);
-            }
-            if (twitterUrlMeta && twitterUrlMeta.getAttribute('content') !== canonicalUrl) {
-                twitterUrlMeta.setAttribute('content', canonicalUrl);
-            }
-
 
             if (receivedFromName) {
                 const decodedName = decodeURIComponent(receivedFromName);
-                console.log("DEBUG: 'name' parameter found. Decoded name: ", decodedName);
+                // console.log("DEBUG: 'name' parameter found. Decoded name: ", decodedName);
 
                 greetingIconElement.innerHTML = '📬'; 
                 mainHeadingElement.innerHTML = `A Smile For You! 😄`; 
@@ -333,39 +302,26 @@
                     Hey there! Your friend, <span class="highlight-name">${decodedName}</span>, sent this to brighten your day! They're thinking of you and missing your awesome friendship. 😊
                     <br><br>Feel like sharing the cheer? Add <strong>your name</strong> below and pass it on! 💖
                 `;
-                console.log("DEBUG: Message text updated for recipient with name.");
+                // console.log("DEBUG: Message text updated for recipient with name.");
                 
                 if (pageTitleElement) pageTitleElement.textContent = `${decodedName} sent you a friendly hello!`;
                 
-                const currentUrlWithName = `${canonicalUrl}?name=${encodeURIComponent(decodedName)}`;
-                if (ogUrlMeta) ogUrlMeta.setAttribute('content', currentUrlWithName); 
-                if (twitterUrlMeta) twitterUrlMeta.setAttribute('content', currentUrlWithName); 
-                if (ogTitleMeta) ogTitleMeta.setAttribute('content', `Message from ${decodedName}! 👋`);
-                if (ogDescriptionMeta) ogDescriptionMeta.setAttribute('content', `${decodedName} is thinking of you! Click to see.`);
-                console.log("DEBUG: OG tags updated for current view with name parameter.");
-
-
                 currentUserNameInput.placeholder = "Enter *your* name to send a new message!";
 
             } else {
-                console.log("DEBUG: No 'name' parameter found. Setting default content and OG tags.");
+                // console.log("DEBUG: No 'name' parameter found. Setting default content.");
                 mainHeadingElement.innerHTML = defaultMainHeading;
                 messageTextElement.innerHTML = defaultMessageText;
                 greetingIconElement.innerHTML = '💖';
 
                 if (pageTitleElement) pageTitleElement.textContent = defaultPageTitle;
-                if (ogTitleMeta) ogTitleMeta.setAttribute('content', defaultOgTitle);
-                if (ogDescriptionMeta) ogDescriptionMeta.setAttribute('content', defaultOgDescription);
-                // Ensure og:url is the canonical one if no name
-                if (ogUrlMeta) ogUrlMeta.setAttribute('content', canonicalUrl);
-                if (twitterUrlMeta) twitterUrlMeta.setAttribute('content', canonicalUrl);
-                console.log("DEBUG: Default message and OG tags set.");
+                // console.log("DEBUG: Default message and titles set.");
             }
 
             shareButton.addEventListener('click', () => {
-                console.log("DEBUG: Share button clicked.");
+                // console.log("DEBUG: Share button clicked.");
                 const nameEnteredByCurrentUser = currentUserNameInput.value.trim();
-                console.log("DEBUG: Name entered by current user: ", nameEnteredByCurrentUser);
+                // console.log("DEBUG: Name entered by current user: ", nameEnteredByCurrentUser);
 
                 if (!nameEnteredByCurrentUser) {
                     alert('Please add your name so your friend knows who sent this smile! 😄');
@@ -374,21 +330,10 @@
                 }
 
                 const shareUrlWithParam = `${canonicalUrl}?name=${encodeURIComponent(nameEnteredByCurrentUser)}`;
-                console.log("DEBUG: Generated share URL with param: ", shareUrlWithParam);
+                // console.log("DEBUG: Generated share URL with param: ", shareUrlWithParam);
                 
-                // --- EXPERIMENTAL: Temporarily update OG tags before sharing ---
-                const originalOgUrl = ogUrlMeta ? ogUrlMeta.getAttribute('content') : canonicalUrl;
-                const originalTwitterUrl = twitterUrlMeta ? twitterUrlMeta.getAttribute('content') : canonicalUrl;
-                const originalOgTitle = ogTitleMeta ? ogTitleMeta.getAttribute('content') : defaultOgTitle;
-                const originalOgDescription = ogDescriptionMeta ? ogDescriptionMeta.getAttribute('content') : defaultOgDescription;
-
-                if (ogUrlMeta) ogUrlMeta.setAttribute('content', shareUrlWithParam);
-                if (twitterUrlMeta) twitterUrlMeta.setAttribute('content', shareUrlWithParam);
-                if (ogTitleMeta) ogTitleMeta.setAttribute('content', `Message from ${nameEnteredByCurrentUser}! 👋`);
-                if (ogDescriptionMeta) ogDescriptionMeta.setAttribute('content', `${nameEnteredByCurrentUser} is thinking of you! Click to see.`);
-                console.log("DEBUG: OG tags temporarily updated for sharing.");
-                // --- END OF EXPERIMENTAL ---
-                
+                // For navigator.share, the title and text are what the user sees in the share UI
+                // not what social media crawlers use for link previews (those were from OG tags).
                 let shareDialogTitle = "Sending a Smile Your Way! 😊"; 
                 let shareDialogText = `Hey! Just sending a little smile because you crossed my mind. Thinking of you! ✨ - From ${nameEnteredByCurrentUser}`;
                 
@@ -397,38 +342,18 @@
                     text: shareDialogText,   
                     url: shareUrlWithParam,          
                 };
-                console.log("DEBUG: Share data prepared: ", shareData);
-
-                function revertOgTags() {
-                    if (ogUrlMeta) ogUrlMeta.setAttribute('content', originalOgUrl);
-                    if (twitterUrlMeta) twitterUrlMeta.setAttribute('content', originalTwitterUrl);
-                    if (ogTitleMeta) ogTitleMeta.setAttribute('content', originalOgTitle);
-                    if (ogDescriptionMeta) ogDescriptionMeta.setAttribute('content', originalOgDescription);
-                    console.log("DEBUG: OG tags reverted.");
-                }
+                // console.log("DEBUG: Share data prepared: ", shareData);
 
                 if (navigator.share) {
                     navigator.share(shareData)
-                        .then(() => {
-                            console.log('DEBUG: Smile shared successfully via navigator.share!');
-                            revertOgTags();
-                        })
+                        .then(() => { /* console.log('DEBUG: Smile shared successfully via navigator.share!'); */ })
                         .catch((error) => {
-                            console.error('DEBUG: Error sharing via navigator.share:', error);
+                            // console.error('DEBUG: Error sharing via navigator.share:', error);
                             alert(`Could not open share dialog. Here's the link to copy: ${shareUrlWithParam}`);
-                            revertOgTags();
                         });
                 } else {
-                    console.log("DEBUG: navigator.share not supported. Alerting with link.");
+                    // console.log("DEBUG: navigator.share not supported. Alerting with link.");
                     alert(`Your browser doesn't support direct sharing. Please copy this link: ${shareUrlWithParam}`);
-                    // No OG tags were changed specifically for this branch, so no revert needed here unless changed before this else.
-                    // However, to be safe, ensure they are at their original state from page load.
-                    // If they were modified by the `if (receivedFromName)` block, they should stay that way.
-                    // If not, they should be the default. The `revertOgTags` function is a good general solution.
-                    // For simplicity, if navigator.share isn't supported, we might not need to revert
-                    // as the main attempt to influence crawler (by changing OG tags before share) didn't happen.
-                    // But if the page was loaded with a name, those specific OG tags should remain.
-                    // The initial `if/else` for `receivedFromName` handles setting the correct "base" OG tags for the current page view.
                 }
             });
         });
