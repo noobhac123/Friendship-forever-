@@ -10,25 +10,21 @@
 
     <!-- Open Graph / Facebook Meta Tags -->
     <meta property="og:type" content="website">
-    <!-- IMPORTANT: Replace with your ACTUAL live URL where this page will be hosted -->
-    <meta property="og:url" content="https://friendship-forever.vercel.app//miss_you.html"> 
+    <meta property="og:url" content="https://friendship-forever.vercel.app/"> 
     <meta property="og:title" content="A Friendly Hello Just For You! 👋">
     <meta property="og:description" content="Someone special is thinking of you and sent a little message. Click to see! ✨">
-    <!-- IMPORTANT: Replace with the absolute URL to your image.jpg on your live server -->
-    <meta property="og:image" content="https://friendship-forever.vercel.app//image.jpg">
+    <meta property="og:image" content="https://friendship-forever.vercel.app/image.jpg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:site_name" content="Friendly Thoughts">
+    <meta property="og:site_name" content="Friendship Forever">
 
     <!-- Twitter Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
-    <!-- IMPORTANT: Replace with your ACTUAL live URL where this page will be hosted -->
-    <meta name="twitter:url" content="https://friendship-forever.vercel.app//miss_you.html">
+    <meta name="twitter:url" content="https://friendship-forever.vercel.app/">
     <meta name="twitter:title" content="A Friendly Hello Just For You! 👋">
     <meta name="twitter:description" content="Someone special is thinking of you and sent a little message. Click to see! ✨">
-    <!-- IMPORTANT: Replace with the absolute URL to your image.jpg on your live server -->
-    <meta name="twitter:image" content="https://friendship-forever.vercel.app//image.jpg">
-    <!-- <meta name="twitter:creator" content="@yourtwitterhandle"> -->
+    <meta name="twitter:image" content="https://friendship-forever.vercel.app/image.jpg">
+    <!-- <meta name="twitter:creator" content="@yourtwitterhandle"> --> <!-- Optional: Aapka Twitter handle -->
 
 
     <style>
@@ -297,13 +293,10 @@
             const urlParams = new URLSearchParams(window.location.search);
             const receivedFromName = urlParams.get('name'); 
             
-            // Meta tag elements (for potential dynamic updates, though initial HTML values are primary for crawlers)
             const pageTitleElement = document.querySelector('title');
             const ogTitleMeta = document.querySelector('meta[property="og:title"]');
             const ogDescriptionMeta = document.querySelector('meta[property="og:description"]');
-            const ogUrlMeta = document.querySelector('meta[property="og:url"]');
-            const twitterUrlMeta = document.querySelector('meta[name="twitter:url"]');
-
+            // og:url and og:image are set statically in HTML for your specific domain.
 
             const currentUserNameInput = document.getElementById('currentUserNameInput');
             const shareButton = document.getElementById('shareButton');
@@ -316,17 +309,8 @@
                 <br><br>Want to send a smile to another friend? Add your name below! 👇
             `;
             
-            // Construct the canonical URL for OG tags (page URL without query parameters)
-            // IMPORTANT: This relies on the HTML file being at the root or a known path.
-            // If your HTML file name changes from 'miss_you.html', update it here or in the meta tags.
-            const canonicalPageName = "miss_you.html"; // Or your actual HTML file name
-            const canonicalUrl = `${window.location.origin}/${canonicalPageName}`; 
-
-            // Update og:url and twitter:url to be the canonical one.
-            // This helps social platforms fetch a consistent URL for metadata.
-            if (ogUrlMeta) ogUrlMeta.setAttribute('content', canonicalUrl);
-            if (twitterUrlMeta) twitterUrlMeta.setAttribute('content', canonicalUrl);
-
+            // The canonical URL is your main domain as index.html is at root.
+            const canonicalUrl = "https://friendship-forever.vercel.app/"; 
 
             if (receivedFromName) {
                 const decodedName = decodeURIComponent(receivedFromName);
@@ -337,22 +321,21 @@
                     <br><br>Feel like sharing the cheer? Add <strong>your name</strong> below and pass it on! 💖
                 `;
                 
-                // Update page title for the browser tab (doesn't affect OG tags for initial scrape)
                 if (pageTitleElement) pageTitleElement.textContent = `${decodedName} sent you a friendly hello!`;
-                // OG title and description can be updated for this view, but initial scrape uses HTML values
+                // Update OG tags for this specific view if desired, though crawlers usually hit the canonical URL first.
+                // For simplicity, we're keeping the main OG tags static for the canonical URL.
+                // If this specific URL (with name) is shared, it might pick up these if the crawler re-fetches.
                 if (ogTitleMeta) ogTitleMeta.setAttribute('content', `Message from ${decodedName}! 👋`);
                 if (ogDescriptionMeta) ogDescriptionMeta.setAttribute('content', `${decodedName} is thinking of you! Click to see.`);
-
 
                 currentUserNameInput.placeholder = "Enter *your* name to send a new message!";
 
             } else {
                 messageTextElement.innerHTML = defaultMessageInitial;
                 if (pageTitleElement) pageTitleElement.textContent = "A Friendly Hello Just For You! 😊";
-                // Ensure OG tags revert to default if no name (already set in HTML, but good for consistency)
+                // Reset OG tags to default if no name, ensuring they match the static HTML ones.
                 if (ogTitleMeta) ogTitleMeta.setAttribute('content', "A Friendly Hello Just For You! 👋");
                 if (ogDescriptionMeta) ogDescriptionMeta.setAttribute('content', "Someone special is thinking of you and sent a little message. Click to see! ✨");
-
             }
 
             shareButton.addEventListener('click', () => {
@@ -363,12 +346,9 @@
                     return;
                 }
 
-                // The URL shared will have the sender's name as a parameter
-                // It uses the canonicalUrl (base page) + the name parameter
                 const shareUrl = `${canonicalUrl}?name=${encodeURIComponent(currentSenderName)}`;
                 
-                // This text is for the share dialog (WhatsApp, Messenger, etc.)
-                let shareDialogTitle = "Sending a Smile Your Way! 😊"; // Default, some platforms might use this
+                let shareDialogTitle = "Sending a Smile Your Way! 😊"; 
                 let shareDialogText = `Hey! Just sending a little smile because you crossed my mind. Thinking of you! ✨ - From ${currentSenderName}`;
                 
                 const shareData = {
