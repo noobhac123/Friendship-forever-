@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A Chain of Cherished Memories</title>
+    <title>Echoes of Our Friendship</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Caveat:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Caveat:wght@400;700&family=Dancing+Script:wght@400;700&display=swap');
 
         :root {
-            --primary-color: #6a11cb; /* Deep Purple */
-            --secondary-color: #2575fc; /* Bright Blue */
-            --accent-color: #ff6f91; /* Playful Pink/Coral for accents */
+            --primary-color: #4e54c8; /* A softer, more nostalgic purple */
+            --secondary-color: #8f94fb; /* Lighter, complementary purple/blue */
+            --accent-color: #f7b733; /* Warm yellow/gold for highlights */
             --text-color: #333;
-            --light-text-color: #f0f0f0;
-            --card-bg: #ffffff;
-            --shadow-color: rgba(0, 0, 0, 0.1);
-            --button-hover-bg: #4a0c9b;
-            --highlight-bg: #e9f2ff; /* Light blueish background for name */
+            --light-text-color: #fdfdfd;
+            --card-bg: rgba(255, 255, 255, 0.95); /* Slightly transparent white */
+            --shadow-color: rgba(0, 0, 0, 0.15);
+            --button-hover-bg: #3a3f9a;
+            --highlight-bg: #e6e7ff; 
         }
 
         body {
@@ -28,77 +28,121 @@
             align-items: center;
             justify-content: center;
             min-height: 100vh;
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            /* Animated Gradient Background */
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab, #4e54c8, #8f94fb);
+            background-size: 400% 400%;
+            animation: gradientBG 25s ease infinite;
             color: var(--text-color);
             box-sizing: border-box;
+            overflow-x: hidden; /* Prevent horizontal scroll from animations */
         }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        /* Optional: Floating stars/particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none; /* So they don't interfere with clicks */
+            z-index: -1; /* Behind content */
+        }
+
+        .particle {
+            position: absolute;
+            background-color: rgba(255, 255, 255, 0.3); /* Light, semi-transparent */
+            border-radius: 50%;
+            animation: float 20s infinite ease-in-out;
+            opacity: 0; /* Start invisible, fade in */
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0) translateX(0) scale(1); opacity: 0; }
+            25% { opacity: 0.7; }
+            50% { transform: translateY(-100px) translateX(50px) scale(1.2); opacity: 0.5; }
+            75% { opacity: 0.7; }
+            100% { transform: translateY(0) translateX(0) scale(1); opacity: 0; }
+        }
+
 
         .container {
             background-color: var(--card-bg);
-            padding: 35px 45px; /* Slightly more padding */
-            border-radius: 20px; /* More rounded */
-            box-shadow: 0 12px 35px var(--shadow-color);
+            padding: 40px 50px;
+            border-radius: 25px;
+            box-shadow: 0 15px 40px var(--shadow-color);
             text-align: center;
-            max-width: 550px; /* Slightly wider */
+            max-width: 600px; 
             width: 90%;
-            animation: fadeInScale 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+            animation: fadeInScale 1s cubic-bezier(0.165, 0.84, 0.44, 1) both;
+            position: relative; /* For z-index if needed */
+            z-index: 1;
         }
 
         @keyframes fadeInScale {
-            0% { opacity: 0; transform: translateY(30px) scale(0.95); }
+            0% { opacity: 0; transform: translateY(40px) scale(0.9); }
             100% { opacity: 1; transform: translateY(0) scale(1); }
         }
 
         h1 {
-            font-family: 'Caveat', cursive; /* A more handwritten, warm font for heading */
-            font-size: 2.8em;
+            font-family: 'Dancing Script', cursive; /* Elegant, flowing script */
+            font-size: 3em;
             color: var(--primary-color);
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             font-weight: 700;
-            line-height: 1.2;
+            line-height: 1.1;
         }
         
         .highlight-name {
-            color: var(--secondary-color);
+            color: var(--accent-color); /* Using accent for more pop */
             font-weight: 700;
             background-color: var(--highlight-bg);
-            padding: 3px 8px;
-            border-radius: 5px;
-            display: inline-block; /* Ensures padding and bg color work well */
+            padding: 4px 10px;
+            border-radius: 6px;
+            display: inline-block;
+            font-family: 'Poppins', sans-serif; /* Keep name easily readable */
+            font-size: 0.9em; /* Relative to parent p, so it stands out but not too large */
+            vertical-align: middle;
         }
 
         p {
-            font-size: 1.1em;
-            line-height: 1.8; /* More spacing for readability */
-            margin-bottom: 25px;
-            color: #444; /* Slightly darker for better contrast on white */
+            font-size: 1.15em;
+            line-height: 1.9; 
+            margin-bottom: 30px;
+            color: #3a3a3a; 
         }
         
         .message-icon {
-            font-size: 1.5em;
-            margin-right: 8px;
+            font-size: 1.6em;
+            margin-right: 10px;
             color: var(--accent-color);
+            vertical-align: middle;
         }
 
         .input-group {
-            margin-bottom: 30px;
+            margin-bottom: 35px;
         }
 
         label {
             display: block;
-            font-size: 0.95em;
-            color: #666;
-            margin-bottom: 10px;
+            font-size: 1em;
+            color: #555;
+            margin-bottom: 12px;
             text-align: left;
             font-weight: 600;
         }
 
         input[type="text"] {
-            width: calc(100% - 24px); 
-            padding: 14px 12px;
-            border: 1px solid #ccc;
-            border-radius: 10px;
-            font-size: 1em;
+            width: calc(100% - 28px); 
+            padding: 16px 14px;
+            border: 1px solid #bbb;
+            border-radius: 12px;
+            font-size: 1.05em;
             font-family: 'Poppins', sans-serif;
             transition: border-color 0.3s ease, box-shadow 0.3s ease;
         }
@@ -106,135 +150,152 @@
         input[type="text"]:focus {
             outline: none;
             border-color: var(--secondary-color);
-            box-shadow: 0 0 0 4px rgba(37, 117, 252, 0.2);
+            box-shadow: 0 0 0 4px rgba(143, 148, 251, 0.3);
         }
 
         button {
-            background: linear-gradient(135deg, var(--accent-color) 0%, var(--primary-color) 100%);
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
             color: var(--light-text-color);
             border: none;
-            padding: 16px 35px;
-            font-size: 1.15em;
+            padding: 18px 40px;
+            font-size: 1.2em;
             font-weight: 600;
-            border-radius: 10px;
+            border-radius: 12px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.35s ease;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 12px;
             width: 100%;
             box-sizing: border-box;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+            text-shadow: 0 1px 3px rgba(0,0,0,0.25);
         }
 
         button:hover {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
-            transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+            background: linear-gradient(135deg, var(--button-hover-bg) 0%, var(--primary-color) 100%);
+            transform: translateY(-4px) scale(1.03);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
         }
         
         button svg {
-            width: 22px;
-            height: 22px;
+            width: 24px;
+            height: 24px;
             fill: currentColor;
         }
 
         .footer-note {
-            margin-top: 35px;
-            font-size: 0.9em;
+            margin-top: 40px;
+            font-size: 1em;
             color: var(--light-text-color);
-            opacity: 0.85;
+            opacity: 0.9;
             font-family: 'Caveat', cursive;
-            font-size: 1.3em;
+            font-size: 1.4em;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
         }
 
         /* Responsive adjustments */
         @media (max-width: 600px) {
             .container {
-                padding: 25px 20px;
+                padding: 30px 25px;
                 width: 95%;
             }
             h1 {
-                font-size: 2.2em;
+                font-size: 2.4em;
             }
             p {
-                font-size: 1em;
-            }
-            button {
-                padding: 14px 25px;
                 font-size: 1.05em;
             }
-            .footer-note {
+            button {
+                padding: 15px 30px;
                 font-size: 1.1em;
+            }
+            .footer-note {
+                font-size: 1.2em;
             }
         }
     </style>
 </head>
 <body>
+    <div class="particles" id="particleContainer"></div>
 
     <div class="container">
-        <h1 id="mainHeading">Old Times, Golden Memories!</h1>
+        <h1 id="mainHeading">An Echo from a Distant Heart</h1>
         <p id="messageText">
-            <span class="message-icon">💌</span>Hey there, amazing friend! Remember those carefree childhood days, the endless laughter that made our stomachs hurt, the secret handshakes, and all those unforgettable adventures we dived into? Life spins its tales, but true friendships like ours, filled with love and countless memories, are the real treasures. Thinking of you and our special bond. ✨
+            <span class="message-icon">🕰️</span>Hey, my dear friend. It feels like ages since we last truly connected, doesn't it? Sometimes life pulls us in different directions, but the threads of true friendship remain. Lately, I've been swept away by a wave of nostalgia, remembering our shared laughter, the secrets whispered, the dreams we painted together, and all those moments that defined 'us'. It's a bittersweet feeling, missing those times, and especially, missing you. Hope this little note finds you well and brings a smile.
         </p>
         
         <div class="input-group">
-            <label for="currentUserNameInput">Your Name (to share this feeling):</label>
+            <label for="currentUserNameInput">Your Name (to send this echo onward):</label>
             <input type="text" id="currentUserNameInput" placeholder="Enter your name here">
         </div>
 
         <button id="shareButton">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.66 1.34 3 3 3s3-1.34 3-3-1.34-3-3-3z"/></svg>
-            Pass on the Warmth
+            Share this Feeling
         </button>
     </div>
 
-    <p class="footer-note">Keep the chain of friendship & memories glowing!</p>
+    <p class="footer-note">Let the echoes of friendship travel far...</p>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // Particle Animation
+            const particleContainer = document.getElementById('particleContainer');
+            const numParticles = 30; // Adjust for more/less particles
+            for (let i = 0; i < numParticles; i++) {
+                let particle = document.createElement('div');
+                particle.classList.add('particle');
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                const size = Math.random() * 5 + 2; // Size between 2px and 7px
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.animationDelay = `${Math.random() * 20}s`; // Stagger animation start
+                particle.style.animationDuration = `${Math.random() * 15 + 10}s`; // Vary duration
+                particleContainer.appendChild(particle);
+            }
+
+
             const urlParams = new URLSearchParams(window.location.search);
-            const receivedFromName = urlParams.get('name'); // Name of the person who sent THIS link
+            const receivedFromName = urlParams.get('name'); 
 
             const currentUserNameInput = document.getElementById('currentUserNameInput');
             const shareButton = document.getElementById('shareButton');
             const mainHeading = document.getElementById('mainHeading');
-            const messageTextElement = document.getElementById('messageText'); // Renamed for clarity
+            const messageTextElement = document.getElementById('messageText');
 
-            const defaultMessage = `
-                <span class="message-icon">💌</span>Hey there, amazing friend! Remember those carefree childhood days, the endless laughter that made our stomachs hurt, the secret handshakes, and all those unforgettable adventures we dived into? Life spins its tales, but true friendships like ours, filled with love and countless memories, are the real treasures. Thinking of you and our special bond. ✨
-                <br><br>Want to send this wave of nostalgia to another cherished friend? Enter <strong>your name</strong> below and share!
+            const defaultMessageInitial = `
+                <span class="message-icon">🕰️</span>Hey, my dear friend. It feels like ages since we last truly connected, doesn't it? Sometimes life pulls us in different directions, but the threads of true friendship remain. Lately, I've been swept away by a wave of nostalgia, remembering our shared laughter, the secrets whispered, the dreams we painted together, and all those moments that defined 'us'. It's a bittersweet feeling, missing those times, and especially, missing you. Hope this little note finds you well and brings a smile.
+                <br><br>If this resonates, perhaps you'd like to send a similar echo to someone you've been missing? Enter <strong>your name</strong> and share.
             `;
 
             if (receivedFromName) {
-                // This page is being viewed by someone who received a link
-                mainHeading.innerHTML = `A Special Message For You!`;
+                mainHeading.innerHTML = `A Heartfelt Echo For You!`;
                 messageTextElement.innerHTML = `
-                    <span class="message-icon">📬</span>Guess what? <span class="highlight-name">${decodeURIComponent(receivedFromName)}</span> is sending a big warm hug through this message! They're reminiscing about all the fun, the childhood pranks, the shared dreams, and the incredible friendship you both cherish. You're being missed! 😊
-                    <br><br>Touched? Why not keep this beautiful chain of memories and friendship going? Enter <strong>your name</strong> below and share this feeling with another special person in your life!
+                    <span class="message-icon">💌</span>Someone special, <span class="highlight-name">${decodeURIComponent(receivedFromName)}</span>, has been thinking of you and the precious bond you share. They're missing the good old days, the easy laughter, and the unique connection that time and distance can't erase. This is a little reminder of how much your friendship is cherished.
+                    <br><br>Feeling the warmth? You can keep this chain of heartfelt connections going. Enter <strong>your name</strong> below and send this echo to another friend you hold dear.
                 `;
             } else {
-                // This is the initial page, or someone opened it directly
-                messageTextElement.innerHTML = defaultMessage;
+                messageTextElement.innerHTML = defaultMessageInitial;
             }
 
             shareButton.addEventListener('click', () => {
                 const currentSenderName = currentUserNameInput.value.trim();
                 if (!currentSenderName) {
-                    alert('Please enter your name so your friend knows who sent this lovely thought!');
+                    alert('Please enter your name, so your friend knows who this heartfelt message is from!');
                     currentUserNameInput.focus();
                     return;
                 }
 
                 const shareUrl = `${window.location.origin}${window.location.pathname}?name=${encodeURIComponent(currentSenderName)}`;
                 
-                let shareDialogTitle = "Thinking of Our Awesome Friendship & Memories!";
-                let shareDialogText = `Hey! Just reminiscing about our amazing friendship, all the laughter and memories. Thinking of you! - ${currentSenderName}`;
+                let shareDialogTitle = "Thinking of You, Old Friend!";
+                let shareDialogText = `Hey! Just sending a little note to say I've been thinking of you and our friendship. Missing our times together! - ${currentSenderName}`;
 
-                if (receivedFromName) { // If this user received a link, they are now forwarding it
-                    shareDialogTitle = "Passing on the Friendship & Memory Chain!";
-                    shareDialogText = `Hey! Sending some love & thinking of our great times and special friendship. Keep the chain going! - ${currentSenderName}`;
+                if (receivedFromName) { 
+                    shareDialogTitle = "Passing on a Wave of Nostalgia!";
+                    shareDialogText = `Hey! This beautiful message reminded me of our friendship. Thinking of you and hoping you're well! - ${currentSenderName}`;
                 }
                 
                 const shareData = {
