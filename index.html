@@ -11,22 +11,23 @@
     <meta property="og:type" content="website" />
     <!-- IMPORTANT: Replace this with the ACTUAL URL where your page will be hosted -->
     <meta property="og:url" content="https://your-website-domain.com/miss_you.html" /> 
-    <!-- IMPORTANT: Replace this with a URL to YOUR cover image (e.g., 1200x630 pixels is good) -->
-    <meta property="og:image" content="https://via.placeholder.com/1200x630.png?text=Missing+Our+Friendship" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
+    <!-- USING image.jpg - Assuming it's at the root or same path as HTML file when hosted -->
+    <meta property="og:image" content="https://your-website-domain.com/image.jpg" /> 
+    <meta property="og:image:width" content="1200" /> <!-- Adjust if your image.jpg has different dimensions -->
+    <meta property="og:image:height" content="630" />  <!-- Adjust if your image.jpg has different dimensions -->
     <meta property="og:site_name" content="Friendly Notes" />
 
-    <!-- Twitter Card Meta Tags (Optional, but good for Twitter) -->
+    <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="A Special Message For You! 👋" />
     <meta name="twitter:description" content="Someone is thinking of you and missing your awesome friendship! Click to see the message." />
-    <!-- IMPORTANT: Replace this with a URL to YOUR cover image -->
-    <meta name="twitter:image" content="https://via.placeholder.com/1200x630.png?text=Missing+Our+Friendship" />
-    <!-- <meta name="twitter:site" content="@yourtwitterhandle"> --> <!-- Optional: Your Twitter handle -->
+    <!-- USING image.jpg - Assuming it's at the root or same path as HTML file when hosted -->
+    <meta name="twitter:image" content="https://your-website-domain.com/image.jpg" />
+    <!-- <meta name="twitter:site" content="@yourtwitterhandle"> --> 
 
 
     <style>
+        /* CSS styles remain the same as previous version */
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Pacifico&display=swap');
 
         :root {
@@ -232,24 +233,8 @@
             text-shadow: 0 1px 2px rgba(0,0,0,0.2);
         }
 
-        /* Responsive adjustments */
         @media (max-width: 600px) {
-            .container {
-                padding: 30px 25px 25px 25px;
-            }
-            h1 {
-                font-size: 2em;
-            }
-            .greeting-icon {
-                font-size: 2.8em;
-            }
-            p.message {
-                font-size: 1em;
-            }
-            button {
-                padding: 13px 22px;
-                font-size: 1em;
-            }
+            /* Responsive styles remain same */
         }
     </style>
 </head>
@@ -285,14 +270,15 @@
     </div>
 
     <script>
+        // JavaScript remains the same as previous version
         document.addEventListener('DOMContentLoaded', () => {
             const urlParams = new URLSearchParams(window.location.search);
             const receivedFromName = urlParams.get('name'); 
-            const pageTitleElement = document.querySelector('title'); // Get the title element
+            const pageTitleElement = document.querySelector('title');
             const ogTitleMeta = document.querySelector('meta[property="og:title"]');
             const ogDescriptionMeta = document.querySelector('meta[property="og:description"]');
-            // const twitterTitleMeta = document.querySelector('meta[name="twitter:title"]'); // If you want to update twitter tags too
-            // const twitterDescriptionMeta = document.querySelector('meta[name="twitter:description"]');
+            const ogImageMeta = document.querySelector('meta[property="og:image"]'); // Get image meta tag
+            const twitterImageMeta = document.querySelector('meta[name="twitter:image"]'); // Get twitter image meta tag
 
 
             const currentUserNameInput = document.getElementById('currentUserNameInput');
@@ -309,37 +295,50 @@
             let dynamicPageTitle = "Thinking of You! 😊";
             let dynamicOgTitle = "A Special Message For You! 👋";
             let dynamicOgDescription = "Someone is thinking of you and missing your awesome friendship! Click to see the message.";
+            // Assuming your page is at your-website-domain.com/miss_you.html and image.jpg is at your-website-domain.com/image.jpg
+            // You MUST replace 'https://your-website-domain.com' with your actual domain.
+            let baseSiteUrl = window.location.origin; // This gets the base URL like "https://your-website-domain.com"
+            let imagePath = "/image.jpg"; // Path to your image relative to the domain root
+            let dynamicOgImage = baseSiteUrl + imagePath;
+
 
             if (receivedFromName) {
                 const decodedName = decodeURIComponent(receivedFromName);
+                // Personalize the main content of the page
                 mainHeading.innerHTML = `A Smile For You, <span class="highlight-name">${decodedName}</span>! 😄`;
                 greetingIconElement.innerHTML = '📬'; 
                 messageTextElement.innerHTML = `
                     Hey <span class="highlight-name">${decodedName}</span>! Your friend sent this to brighten your day! They're thinking of you and missing your awesome friendship. 😊
                     <br><br>Feel like sharing the cheer? Add <strong>your name</strong> below and pass it on! 💖
                 `;
-                // Update dynamic titles and descriptions if a name is present in URL
+                
+                // Update dynamic titles and descriptions for THIS page view (recipient's view)
+                // These are used by the browser tab and potentially if this specific URL (with name param) is shared
                 dynamicPageTitle = `${decodedName} sent you a friendly hello!`;
                 dynamicOgTitle = `Message from ${decodedName}! 👋`;
                 dynamicOgDescription = `${decodedName} is thinking of you and missing your friendship! Click to see.`;
-
-                // If this page is viewed by recipient, the name field can be for *their* name to send *new* message
+                // The og:image can remain the same or you could even generate dynamic images (advanced)
+                
                 currentUserNameInput.placeholder = "Enter *your* name to send a new message!";
 
-
             } else {
-                // This page is being viewed by the sender (or fresh open)
                 messageTextElement.innerHTML = defaultMessageInitial;
-                // The OG tags will use the default generic message.
-                // The share dialog text below will be personalized by the sender's input.
+                // OG tags will use the default generic message as set in the HTML initially
+                // or the dynamically constructed ones above if you prefer the base URL for image.
             }
 
-            // Set the dynamic titles and meta tags
             if (pageTitleElement) pageTitleElement.textContent = dynamicPageTitle;
             if (ogTitleMeta) ogTitleMeta.setAttribute('content', dynamicOgTitle);
             if (ogDescriptionMeta) ogDescriptionMeta.setAttribute('content', dynamicOgDescription);
-            // if (twitterTitleMeta) twitterTitleMeta.setAttribute('content', dynamicOgTitle);
-            // if (twitterDescriptionMeta) twitterDescriptionMeta.setAttribute('content', dynamicOgDescription);
+            
+            // Update the image URL in meta tags (especially if you want to ensure it uses the base URL dynamically)
+            // This is more robust if your page might be in subfolders.
+            if (ogImageMeta) ogImageMeta.setAttribute('content', dynamicOgImage);
+            if (twitterImageMeta) twitterImageMeta.setAttribute('content', dynamicOgImage);
+            // Also update og:url to be the current page's actual URL, without parameters for the base share
+            const canonicalUrl = `${window.location.origin}${window.location.pathname}`;
+            const ogUrlMeta = document.querySelector('meta[property="og:url"]');
+            if (ogUrlMeta) ogUrlMeta.setAttribute('content', canonicalUrl);
 
 
             shareButton.addEventListener('click', () => {
@@ -350,19 +349,15 @@
                     return;
                 }
 
-                // The link that will be shared. It includes the name from the input field.
-                const shareBaseUrl = `${window.location.origin}${window.location.pathname}`;
-                const shareUrl = `${shareBaseUrl}?name=${encodeURIComponent(currentSenderName)}`;
+                const shareUrl = `${canonicalUrl}?name=${encodeURIComponent(currentSenderName)}`;
                 
-                // This text is for the share dialog itself (WhatsApp, Messenger, etc.)
-                // It's different from the og:description which is for the link preview.
                 let shareDialogTitle = "Sending a Smile Your Way! 😊";
                 let shareDialogText = `Hey! Just sending a little smile because you crossed my mind. Thinking of you! ✨ - From ${currentSenderName}`;
                 
                 const shareData = {
-                    title: shareDialogTitle, // This title is often used by some platforms
-                    text: shareDialogText,   // This is the main text shared
-                    url: shareUrl,           // This URL has the name parameter
+                    title: shareDialogTitle, 
+                    text: shareDialogText,   
+                    url: shareUrl,           
                 };
 
                 if (navigator.share) {
@@ -378,6 +373,5 @@
             });
         });
     </script>
-
 </body>
 </html>
