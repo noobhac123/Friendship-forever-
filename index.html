@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Missing Our Connection</title>
+    <title>Sending Good Vibes! ✨</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Pacifico&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Pacifico&family=Poppins:wght@300;400;600&display=swap');
 
         :root {
             --bg-grad-start: #6a11cb; 
@@ -14,15 +14,17 @@
             
             --card-bg: #ffffff;
             --text-primary: #333740; 
-            --text-secondary: #5c626e; 
-            --accent-color: #7c4dff; 
+            --text-secondary: #555e6d; /* Slightly lighter secondary text */
+            --accent-color: #7c4dff; /* Main accent */
+            --highlight-accent: #ff4081; /* Brighter pink for emoji-like highlights */
+            
             --input-border: #d9dce1;
             --input-focus-border: var(--accent-color);
-            --shadow-color: rgba(74, 0, 224, 0.15); 
+            --shadow-color: rgba(74, 0, 224, 0.18); /* Slightly stronger shadow */
             --button-text: #ffffff;
             --button-bg-start: var(--accent-color);
             --button-bg-end: #536dfe; 
-            --footer-text-color: rgba(255, 255, 255, 0.85);
+            --footer-text-color: rgba(255, 255, 255, 0.9);
         }
 
         * {
@@ -32,7 +34,7 @@
         }
 
         body {
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Poppins', sans-serif; /* Changed to Poppins for a slightly rounder, friendlier feel */
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -53,55 +55,58 @@
         
         .container {
             background-color: var(--card-bg);
-            padding: 40px;
-            border-radius: 20px; 
-            box-shadow: 0 12px 35px var(--shadow-color);
+            padding: 35px 40px 40px 40px; /* Adjusted padding */
+            border-radius: 24px; /* Softer radius */
+            box-shadow: 0 15px 45px var(--shadow-color);
             text-align: center;
-            max-width: 480px; /* Adjusted for medium text */
+            max-width: 460px; 
             width: 95%;
-            animation: popInSmooth 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+            animation: popInSmooth 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) both; /* More playful pop */
             position: relative;
             z-index: 1;
         }
 
         @keyframes popInSmooth {
-            0% { opacity: 0; transform: scale(0.9) translateY(15px); }
+            0% { opacity: 0; transform: scale(0.85) translateY(20px); }
             100% { opacity: 1; transform: scale(1) translateY(0); }
         }
         
         .greeting-icon {
-            font-size: 3em; /* Slightly smaller for balance */
-            color: var(--accent-color);
-            margin-bottom: 18px;
+            font-size: 3.5em; /* Larger icon */
+            color: var(--highlight-accent); /* Using the brighter accent */
+            margin-bottom: 15px;
             display: inline-block;
-            animation: gentleBob 3s infinite ease-in-out;
+            animation: wiggleIcon 2.5s infinite ease-in-out;
         }
 
-        @keyframes gentleBob {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-6px); }
+        @keyframes wiggleIcon {
+            0%, 100% { transform: rotate(0deg) scale(1); }
+            25% { transform: rotate(-8deg) scale(1.1); }
+            75% { transform: rotate(8deg) scale(1.1); }
         }
 
         h1 {
             font-family: 'Pacifico', cursive;
-            font-size: 2.3em; /* Adjusted for message length */
+            font-size: 2.5em; 
             color: var(--accent-color);
-            margin-bottom: 20px; /* More space before message */
+            margin-bottom: 20px;
             font-weight: 400;
+            line-height: 1.2;
         }
         
         .highlight-name {
             font-weight: 600;
-            color: var(--accent-color);
-            padding: 2px 6px;
-            border-radius: 4px;
-            background-color: rgba(124, 77, 255, 0.1); 
+            color: var(--highlight-accent); /* Brighter accent for name */
+            padding: 3px 7px;
+            border-radius: 5px;
+            background-color: rgba(255, 64, 129, 0.1); /* Light pink bg for name */
+            display: inline-block; /* Ensures bg color wraps nicely */
         }
 
         p.message {
-            font-size: 1.08em; /* Good for medium text */
-            font-weight: 400; /* For readability */
-            line-height: 1.75; 
+            font-size: 1.1em; 
+            font-weight: 400; 
+            line-height: 1.8; 
             margin-bottom: 30px;
             color: var(--text-secondary);
         }
@@ -113,88 +118,85 @@
 
         label {
             display: block;
-            font-size: 0.85em;
+            font-size: 0.9em; /* Slightly larger label */
             color: var(--text-secondary);
-            margin-bottom: 7px;
-            font-weight: 600;
-            text-transform: uppercase; 
-            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+            font-weight: 500; /* Medium weight */
         }
 
         input[type="text"] {
             width: 100%; 
-            padding: 13px 15px;
-            border: 1px solid var(--input-border);
-            border-radius: 10px;
+            padding: 14px 16px; /* More padding */
+            border: 1.5px solid var(--input-border); /* Slightly thicker border */
+            border-radius: 12px; /* More rounded */
             font-size: 1em;
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Poppins', sans-serif;
             transition: all 0.3s ease;
-            background-color: #fdfdff; 
+            background-color: #fcfcff; 
             color: var(--text-primary);
         }
 
         input[type="text"]:focus {
             outline: none;
             border-color: var(--input-focus-border);
-            box-shadow: 0 0 0 3px rgba(124, 77, 255, 0.2);
+            box-shadow: 0 0 0 3.5px rgba(124, 77, 255, 0.25);
             background-color: #fff;
         }
 
         button {
-            background: linear-gradient(135deg, var(--button-bg-start), var(--button-bg-end));
+            background: linear-gradient(135deg, var(--highlight-accent), var(--accent-color)); /* More vibrant button */
             color: var(--button-text);
             border: none;
-            padding: 15px 28px;
-            font-size: 1.05em;
+            padding: 16px 30px; /* Generous padding */
+            font-size: 1.1em;
             font-weight: 600;
-            border-radius: 10px;
+            border-radius: 12px;
             cursor: pointer;
             transition: all 0.3s ease;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 9px;
+            gap: 10px;
             width: 100%;
-            text-shadow: 0 1px 1px rgba(0,0,0,0.15);
+            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
         }
 
         button:hover {
-            transform: translateY(-2px) scale(1.01);
-            box-shadow: 0 7px 14px rgba(74, 0, 224, 0.2);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 16px rgba(74, 0, 224, 0.25);
         }
         
         button svg {
-            width: 19px;
-            height: 19px;
+            width: 20px;
+            height: 20px;
             fill: currentColor;
         }
 
         .footer-note {
-            margin-top: 28px;
-            font-size: 0.9em;
+            margin-top: 30px;
+            font-size: 0.95em;
             color: var(--footer-text-color); 
-            font-weight: 300;
+            font-weight: 400;
             text-shadow: 0 1px 2px rgba(0,0,0,0.2);
         }
 
         /* Responsive adjustments */
         @media (max-width: 600px) {
             .container {
-                padding: 30px 25px;
-                border-radius: 16px;
+                padding: 30px 25px 35px 25px;
             }
             h1 {
-                font-size: 2em;
+                font-size: 2.2em;
             }
             .greeting-icon {
-                font-size: 2.6em;
+                font-size: 3em;
             }
             p.message {
-                font-size: 1em;
+                font-size: 1.05em;
             }
             button {
-                padding: 13px 22px;
-                font-size: 1em;
+                padding: 14px 25px;
+                font-size: 1.05em;
             }
         }
     </style>
@@ -202,24 +204,24 @@
 <body>
 
     <div class="container">
-        <div class="greeting-icon">🫂</div> <!-- Hugging face icon for friendship -->
-        <h1 id="mainHeading">Missing Our Friendship</h1>
+        <div class="greeting-icon">🎉</div> 
+        <h1 id="mainHeading">Hey Awesome Friend! 👋</h1>
         <p id="messageText" class="message">
-            Hey there, my friend. Just wanted to reach out and say I've been thinking about you and our friendship a lot lately. Life gets busy, but the good times and great conversations we've shared always stick with me. Truly missing our connection and hoping we can catch up soon. You're one of a kind!
+            Just a little burst of good vibes coming your way! 🥳 Thinking of all the fun times and crazy laughs we've shared. Missing your awesome energy! ✨ Hope you're having a fantastic day and we can reconnect soon for more adventures! 🚀 You rock! 🎸
         </p>
         
         <div class="input-group">
-            <label for="currentUserNameInput">Your Name:</label>
-            <input type="text" id="currentUserNameInput" placeholder="So they know it's from you!">
+            <label for="currentUserNameInput">Your Name (to spread the cheer!):</label>
+            <input type="text" id="currentUserNameInput" placeholder="So they know it's you! 😄">
         </div>
 
         <button id="shareButton">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.66 1.34 3 3 3s3-1.34 3-3-1.34-3-3-3z"/></svg>
-            Share This Thought
+            Send Good Vibes!
         </button>
     </div>
 
-    <p class="footer-note">Friendships are precious. Keep them close.</p>
+    <p class="footer-note">Keep the positive energy flowing! 🌟</p>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -233,16 +235,16 @@
             const greetingIconElement = document.querySelector('.greeting-icon');
 
             const defaultMessageInitial = `
-                Hey there, my friend. Just wanted to reach out and say I've been thinking about you and our friendship a lot lately. Life gets busy, but the good times and great conversations we've shared always stick with me. Truly missing our connection and hoping we can catch up soon. You're one of a kind!
-                <br><br>Want to send a similar warm thought to another friend? Add your name below.
+                Just a little burst of good vibes coming your way! 🥳 Thinking of all the fun times and crazy laughs we've shared. Missing your awesome energy! ✨ Hope you're having a fantastic day and we can reconnect soon for more adventures! 🚀 You rock! 🎸
+                <br><br>Want to send some cheer to another amazing friend? Add your name and hit share! 👇
             `;
 
             if (receivedFromName) {
-                mainHeading.innerHTML = `A Message For You`;
-                greetingIconElement.innerHTML = '💌'; // Letter icon for received message
+                mainHeading.innerHTML = `Good Vibes For You! 📬`;
+                greetingIconElement.innerHTML = '🤩'; // Star-struck for excitement
                 messageTextElement.innerHTML = `
-                    Hi! Your friend <span class="highlight-name">${decodeURIComponent(receivedFromName)}</span> sent this message because they're genuinely missing your friendship and the special bond you share. They're cherishing the memories and would love to reconnect.
-                    <br><br>Touched by this? You can share this feeling with another dear friend by adding your name.
+                    Hey there! <span class="highlight-name">${decodeURIComponent(receivedFromName)}</span> is sending you a wave of good vibes and thinking of you! 🥳 They're missing your amazing presence and all the great memories. Hope this brightens your day! ✨
+                    <br><br>Feel like spreading more positivity? Add your name and share the good vibes onward! 💖
                 `;
             } else {
                 messageTextElement.innerHTML = defaultMessageInitial;
@@ -251,18 +253,18 @@
             shareButton.addEventListener('click', () => {
                 const currentSenderName = currentUserNameInput.value.trim();
                 if (!currentSenderName) {
-                    alert('Please add your name so your friend knows who this heartfelt message is from!');
+                    alert('Please add your name so your friend knows who sent these awesome vibes! 😄');
                     currentUserNameInput.focus();
                     return;
                 }
 
                 const shareUrl = `${window.location.origin}${window.location.pathname}?name=${encodeURIComponent(currentSenderName)}`;
                 
-                let shareDialogTitle = "Missing Our Friendship!";
-                let shareDialogText = `Hey! Just wanted to say I'm thinking of you and really missing our friendship. Hope you're doing well! - ${currentSenderName}`;
+                let shareDialogTitle = "Sending You Some Awesome Vibes! ✨";
+                let shareDialogText = `Hey! Just sending some good vibes and thinking of you! Missing our fun times! 🥳 - ${currentSenderName}`;
 
                 if (receivedFromName) { 
-                    shareDialogTitle = "Passing on a Friendship Thought!";
+                    shareDialogTitle = "Passing On The Good Energy! 🚀";
                 }
                 
                 const shareData = {
@@ -273,7 +275,7 @@
 
                 if (navigator.share) {
                     navigator.share(shareData)
-                        .then(() => console.log('Message shared successfully!'))
+                        .then(() => console.log('Good vibes shared successfully!'))
                         .catch((error) => {
                             console.error('Error sharing:', error);
                             alert(`Could not open share dialog. Here's the link to copy: ${shareUrl}`);
