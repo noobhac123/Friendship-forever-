@@ -24,7 +24,7 @@
     <meta name="twitter:title" content="A Friendly Hello Just For You! 👋">
     <meta name="twitter:description" content="Someone special is thinking of you and sent a little message. Click to see! ✨">
     <meta name="twitter:image" content="https://friendship-forever.vercel.app/image.jpg">
-    <!-- <meta name="twitter:creator" content="@yourtwitterhandle"> --> <!-- Optional: Aapka Twitter handle -->
+    <!-- <meta name="twitter:creator" content="@yourtwitterhandle"> -->
 
 
     <style>
@@ -265,9 +265,8 @@
         <div class="container">
             <div class="greeting-icon">💖</div> 
             <h1 id="mainHeading">Hey Friend! 👋</h1>
-            <p id="messageText" class="message">
-                Just a little hello to say you crossed my mind! 😊 Missing our chats and the good times. Hope you're doing awesome! ✨
-            </p>
+            <!-- Message text will be populated by JavaScript -->
+            <p id="messageText" class="message"></p> 
             
             <div class="input-group">
                 <label for="currentUserNameInput">Your Name:</label>
@@ -291,65 +290,76 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const urlParams = new URLSearchParams(window.location.search);
-            const receivedFromName = urlParams.get('name'); 
+            const receivedFromName = urlParams.get('name'); // Naam jo URL se aaya (sender ka)
             
+            // HTML elements
             const pageTitleElement = document.querySelector('title');
             const ogTitleMeta = document.querySelector('meta[property="og:title"]');
             const ogDescriptionMeta = document.querySelector('meta[property="og:description"]');
-            // og:url and og:image are set statically in HTML for your specific domain.
-
+            
             const currentUserNameInput = document.getElementById('currentUserNameInput');
             const shareButton = document.getElementById('shareButton');
-            const mainHeading = document.getElementById('mainHeading');
-            const messageTextElement = document.getElementById('messageText');
+            const mainHeadingElement = document.getElementById('mainHeading');
+            const messageTextElement = document.getElementById('messageText'); // The <p> tag for the message
             const greetingIconElement = document.querySelector('.greeting-icon');
 
-            const defaultMessageInitial = `
+            // Default messages
+            const defaultPageTitle = "A Friendly Hello Just For You! 😊";
+            const defaultOgTitle = "A Friendly Hello Just For You! 👋"; // Used for OG tags
+            const defaultOgDescription = "Someone special is thinking of you and sent a little message. Click to see! ✨"; // Used for OG tags
+            const defaultMainHeading = "Hey Friend! 👋";
+            const defaultMessageText = `
                 Just a little hello to say you crossed my mind! 😊 Missing our chats and the good times. Hope you're doing awesome! ✨
                 <br><br>Want to send a smile to another friend? Add your name below! 👇
             `;
             
-            // The canonical URL is your main domain as index.html is at root.
             const canonicalUrl = "https://friendship-forever.vercel.app/"; 
 
             if (receivedFromName) {
                 const decodedName = decodeURIComponent(receivedFromName);
-                mainHeading.innerHTML = `A Smile For You, <span class="highlight-name">${decodedName}</span>! 😄`;
+
                 greetingIconElement.innerHTML = '📬'; 
+                mainHeadingElement.innerHTML = `A Smile For You! 😄`; 
+                
                 messageTextElement.innerHTML = `
-                    Hey <span class="highlight-name">${decodedName}</span>! Your friend sent this to brighten your day! They're thinking of you and missing your awesome friendship. 😊
+                    Hey there! Your friend, <span class="highlight-name">${decodedName}</span>, sent this to brighten your day! They're thinking of you and missing your awesome friendship. 😊
                     <br><br>Feel like sharing the cheer? Add <strong>your name</strong> below and pass it on! 💖
                 `;
                 
                 if (pageTitleElement) pageTitleElement.textContent = `${decodedName} sent you a friendly hello!`;
-                // Update OG tags for this specific view if desired, though crawlers usually hit the canonical URL first.
-                // For simplicity, we're keeping the main OG tags static for the canonical URL.
-                // If this specific URL (with name) is shared, it might pick up these if the crawler re-fetches.
+                
+                // Dynamically update OG tags IF a name is present in the URL.
+                // This helps if this specific link (with ?name=) gets shared again by the recipient.
+                // However, the primary OG tags fetched by crawlers will be those from the canonicalUrl.
                 if (ogTitleMeta) ogTitleMeta.setAttribute('content', `Message from ${decodedName}! 👋`);
                 if (ogDescriptionMeta) ogDescriptionMeta.setAttribute('content', `${decodedName} is thinking of you! Click to see.`);
 
                 currentUserNameInput.placeholder = "Enter *your* name to send a new message!";
 
             } else {
-                messageTextElement.innerHTML = defaultMessageInitial;
-                if (pageTitleElement) pageTitleElement.textContent = "A Friendly Hello Just For You! 😊";
-                // Reset OG tags to default if no name, ensuring they match the static HTML ones.
-                if (ogTitleMeta) ogTitleMeta.setAttribute('content', "A Friendly Hello Just For You! 👋");
-                if (ogDescriptionMeta) ogDescriptionMeta.setAttribute('content', "Someone special is thinking of you and sent a little message. Click to see! ✨");
+                // Set default content when no name is in the URL (sender's view or fresh open)
+                mainHeadingElement.innerHTML = defaultMainHeading;
+                messageTextElement.innerHTML = defaultMessageText;
+                greetingIconElement.innerHTML = '💖';
+
+                if (pageTitleElement) pageTitleElement.textContent = defaultPageTitle;
+                // Ensure OG tags are set to default (they are already in HTML, but this is for JS consistency)
+                if (ogTitleMeta) ogTitleMeta.setAttribute('content', defaultOgTitle);
+                if (ogDescriptionMeta) ogDescriptionMeta.setAttribute('content', defaultOgDescription);
             }
 
             shareButton.addEventListener('click', () => {
-                const currentSenderName = currentUserNameInput.value.trim();
-                if (!currentSenderName) {
+                const nameEnteredByCurrentUser = currentUserNameInput.value.trim();
+                if (!nameEnteredByCurrentUser) {
                     alert('Please add your name so your friend knows who sent this smile! 😄');
                     currentUserNameInput.focus();
                     return;
                 }
 
-                const shareUrl = `${canonicalUrl}?name=${encodeURIComponent(currentSenderName)}`;
+                const shareUrl = `${canonicalUrl}?name=${encodeURIComponent(nameEnteredByCurrentUser)}`;
                 
                 let shareDialogTitle = "Sending a Smile Your Way! 😊"; 
-                let shareDialogText = `Hey! Just sending a little smile because you crossed my mind. Thinking of you! ✨ - From ${currentSenderName}`;
+                let shareDialogText = `Hey! Just sending a little smile because you crossed my mind. Thinking of you! ✨ - From ${nameEnteredByCurrentUser}`;
                 
                 const shareData = {
                     title: shareDialogTitle, 
