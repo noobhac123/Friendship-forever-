@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sending Good Vibes! ✨</title>
+    <title>Thinking of You! 😊</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Pacifico&family=Poppins:wght@300;400;600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Pacifico&display=swap');
 
         :root {
             --bg-grad-start: #6a11cb; 
@@ -14,17 +14,22 @@
             
             --card-bg: #ffffff;
             --text-primary: #333740; 
-            --text-secondary: #555e6d; /* Slightly lighter secondary text */
-            --accent-color: #7c4dff; /* Main accent */
-            --highlight-accent: #ff4081; /* Brighter pink for emoji-like highlights */
+            --text-secondary: #555e6d;
+            --accent-color: #7c4dff; 
+            --highlight-accent: #ff4081; 
             
-            --input-border: #d9dce1;
+            --input-border: #e0e2e7; /* Slightly softer border */
             --input-focus-border: var(--accent-color);
-            --shadow-color: rgba(74, 0, 224, 0.18); /* Slightly stronger shadow */
+            --shadow-color: rgba(74, 0, 224, 0.15); 
             --button-text: #ffffff;
-            --button-bg-start: var(--accent-color);
-            --button-bg-end: #536dfe; 
+            --button-bg-start: var(--highlight-accent);
+            --button-bg-end: var(--accent-color); 
             --footer-text-color: rgba(255, 255, 255, 0.9);
+
+            /* Ad Placeholder Styling (basic) */
+            --ad-placeholder-bg: #f0f0f0;
+            --ad-placeholder-text: #aaa;
+            --ad-placeholder-border: #ddd;
         }
 
         * {
@@ -34,11 +39,11 @@
         }
 
         body {
-            font-family: 'Poppins', sans-serif; /* Changed to Poppins for a slightly rounder, friendlier feel */
+            font-family: 'Poppins', sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start; /* Align to start for potential header ad */
             min-height: 100vh;
             background: linear-gradient(135deg, var(--bg-grad-start), var(--bg-grad-mid), var(--bg-grad-end));
             background-size: 300% 300%;
@@ -52,129 +57,163 @@
             0% { background-position: 0% 50%; }
             100% { background-position: 100% 50%; }
         }
+
+        .page-wrapper { /* New wrapper for content and ads */
+            width: 100%;
+            max-width: 500px; /* Max width for content area */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
         
+        .ad-placeholder {
+            width: 100%;
+            min-height: 90px; /* Common banner ad height */
+            background-color: var(--ad-placeholder-bg);
+            border: 1px dashed var(--ad-placeholder-border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 15px 0;
+            font-size: 0.9em;
+            color: var(--ad-placeholder-text);
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .ad-placeholder.top {
+            /* Specific styles for top ad if needed */
+        }
+        .ad-placeholder.bottom {
+            /* Specific styles for bottom ad if needed */
+        }
+
         .container {
             background-color: var(--card-bg);
-            padding: 35px 40px 40px 40px; /* Adjusted padding */
-            border-radius: 24px; /* Softer radius */
-            box-shadow: 0 15px 45px var(--shadow-color);
+            padding: 35px 30px 30px 30px; /* Adjusted padding */
+            border-radius: 20px; 
+            box-shadow: 0 12px 30px var(--shadow-color);
             text-align: center;
-            max-width: 460px; 
-            width: 95%;
-            animation: popInSmooth 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) both; /* More playful pop */
+            width: 100%; /* Takes full width of page-wrapper */
+            animation: popInSmooth 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.2s both; /* Added delay */
             position: relative;
             z-index: 1;
+            margin-top: 10px; /* Space from top ad */
+            margin-bottom: 10px; /* Space to bottom ad */
         }
 
         @keyframes popInSmooth {
-            0% { opacity: 0; transform: scale(0.85) translateY(20px); }
+            0% { opacity: 0; transform: scale(0.9) translateY(15px); }
             100% { opacity: 1; transform: scale(1) translateY(0); }
         }
         
         .greeting-icon {
-            font-size: 3.5em; /* Larger icon */
-            color: var(--highlight-accent); /* Using the brighter accent */
-            margin-bottom: 15px;
+            font-size: 3em; 
+            color: var(--highlight-accent); 
+            margin-bottom: 12px;
             display: inline-block;
-            animation: wiggleIcon 2.5s infinite ease-in-out;
+            animation: heartBeat 1.5s infinite ease-in-out;
         }
 
-        @keyframes wiggleIcon {
-            0%, 100% { transform: rotate(0deg) scale(1); }
-            25% { transform: rotate(-8deg) scale(1.1); }
-            75% { transform: rotate(8deg) scale(1.1); }
+        @keyframes heartBeat {
+            0% { transform: scale(1); }
+            14% { transform: scale(1.2); }
+            28% { transform: scale(1); }
+            42% { transform: scale(1.2); }
+            70% { transform: scale(1); }
         }
+
 
         h1 {
             font-family: 'Pacifico', cursive;
-            font-size: 2.5em; 
+            font-size: 2.2em; 
             color: var(--accent-color);
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             font-weight: 400;
             line-height: 1.2;
         }
         
         .highlight-name {
-            font-weight: 600;
-            color: var(--highlight-accent); /* Brighter accent for name */
-            padding: 3px 7px;
-            border-radius: 5px;
-            background-color: rgba(255, 64, 129, 0.1); /* Light pink bg for name */
-            display: inline-block; /* Ensures bg color wraps nicely */
+            font-weight: 700; /* Bolder name */
+            color: var(--highlight-accent); 
+            padding: 2px 6px;
+            border-radius: 4px;
+            background-color: rgba(255, 64, 129, 0.12); 
+            display: inline-block; 
         }
 
         p.message {
-            font-size: 1.1em; 
+            font-size: 1.05em; 
             font-weight: 400; 
-            line-height: 1.8; 
-            margin-bottom: 30px;
+            line-height: 1.7; 
+            margin-bottom: 25px;
             color: var(--text-secondary);
         }
         
         .input-group {
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             text-align: left;
         }
 
         label {
             display: block;
-            font-size: 0.9em; /* Slightly larger label */
+            font-size: 0.85em; 
             color: var(--text-secondary);
-            margin-bottom: 8px;
-            font-weight: 500; /* Medium weight */
+            margin-bottom: 6px;
+            font-weight: 600; /* Bolder label */
         }
 
         input[type="text"] {
             width: 100%; 
-            padding: 14px 16px; /* More padding */
-            border: 1.5px solid var(--input-border); /* Slightly thicker border */
-            border-radius: 12px; /* More rounded */
+            padding: 12px 14px; 
+            border: 1.5px solid var(--input-border); 
+            border-radius: 10px; 
             font-size: 1em;
             font-family: 'Poppins', sans-serif;
             transition: all 0.3s ease;
-            background-color: #fcfcff; 
+            background-color: #fdfdff; 
             color: var(--text-primary);
         }
 
         input[type="text"]:focus {
             outline: none;
             border-color: var(--input-focus-border);
-            box-shadow: 0 0 0 3.5px rgba(124, 77, 255, 0.25);
+            box-shadow: 0 0 0 3px rgba(124, 77, 255, 0.2);
             background-color: #fff;
         }
 
         button {
-            background: linear-gradient(135deg, var(--highlight-accent), var(--accent-color)); /* More vibrant button */
+            background: linear-gradient(135deg, var(--button-bg-start), var(--button-bg-end)); 
             color: var(--button-text);
             border: none;
-            padding: 16px 30px; /* Generous padding */
-            font-size: 1.1em;
+            padding: 14px 28px; 
+            font-size: 1.05em;
             font-weight: 600;
-            border-radius: 12px;
+            border-radius: 10px;
             cursor: pointer;
             transition: all 0.3s ease;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 9px;
             width: 100%;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+            text-shadow: 0 1px 1px rgba(0,0,0,0.15);
         }
 
         button:hover {
-            transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 8px 16px rgba(74, 0, 224, 0.25);
+            transform: translateY(-2px) scale(1.01);
+            box-shadow: 0 7px 14px rgba(74, 0, 224, 0.2);
         }
         
         button svg {
-            width: 20px;
-            height: 20px;
+            width: 19px;
+            height: 19px;
             fill: currentColor;
         }
 
         .footer-note {
-            margin-top: 30px;
-            font-size: 0.95em;
+            margin-top: 20px; /* Reduced margin because of bottom ad */
+            font-size: 0.9em;
             color: var(--footer-text-color); 
             font-weight: 400;
             text-shadow: 0 1px 2px rgba(0,0,0,0.2);
@@ -183,45 +222,56 @@
         /* Responsive adjustments */
         @media (max-width: 600px) {
             .container {
-                padding: 30px 25px 35px 25px;
+                padding: 30px 25px 25px 25px;
             }
             h1 {
-                font-size: 2.2em;
+                font-size: 2em;
             }
             .greeting-icon {
-                font-size: 3em;
+                font-size: 2.8em;
             }
             p.message {
-                font-size: 1.05em;
+                font-size: 1em;
             }
             button {
-                padding: 14px 25px;
-                font-size: 1.05em;
+                padding: 13px 22px;
+                font-size: 1em;
             }
         }
     </style>
 </head>
 <body>
-
-    <div class="container">
-        <div class="greeting-icon">🎉</div> 
-        <h1 id="mainHeading">Hey Awesome Friend! 👋</h1>
-        <p id="messageText" class="message">
-            Just a little burst of good vibes coming your way! 🥳 Thinking of all the fun times and crazy laughs we've shared. Missing your awesome energy! ✨ Hope you're having a fantastic day and we can reconnect soon for more adventures! 🚀 You rock! 🎸
-        </p>
-        
-        <div class="input-group">
-            <label for="currentUserNameInput">Your Name (to spread the cheer!):</label>
-            <input type="text" id="currentUserNameInput" placeholder="So they know it's you! 😄">
+    <div class="page-wrapper">
+        <!-- Placeholder for Top Ad -->
+        <div class="ad-placeholder top">
+            Top Ad Placeholder (e.g., 320x100 or 468x60)
         </div>
 
-        <button id="shareButton">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.66 1.34 3 3 3s3-1.34 3-3-1.34-3-3-3z"/></svg>
-            Send Good Vibes!
-        </button>
-    </div>
+        <div class="container">
+            <div class="greeting-icon">💖</div> 
+            <h1 id="mainHeading">Hey Friend! 👋</h1>
+            <p id="messageText" class="message">
+                Just a little hello to say you crossed my mind! 😊 Missing our chats and the good times. Hope you're doing awesome! ✨
+            </p>
+            
+            <div class="input-group">
+                <label for="currentUserNameInput">Your Name:</label>
+                <input type="text" id="currentUserNameInput" placeholder="So they know it's you! 😄">
+            </div>
 
-    <p class="footer-note">Keep the positive energy flowing! 🌟</p>
+            <button id="shareButton">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.66 1.34 3 3 3s3-1.34 3-3-1.34-3-3-3z"/></svg>
+                Share a Smile
+            </button>
+        </div>
+
+        <!-- Placeholder for Bottom Ad -->
+        <div class="ad-placeholder bottom">
+            Bottom Ad Placeholder (e.g., 300x250 or 320x50)
+        </div>
+
+        <p class="footer-note">Spread kindness, one message at a time! 💌</p>
+    </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -235,16 +285,16 @@
             const greetingIconElement = document.querySelector('.greeting-icon');
 
             const defaultMessageInitial = `
-                Just a little burst of good vibes coming your way! 🥳 Thinking of all the fun times and crazy laughs we've shared. Missing your awesome energy! ✨ Hope you're having a fantastic day and we can reconnect soon for more adventures! 🚀 You rock! 🎸
-                <br><br>Want to send some cheer to another amazing friend? Add your name and hit share! 👇
+                Just a little hello to say you crossed my mind! 😊 Missing our chats and the good times. Hope you're doing awesome! ✨
+                <br><br>Want to send a smile to another friend? Add your name below! 👇
             `;
 
             if (receivedFromName) {
-                mainHeading.innerHTML = `Good Vibes For You! 📬`;
-                greetingIconElement.innerHTML = '🤩'; // Star-struck for excitement
+                mainHeading.innerHTML = `A Smile For You! 😄`;
+                greetingIconElement.innerHTML = '📬'; 
                 messageTextElement.innerHTML = `
-                    Hey there! <span class="highlight-name">${decodeURIComponent(receivedFromName)}</span> is sending you a wave of good vibes and thinking of you! 🥳 They're missing your amazing presence and all the great memories. Hope this brightens your day! ✨
-                    <br><br>Feel like spreading more positivity? Add your name and share the good vibes onward! 💖
+                    Hey there! <span class="highlight-name">${decodeURIComponent(receivedFromName)}</span> sent this to brighten your day! They're thinking of you and missing your awesome friendship. 😊
+                    <br><br>Feel like sharing the cheer? Add your name and pass it on! 💖
                 `;
             } else {
                 messageTextElement.innerHTML = defaultMessageInitial;
@@ -253,18 +303,18 @@
             shareButton.addEventListener('click', () => {
                 const currentSenderName = currentUserNameInput.value.trim();
                 if (!currentSenderName) {
-                    alert('Please add your name so your friend knows who sent these awesome vibes! 😄');
+                    alert('Please add your name so your friend knows who sent this smile! 😄');
                     currentUserNameInput.focus();
                     return;
                 }
 
                 const shareUrl = `${window.location.origin}${window.location.pathname}?name=${encodeURIComponent(currentSenderName)}`;
                 
-                let shareDialogTitle = "Sending You Some Awesome Vibes! ✨";
-                let shareDialogText = `Hey! Just sending some good vibes and thinking of you! Missing our fun times! 🥳 - ${currentSenderName}`;
+                let shareDialogTitle = "Sending a Smile Your Way! 😊";
+                let shareDialogText = `Hey! Just sending a little smile and thinking of you! ✨ - ${currentSenderName}`;
 
                 if (receivedFromName) { 
-                    shareDialogTitle = "Passing On The Good Energy! 🚀";
+                    shareDialogTitle = "Passing On The Happiness! 💖";
                 }
                 
                 const shareData = {
@@ -275,7 +325,7 @@
 
                 if (navigator.share) {
                     navigator.share(shareData)
-                        .then(() => console.log('Good vibes shared successfully!'))
+                        .then(() => console.log('Smile shared successfully!'))
                         .catch((error) => {
                             console.error('Error sharing:', error);
                             alert(`Could not open share dialog. Here's the link to copy: ${shareUrl}`);
