@@ -4,6 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thinking of You! 😊</title>
+
+    <!-- Open Graph Meta Tags for Social Sharing -->
+    <meta property="og:title" content="A Special Message For You! 👋" />
+    <meta property="og:description" content="Someone is thinking of you and missing your awesome friendship! Click to see the message." />
+    <meta property="og:type" content="website" />
+    <!-- IMPORTANT: Replace this with the ACTUAL URL where your page will be hosted -->
+    <meta property="og:url" content="https://your-website-domain.com/miss_you.html" /> 
+    <!-- IMPORTANT: Replace this with a URL to YOUR cover image (e.g., 1200x630 pixels is good) -->
+    <meta property="og:image" content="https://via.placeholder.com/1200x630.png?text=Missing+Our+Friendship" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="Friendly Notes" />
+
+    <!-- Twitter Card Meta Tags (Optional, but good for Twitter) -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="A Special Message For You! 👋" />
+    <meta name="twitter:description" content="Someone is thinking of you and missing your awesome friendship! Click to see the message." />
+    <!-- IMPORTANT: Replace this with a URL to YOUR cover image -->
+    <meta name="twitter:image" content="https://via.placeholder.com/1200x630.png?text=Missing+Our+Friendship" />
+    <!-- <meta name="twitter:site" content="@yourtwitterhandle"> --> <!-- Optional: Your Twitter handle -->
+
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Pacifico&display=swap');
 
@@ -18,7 +40,7 @@
             --accent-color: #7c4dff; 
             --highlight-accent: #ff4081; 
             
-            --input-border: #e0e2e7; /* Slightly softer border */
+            --input-border: #e0e2e7;
             --input-focus-border: var(--accent-color);
             --shadow-color: rgba(74, 0, 224, 0.15); 
             --button-text: #ffffff;
@@ -26,7 +48,6 @@
             --button-bg-end: var(--accent-color); 
             --footer-text-color: rgba(255, 255, 255, 0.9);
 
-            /* Ad Placeholder Styling (basic) */
             --ad-placeholder-bg: #f0f0f0;
             --ad-placeholder-text: #aaa;
             --ad-placeholder-border: #ddd;
@@ -43,7 +64,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: flex-start; /* Align to start for potential header ad */
+            justify-content: flex-start;
             min-height: 100vh;
             background: linear-gradient(135deg, var(--bg-grad-start), var(--bg-grad-mid), var(--bg-grad-end));
             background-size: 300% 300%;
@@ -58,9 +79,9 @@
             100% { background-position: 100% 50%; }
         }
 
-        .page-wrapper { /* New wrapper for content and ads */
+        .page-wrapper {
             width: 100%;
-            max-width: 500px; /* Max width for content area */
+            max-width: 500px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -68,7 +89,7 @@
         
         .ad-placeholder {
             width: 100%;
-            min-height: 90px; /* Common banner ad height */
+            min-height: 90px; 
             background-color: var(--ad-placeholder-bg);
             border: 1px dashed var(--ad-placeholder-border);
             display: flex;
@@ -81,25 +102,18 @@
             text-align: center;
         }
 
-        .ad-placeholder.top {
-            /* Specific styles for top ad if needed */
-        }
-        .ad-placeholder.bottom {
-            /* Specific styles for bottom ad if needed */
-        }
-
         .container {
             background-color: var(--card-bg);
-            padding: 35px 30px 30px 30px; /* Adjusted padding */
+            padding: 35px 30px 30px 30px;
             border-radius: 20px; 
             box-shadow: 0 12px 30px var(--shadow-color);
             text-align: center;
-            width: 100%; /* Takes full width of page-wrapper */
-            animation: popInSmooth 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.2s both; /* Added delay */
+            width: 100%;
+            animation: popInSmooth 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.2s both;
             position: relative;
             z-index: 1;
-            margin-top: 10px; /* Space from top ad */
-            margin-bottom: 10px; /* Space to bottom ad */
+            margin-top: 10px;
+            margin-bottom: 10px;
         }
 
         @keyframes popInSmooth {
@@ -123,7 +137,6 @@
             70% { transform: scale(1); }
         }
 
-
         h1 {
             font-family: 'Pacifico', cursive;
             font-size: 2.2em; 
@@ -134,7 +147,7 @@
         }
         
         .highlight-name {
-            font-weight: 700; /* Bolder name */
+            font-weight: 700;
             color: var(--highlight-accent); 
             padding: 2px 6px;
             border-radius: 4px;
@@ -160,7 +173,7 @@
             font-size: 0.85em; 
             color: var(--text-secondary);
             margin-bottom: 6px;
-            font-weight: 600; /* Bolder label */
+            font-weight: 600;
         }
 
         input[type="text"] {
@@ -212,7 +225,7 @@
         }
 
         .footer-note {
-            margin-top: 20px; /* Reduced margin because of bottom ad */
+            margin-top: 20px;
             font-size: 0.9em;
             color: var(--footer-text-color); 
             font-weight: 400;
@@ -242,9 +255,8 @@
 </head>
 <body>
     <div class="page-wrapper">
-        <!-- Placeholder for Top Ad -->
         <div class="ad-placeholder top">
-            Top Ad Placeholder (e.g., 320x100 or 468x60)
+            Top Ad Placeholder
         </div>
 
         <div class="container">
@@ -265,9 +277,8 @@
             </button>
         </div>
 
-        <!-- Placeholder for Bottom Ad -->
         <div class="ad-placeholder bottom">
-            Bottom Ad Placeholder (e.g., 300x250 or 320x50)
+            Bottom Ad Placeholder
         </div>
 
         <p class="footer-note">Spread kindness, one message at a time! 💌</p>
@@ -277,6 +288,12 @@
         document.addEventListener('DOMContentLoaded', () => {
             const urlParams = new URLSearchParams(window.location.search);
             const receivedFromName = urlParams.get('name'); 
+            const pageTitleElement = document.querySelector('title'); // Get the title element
+            const ogTitleMeta = document.querySelector('meta[property="og:title"]');
+            const ogDescriptionMeta = document.querySelector('meta[property="og:description"]');
+            // const twitterTitleMeta = document.querySelector('meta[name="twitter:title"]'); // If you want to update twitter tags too
+            // const twitterDescriptionMeta = document.querySelector('meta[name="twitter:description"]');
+
 
             const currentUserNameInput = document.getElementById('currentUserNameInput');
             const shareButton = document.getElementById('shareButton');
@@ -288,17 +305,42 @@
                 Just a little hello to say you crossed my mind! 😊 Missing our chats and the good times. Hope you're doing awesome! ✨
                 <br><br>Want to send a smile to another friend? Add your name below! 👇
             `;
+            
+            let dynamicPageTitle = "Thinking of You! 😊";
+            let dynamicOgTitle = "A Special Message For You! 👋";
+            let dynamicOgDescription = "Someone is thinking of you and missing your awesome friendship! Click to see the message.";
 
             if (receivedFromName) {
-                mainHeading.innerHTML = `A Smile For You! 😄`;
+                const decodedName = decodeURIComponent(receivedFromName);
+                mainHeading.innerHTML = `A Smile For You, <span class="highlight-name">${decodedName}</span>! 😄`;
                 greetingIconElement.innerHTML = '📬'; 
                 messageTextElement.innerHTML = `
-                    Hey there! <span class="highlight-name">${decodeURIComponent(receivedFromName)}</span> sent this to brighten your day! They're thinking of you and missing your awesome friendship. 😊
-                    <br><br>Feel like sharing the cheer? Add your name and pass it on! 💖
+                    Hey <span class="highlight-name">${decodedName}</span>! Your friend sent this to brighten your day! They're thinking of you and missing your awesome friendship. 😊
+                    <br><br>Feel like sharing the cheer? Add <strong>your name</strong> below and pass it on! 💖
                 `;
+                // Update dynamic titles and descriptions if a name is present in URL
+                dynamicPageTitle = `${decodedName} sent you a friendly hello!`;
+                dynamicOgTitle = `Message from ${decodedName}! 👋`;
+                dynamicOgDescription = `${decodedName} is thinking of you and missing your friendship! Click to see.`;
+
+                // If this page is viewed by recipient, the name field can be for *their* name to send *new* message
+                currentUserNameInput.placeholder = "Enter *your* name to send a new message!";
+
+
             } else {
+                // This page is being viewed by the sender (or fresh open)
                 messageTextElement.innerHTML = defaultMessageInitial;
+                // The OG tags will use the default generic message.
+                // The share dialog text below will be personalized by the sender's input.
             }
+
+            // Set the dynamic titles and meta tags
+            if (pageTitleElement) pageTitleElement.textContent = dynamicPageTitle;
+            if (ogTitleMeta) ogTitleMeta.setAttribute('content', dynamicOgTitle);
+            if (ogDescriptionMeta) ogDescriptionMeta.setAttribute('content', dynamicOgDescription);
+            // if (twitterTitleMeta) twitterTitleMeta.setAttribute('content', dynamicOgTitle);
+            // if (twitterDescriptionMeta) twitterDescriptionMeta.setAttribute('content', dynamicOgDescription);
+
 
             shareButton.addEventListener('click', () => {
                 const currentSenderName = currentUserNameInput.value.trim();
@@ -308,19 +350,19 @@
                     return;
                 }
 
-                const shareUrl = `${window.location.origin}${window.location.pathname}?name=${encodeURIComponent(currentSenderName)}`;
+                // The link that will be shared. It includes the name from the input field.
+                const shareBaseUrl = `${window.location.origin}${window.location.pathname}`;
+                const shareUrl = `${shareBaseUrl}?name=${encodeURIComponent(currentSenderName)}`;
                 
+                // This text is for the share dialog itself (WhatsApp, Messenger, etc.)
+                // It's different from the og:description which is for the link preview.
                 let shareDialogTitle = "Sending a Smile Your Way! 😊";
-                let shareDialogText = `Hey! Just sending a little smile and thinking of you! ✨ - ${currentSenderName}`;
-
-                if (receivedFromName) { 
-                    shareDialogTitle = "Passing On The Happiness! 💖";
-                }
+                let shareDialogText = `Hey! Just sending a little smile because you crossed my mind. Thinking of you! ✨ - From ${currentSenderName}`;
                 
                 const shareData = {
-                    title: shareDialogTitle,
-                    text: shareDialogText,
-                    url: shareUrl,
+                    title: shareDialogTitle, // This title is often used by some platforms
+                    text: shareDialogText,   // This is the main text shared
+                    url: shareUrl,           // This URL has the name parameter
                 };
 
                 if (navigator.share) {
