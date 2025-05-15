@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- Primary Meta Tags -->
-    <title>A Friendly Hello Just For You! 馃槉</title>
-    <meta name="description" content="Someone special is thinking of you and sent a little message. Click to see! 鉁�">
+    <title>A Friendly Hello Just For You! 😊</title>
+    <meta name="description" content="Someone special is thinking of you and sent a little message. Click to see! ✨">
 
     <!-- Open Graph / Facebook Meta Tags -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://friendship-forever.vercel.app/"> 
-    <meta property="og:title" content="A Friendly Hello Just For You! 馃憢">
-    <meta property="og:description" content="Someone special is thinking of you and sent a little message. Click to see! 鉁�">
+    <meta property="og:title" content="A Friendly Hello Just For You! 👋">
+    <meta property="og:description" content="Someone special is thinking of you and sent a little message. Click to see! ✨">
     <meta property="og:image" content="https://friendship-forever.vercel.app/image.jpg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
@@ -21,8 +21,8 @@
     <!-- Twitter Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://friendship-forever.vercel.app/">
-    <meta name="twitter:title" content="A Friendly Hello Just For You! 馃憢">
-    <meta name="twitter:description" content="Someone special is thinking of you and sent a little message. Click to see! 鉁�">
+    <meta name="twitter:title" content="A Friendly Hello Just For You! 👋">
+    <meta name="twitter:description" content="Someone special is thinking of you and sent a little message. Click to see! ✨">
     <meta name="twitter:image" content="https://friendship-forever.vercel.app/image.jpg">
     <!-- <meta name="twitter:creator" content="@yourtwitterhandle"> -->
 
@@ -270,13 +270,13 @@
         </div>
 
         <div class="container">
-            <div class="greeting-icon">馃挅</div> 
-            <h1 id="mainHeading">Hey Friend! 馃憢</h1>
+            <div class="greeting-icon">💖</div> 
+            <h1 id="mainHeading">Hey Friend! 👋</h1>
             <p id="messageText" class="message"></p> 
             
             <div class="input-group">
                 <label for="currentUserNameInput">Your Name:</label>
-                <input type="text" id="currentUserNameInput" placeholder="So they know it's you! 馃槃">
+                <input type="text" id="currentUserNameInput" placeholder="So they know it's you! 😄">
             </div>
 
             <button id="shareButton">
@@ -299,7 +299,7 @@
             <script type="text/javascript" src="//maintaintournamentslick.com/58d55d5d48a6447673ab2f1bb1c7de82/invoke.js"></script>
         </div>
 
-        <p class="footer-note">Spread kindness, one message at a time! 馃拰</p>
+        <p class="footer-note">Spread kindness, one message at a time! 💌</p>
     </div>
 
     <script>
@@ -317,13 +317,13 @@
             const messageTextElement = document.getElementById('messageText'); 
             const greetingIconElement = document.querySelector('.greeting-icon');
 
-            const defaultPageTitle = "A Friendly Hello Just For You! 馃槉";
-            const defaultOgTitle = "A Friendly Hello Just For You! 馃憢"; 
-            const defaultOgDescription = "Someone special is thinking of you and sent a little message. Click to see! 鉁�"; 
-            const defaultMainHeading = "Hey Friend! 馃憢";
+            const defaultPageTitle = "A Friendly Hello Just For You! 😊";
+            const defaultOgTitle = "A Friendly Hello Just For You! 👋"; 
+            const defaultOgDescription = "Someone special is thinking of you and sent a little message. Click to see! ✨"; 
+            const defaultMainHeading = "Hey Friend! 👋";
             const defaultMessageText = `
-                Just a little hello to say you crossed my mind! 馃槉 Missing our chats and the good times. Hope you're doing awesome! 鉁�
-                <br><br>Want to send a smile to another friend? Add your name below! 馃憞
+                Just a little hello to say you crossed my mind! 😊 Missing our chats and the good times. Hope you're doing awesome! ✨
+                <br><br>Want to send a smile to another friend? Add your name below! 👇
             `;
             
             const canonicalUrl = "https://friendship-forever.vercel.app/"; 
@@ -331,16 +331,16 @@
             if (receivedFromName) {
                 const decodedName = decodeURIComponent(receivedFromName);
 
-                greetingIconElement.innerHTML = '馃摤'; 
-                mainHeadingElement.innerHTML = `A Smile For You! 馃槃`; 
+                greetingIconElement.innerHTML = '📬'; 
+                mainHeadingElement.innerHTML = `A Smile For You! 😄`; 
                 
                 messageTextElement.innerHTML = `
-                    Hey there! Your friend, <span class="highlight-name">${decodedName}</span>, sent this to brighten your day! They're thinking of you and missing your awesome friendship. 馃槉
-                    <br><br>Feel like sharing the cheer? Add <strong>your name</strong> below and pass it on! 馃挅
+                    Hey there! Your friend, <span class="highlight-name">${decodedName}</span>, sent this to brighten your day! They're thinking of you and missing your awesome friendship. 😊
+                    <br><br>Feel like sharing the cheer? Add <strong>your name</strong> below and pass it on! 💖
                 `;
                 
                 if (pageTitleElement) pageTitleElement.textContent = `${decodedName} sent you a friendly hello!`;
-                if (ogTitleMeta) ogTitleMeta.setAttribute('content', `Message from ${decodedName}! 馃憢`);
+                if (ogTitleMeta) ogTitleMeta.setAttribute('content', `Message from ${decodedName}! 👋`);
                 if (ogDescriptionMeta) ogDescriptionMeta.setAttribute('content', `${decodedName} is thinking of you! Click to see.`);
 
                 currentUserNameInput.placeholder = "Enter *your* name to send a new message!";
@@ -348,7 +348,7 @@
             } else {
                 mainHeadingElement.innerHTML = defaultMainHeading;
                 messageTextElement.innerHTML = defaultMessageText;
-                greetingIconElement.innerHTML = '馃挅';
+                greetingIconElement.innerHTML = '💖';
 
                 if (pageTitleElement) pageTitleElement.textContent = defaultPageTitle;
                 if (ogTitleMeta) ogTitleMeta.setAttribute('content', defaultOgTitle);
@@ -358,15 +358,15 @@
             shareButton.addEventListener('click', () => {
                 const nameEnteredByCurrentUser = currentUserNameInput.value.trim();
                 if (!nameEnteredByCurrentUser) {
-                    alert('Please add your name so your friend knows who sent this smile! 馃槃');
+                    alert('Please add your name so your friend knows who sent this smile! 😄');
                     currentUserNameInput.focus();
                     return;
                 }
 
                 const shareUrl = `${canonicalUrl}?name=${encodeURIComponent(nameEnteredByCurrentUser)}`;
                 
-                let shareDialogTitle = "Sending a Smile Your Way! 馃槉"; 
-                let shareDialogText = `Hey! Just sending a little smile because you crossed my mind. Thinking of you! 鉁� - From ${nameEnteredByCurrentUser}`;
+                let shareDialogTitle = "Sending a Smile Your Way! 😊"; 
+                let shareDialogText = `Hey! Just sending a little smile because you crossed my mind. Thinking of you! ✨ - From ${nameEnteredByCurrentUser}`;
                 
                 const shareData = {
                     title: shareDialogTitle, 
