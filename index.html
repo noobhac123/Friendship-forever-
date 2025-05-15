@@ -3,28 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A Friendly Note</title>
+    <title>Missing Our Connection</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Pacifico&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Pacifico&display=swap');
 
         :root {
-            /* Purple Themed Background */
-            --bg-grad-start: #6a11cb; /* Deep Purple - like before */
-            --bg-grad-mid: #8E2DE2;   /* A mid-tone purple */
-            --bg-grad-end: #4A00E0;   /* Another deep purple/blue */
+            --bg-grad-start: #6a11cb; 
+            --bg-grad-mid: #8E2DE2;   
+            --bg-grad-end: #4A00E0;   
             
-            /* White UI Elements */
             --card-bg: #ffffff;
-            --text-primary: #333740; /* Dark grey for primary text on white */
-            --text-secondary: #5c626e; /* Lighter grey for secondary text */
-            --accent-color: #7c4dff; /* A vibrant purple for accents on white UI */
+            --text-primary: #333740; 
+            --text-secondary: #5c626e; 
+            --accent-color: #7c4dff; 
             --input-border: #d9dce1;
             --input-focus-border: var(--accent-color);
-            --shadow-color: rgba(74, 0, 224, 0.15); /* Shadow color related to purple */
+            --shadow-color: rgba(74, 0, 224, 0.15); 
             --button-text: #ffffff;
             --button-bg-start: var(--accent-color);
-            --button-bg-end: #536dfe; /* A complementary blueish purple */
-            --footer-text-color: rgba(255, 255, 255, 0.85); /* Light text for footer on dark bg */
+            --button-bg-end: #536dfe; 
+            --footer-text-color: rgba(255, 255, 255, 0.85);
         }
 
         * {
@@ -41,10 +39,10 @@
             justify-content: center;
             min-height: 100vh;
             background: linear-gradient(135deg, var(--bg-grad-start), var(--bg-grad-mid), var(--bg-grad-end));
-            background-size: 300% 300%; /* For smoother animation if we add one */
-            animation: gradientFlow 20s ease infinite alternate; /* Smooth gradient flow */
+            background-size: 300% 300%;
+            animation: gradientFlow 20s ease infinite alternate;
             padding: 20px;
-            color: var(--text-primary); /* Default text color (for card) */
+            color: var(--text-primary);
             overflow-x: hidden;
         }
 
@@ -59,7 +57,7 @@
             border-radius: 20px; 
             box-shadow: 0 12px 35px var(--shadow-color);
             text-align: center;
-            max-width: 450px; /* Slightly more compact */
+            max-width: 480px; /* Adjusted for medium text */
             width: 95%;
             animation: popInSmooth 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
             position: relative;
@@ -72,24 +70,23 @@
         }
         
         .greeting-icon {
-            font-size: 3.2em;
+            font-size: 3em; /* Slightly smaller for balance */
             color: var(--accent-color);
             margin-bottom: 18px;
             display: inline-block;
-            animation: pulseIcon 2.5s infinite ease-in-out;
+            animation: gentleBob 3s infinite ease-in-out;
         }
 
-        @keyframes pulseIcon {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.15); }
-            100% { transform: scale(1); }
+        @keyframes gentleBob {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
         }
 
         h1 {
             font-family: 'Pacifico', cursive;
-            font-size: 2.4em;
+            font-size: 2.3em; /* Adjusted for message length */
             color: var(--accent-color);
-            margin-bottom: 15px;
+            margin-bottom: 20px; /* More space before message */
             font-weight: 400;
         }
         
@@ -98,19 +95,19 @@
             color: var(--accent-color);
             padding: 2px 6px;
             border-radius: 4px;
-            background-color: rgba(124, 77, 255, 0.1); /* Light purple bg for name */
+            background-color: rgba(124, 77, 255, 0.1); 
         }
 
         p.message {
-            font-size: 1.05em; /* Slightly more compact text */
-            line-height: 1.65; 
-            margin-bottom: 28px;
+            font-size: 1.08em; /* Good for medium text */
+            font-weight: 400; /* For readability */
+            line-height: 1.75; 
+            margin-bottom: 30px;
             color: var(--text-secondary);
-            font-weight: 400;
         }
         
         .input-group {
-            margin-bottom: 28px;
+            margin-bottom: 30px;
             text-align: left;
         }
 
@@ -120,7 +117,7 @@
             color: var(--text-secondary);
             margin-bottom: 7px;
             font-weight: 600;
-            text-transform: uppercase; /* Added for a cleaner look */
+            text-transform: uppercase; 
             letter-spacing: 0.5px;
         }
 
@@ -132,7 +129,7 @@
             font-size: 1em;
             font-family: 'Montserrat', sans-serif;
             transition: all 0.3s ease;
-            background-color: #fdfdff; /* Very light off-white */
+            background-color: #fdfdff; 
             color: var(--text-primary);
         }
 
@@ -187,10 +184,10 @@
                 border-radius: 16px;
             }
             h1 {
-                font-size: 2.1em;
+                font-size: 2em;
             }
             .greeting-icon {
-                font-size: 2.8em;
+                font-size: 2.6em;
             }
             p.message {
                 font-size: 1em;
@@ -205,10 +202,10 @@
 <body>
 
     <div class="container">
-        <div class="greeting-icon">💌</div> <!-- Icon for a "note" or "letter" -->
-        <h1 id="mainHeading">Just a Thought...</h1>
+        <div class="greeting-icon">🫂</div> <!-- Hugging face icon for friendship -->
+        <h1 id="mainHeading">Missing Our Friendship</h1>
         <p id="messageText" class="message">
-            Hey there! Popped into my head today. Missing our random chats and laughs. Hope you're doing wonderfully! ✨
+            Hey there, my friend. Just wanted to reach out and say I've been thinking about you and our friendship a lot lately. Life gets busy, but the good times and great conversations we've shared always stick with me. Truly missing our connection and hoping we can catch up soon. You're one of a kind!
         </p>
         
         <div class="input-group">
@@ -218,11 +215,11 @@
 
         <button id="shareButton">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.66 1.34 3 3 3s3-1.34 3-3-1.34-3-3-3z"/></svg>
-            Send This Note
+            Share This Thought
         </button>
     </div>
 
-    <p class="footer-note">Keep the friendly thoughts flowing!</p>
+    <p class="footer-note">Friendships are precious. Keep them close.</p>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -236,16 +233,16 @@
             const greetingIconElement = document.querySelector('.greeting-icon');
 
             const defaultMessageInitial = `
-                Hey there! Popped into my head today. Missing our random chats and laughs. Hope you're doing wonderfully! ✨
-                <br><br>Want to send a friendly note to someone else? Just add your name!
+                Hey there, my friend. Just wanted to reach out and say I've been thinking about you and our friendship a lot lately. Life gets busy, but the good times and great conversations we've shared always stick with me. Truly missing our connection and hoping we can catch up soon. You're one of a kind!
+                <br><br>Want to send a similar warm thought to another friend? Add your name below.
             `;
 
             if (receivedFromName) {
-                mainHeading.innerHTML = `A Note For You!`;
-                greetingIconElement.innerHTML = '📬'; // Mailbox icon for received message
+                mainHeading.innerHTML = `A Message For You`;
+                greetingIconElement.innerHTML = '💌'; // Letter icon for received message
                 messageTextElement.innerHTML = `
-                    Hello! <span class="highlight-name">${decodeURIComponent(receivedFromName)}</span> sent you this little note because you were on their mind. Thinking of you!
-                    <br><br>Feel like sharing a thought with another friend? Add your name below.
+                    Hi! Your friend <span class="highlight-name">${decodeURIComponent(receivedFromName)}</span> sent this message because they're genuinely missing your friendship and the special bond you share. They're cherishing the memories and would love to reconnect.
+                    <br><br>Touched by this? You can share this feeling with another dear friend by adding your name.
                 `;
             } else {
                 messageTextElement.innerHTML = defaultMessageInitial;
@@ -254,18 +251,18 @@
             shareButton.addEventListener('click', () => {
                 const currentSenderName = currentUserNameInput.value.trim();
                 if (!currentSenderName) {
-                    alert('Please add your name so your friend knows who this lovely note is from!');
+                    alert('Please add your name so your friend knows who this heartfelt message is from!');
                     currentUserNameInput.focus();
                     return;
                 }
 
                 const shareUrl = `${window.location.origin}${window.location.pathname}?name=${encodeURIComponent(currentSenderName)}`;
                 
-                let shareDialogTitle = "A Friendly Thought For You!";
-                let shareDialogText = `Hey! Just sending a little note because you crossed my mind. Hope you're well! - ${currentSenderName}`;
+                let shareDialogTitle = "Missing Our Friendship!";
+                let shareDialogText = `Hey! Just wanted to say I'm thinking of you and really missing our friendship. Hope you're doing well! - ${currentSenderName}`;
 
                 if (receivedFromName) { 
-                    shareDialogTitle = "Passing Along a Friendly Note!";
+                    shareDialogTitle = "Passing on a Friendship Thought!";
                 }
                 
                 const shareData = {
