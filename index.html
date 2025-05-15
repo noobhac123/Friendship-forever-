@@ -4,23 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title>A Friendly Hello Just For You! 😊</title>
-    <meta name="description" content="Someone special is thinking of you and sent a little message. Click to see! ✨">
+    <!-- Primary Meta Tags -->
+    <title>A Friendly Hello Just For You! 馃槉</title>
+    <meta name="description" content="Someone special is thinking of you and sent a little message. Click to see! 鉁�">
+
+    <!-- Open Graph / Facebook Meta Tags -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://friendship-forever.vercel.app/"> 
-    <meta property="og:title" content="A Friendly Hello Just For You! 👋">
-    <meta property="og:description" content="Someone special is thinking of you and sent a little message. Click to see! ✨">
+    <meta property="og:title" content="A Friendly Hello Just For You! 馃憢">
+    <meta property="og:description" content="Someone special is thinking of you and sent a little message. Click to see! 鉁�">
     <meta property="og:image" content="https://friendship-forever.vercel.app/image.jpg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:site_name" content="Friendship Forever">
+
+    <!-- Twitter Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://friendship-forever.vercel.app/">
-    <meta name="twitter:title" content="A Friendly Hello Just For You! 👋">
-    <meta name="twitter:description" content="Someone special is thinking of you and sent a little message. Click to see! ✨">
+    <meta name="twitter:title" content="A Friendly Hello Just For You! 馃憢">
+    <meta name="twitter:description" content="Someone special is thinking of you and sent a little message. Click to see! 鉁�">
     <meta name="twitter:image" content="https://friendship-forever.vercel.app/image.jpg">
+    <!-- <meta name="twitter:creator" content="@yourtwitterhandle"> -->
 
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Pacifico&display=swap');
@@ -29,23 +34,31 @@
             --bg-grad-start: #6a11cb; 
             --bg-grad-mid: #8E2DE2;   
             --bg-grad-end: #4A00E0;   
+            
             --card-bg: #ffffff;
             --text-primary: #333740; 
             --text-secondary: #555e6d;
             --accent-color: #7c4dff; 
             --highlight-accent: #ff4081; 
+            
             --input-border: #e0e2e7;
             --input-focus-border: var(--accent-color);
             --shadow-color: rgba(74, 0, 224, 0.15); 
-            --shadow-color-hover: rgba(74, 0, 224, 0.25);
             --button-text: #ffffff;
             --button-bg-start: var(--highlight-accent);
             --button-bg-end: var(--accent-color); 
             --footer-text-color: rgba(255, 255, 255, 0.9);
-            --ad-placeholder-min-height: 250px;
+
+            /* Ad Placeholder Styling (basic) - will be overridden by ad itself */
+            /* We can keep min-height for layout spacing if ad doesn't load */
+            --ad-placeholder-min-height: 250px; /* For 300x250 ad */
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
         body {
             font-family: 'Poppins', sans-serif;
@@ -60,7 +73,6 @@
             padding: 20px;
             color: var(--text-primary);
             overflow-x: hidden;
-            position: relative;
         }
 
         @keyframes gradientFlow {
@@ -68,20 +80,22 @@
             100% { background-position: 100% 50%; }
         }
 
-        #particles-canvas {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: 0; pointer-events: none;
-        }
-
         .page-wrapper { 
-            width: 100%; max-width: 500px; 
-            display: flex; flex-direction: column; align-items: center;
-            position: relative; z-index: 1;
+            width: 100%;
+            max-width: 500px; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         
-        .ad-container {
-            width: 100%; display: flex; justify-content: center; align-items: center;
-            margin: 20px 0; min-height: var(--ad-placeholder-min-height);
+        .ad-container { /* Changed from ad-placeholder to ad-container */
+            width: 100%;
+            display: flex; /* To center the 300px ad within the container */
+            justify-content: center;
+            align-items: center;
+            margin: 20px 0;
+            min-height: var(--ad-placeholder-min-height); /* Reserve space even if ad fails */
+            /* border: 1px dashed #ccc; */ /* Optional: for debugging ad space */
         }
 
         .container {
@@ -89,14 +103,13 @@
             padding: 35px 30px 30px 30px; 
             border-radius: 20px; 
             box-shadow: 0 12px 30px var(--shadow-color);
-            text-align: center; width: 100%; 
+            text-align: center;
+            width: 100%; 
             animation: popInSmooth 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.2s both; 
-            position: relative; z-index: 2;
-            transition: transform 0.3s ease, box-shadow 0.3s ease; /* For hover effect */
-        }
-        .container:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 18px 35px var(--shadow-color-hover);
+            position: relative;
+            z-index: 1;
+            /* margin-top: 10px;  Removed, ad-container handles spacing */
+            /* margin-bottom: 10px; Removed, ad-container handles spacing */
         }
 
         @keyframes popInSmooth {
@@ -104,299 +117,276 @@
             100% { opacity: 1; transform: scale(1) translateY(0); }
         }
         
-        /* Staggered load-in for content items */
-        .container > *:not(.greeting-icon) { /* Exclude icon from this specific initial state */
-            opacity: 0;
-            transform: translateY(15px);
-            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-        }
-        .container .greeting-icon { /* Already has its own animation */
-            transition: opacity 0.5s ease-out 0.7s, transform 0.5s ease-out 0.7s; /* Sync with other content appearing */
-        }
-
-        .container.content-loaded > .greeting-icon,
-        .container.content-loaded > h1,
-        .container.content-loaded > p.message,
-        .container.content-loaded > .input-group,
-        .container.content-loaded > button {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        /* Stagger delays using JS or more specific CSS if preferred */
-        .container.content-loaded > h1 { transition-delay: 0.1s; }
-        .container.content-loaded > p.message { transition-delay: 0.25s; }
-        .container.content-loaded > .input-group { transition-delay: 0.4s; }
-        .container.content-loaded > button { transition-delay: 0.4s; }
-
-
         .greeting-icon {
-            font-size: 3em; color: var(--highlight-accent); margin-bottom: 12px;
-            display: inline-block; animation: heartBeat 1.5s infinite ease-in-out;
+            font-size: 3em; 
+            color: var(--highlight-accent); 
+            margin-bottom: 12px;
+            display: inline-block;
+            animation: heartBeat 1.5s infinite ease-in-out;
         }
 
         @keyframes heartBeat {
-            0%, 70%, 100% { transform: scale(1); }
-            14%, 42% { transform: scale(1.2); }
+            0% { transform: scale(1); }
+            14% { transform: scale(1.2); }
+            28% { transform: scale(1); }
+            42% { transform: scale(1.2); }
+            70% { transform: scale(1); }
         }
 
+
         h1 {
-            font-family: 'Pacifico', cursive; font-size: 2.2em; color: var(--accent-color);
-            margin-bottom: 15px; font-weight: 400; line-height: 1.2;
+            font-family: 'Pacifico', cursive;
+            font-size: 2.2em; 
+            color: var(--accent-color);
+            margin-bottom: 15px;
+            font-weight: 400;
+            line-height: 1.2;
         }
         
         .highlight-name {
-            font-weight: 700; color: var(--highlight-accent); padding: 2px 6px;
-            border-radius: 4px; background-color: rgba(255, 64, 129, 0.12); 
+            font-weight: 700; 
+            color: var(--highlight-accent); 
+            padding: 2px 6px;
+            border-radius: 4px;
+            background-color: rgba(255, 64, 129, 0.12); 
             display: inline-block; 
         }
 
         p.message {
-            font-size: 1.05em; font-weight: 400; line-height: 1.7; 
-            margin-bottom: 25px; color: var(--text-secondary);
+            font-size: 1.05em; 
+            font-weight: 400; 
+            line-height: 1.7; 
+            margin-bottom: 25px;
+            color: var(--text-secondary);
         }
         
-        .input-group { margin-bottom: 25px; text-align: left; }
+        .input-group {
+            margin-bottom: 25px;
+            text-align: left;
+        }
 
         label {
-            display: block; font-size: 0.85em; color: var(--text-secondary);
-            margin-bottom: 6px; font-weight: 600; 
+            display: block;
+            font-size: 0.85em; 
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+            font-weight: 600; 
         }
 
         input[type="text"] {
-            width: 100%; padding: 12px 14px; border: 1.5px solid var(--input-border); 
-            border-radius: 10px; font-size: 1em; font-family: 'Poppins', sans-serif;
-            transition: all 0.3s ease; background-color: #fdfdff; color: var(--text-primary);
+            width: 100%; 
+            padding: 12px 14px; 
+            border: 1.5px solid var(--input-border); 
+            border-radius: 10px; 
+            font-size: 1em;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s ease;
+            background-color: #fdfdff; 
+            color: var(--text-primary);
         }
+
         input[type="text"]:focus {
-            outline: none; border-color: var(--input-focus-border);
-            box-shadow: 0 0 0 3px rgba(124, 77, 255, 0.2); background-color: #fff;
+            outline: none;
+            border-color: var(--input-focus-border);
+            box-shadow: 0 0 0 3px rgba(124, 77, 255, 0.2);
+            background-color: #fff;
         }
 
         button {
             background: linear-gradient(135deg, var(--button-bg-start), var(--button-bg-end)); 
-            background-size: 200% 200%; /* For gradient shift on hover */
-            color: var(--button-text); border: none; padding: 14px 28px; 
-            font-size: 1.05em; font-weight: 600; border-radius: 10px;
-            cursor: pointer; transition: all 0.3s ease;
-            display: flex; align-items: center; justify-content: center;
-            gap: 9px; width: 100%; text-shadow: 0 1px 1px rgba(0,0,0,0.15);
+            color: var(--button-text);
+            border: none;
+            padding: 14px 28px; 
+            font-size: 1.05em;
+            font-weight: 600;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+            width: 100%;
+            text-shadow: 0 1px 1px rgba(0,0,0,0.15);
         }
+
         button:hover {
             transform: translateY(-2px) scale(1.01);
-            box-shadow: 0 7px 14px rgba(74, 0, 224, 0.2), 0 0 15px rgba(255, 64, 129, 0.3); /* Added glow */
-            background-position: right center; /* Shift gradient */
+            box-shadow: 0 7px 14px rgba(74, 0, 224, 0.2);
         }
-        button:active {
-            transform: translateY(0px) scale(0.99);
-            box-shadow: 0 4px 8px rgba(74, 0, 224, 0.18);
+        
+        button svg {
+            width: 19px;
+            height: 19px;
+            fill: currentColor;
         }
-        button svg { width: 19px; height: 19px; fill: currentColor; }
 
         .footer-note {
-            margin-top: 20px; font-size: 0.9em; color: var(--footer-text-color); 
-            font-weight: 400; text-shadow: 0 1px 2px rgba(0,0,0,0.2);
-            position: relative; z-index: 1;
+            margin-top: 20px; 
+            font-size: 0.9em;
+            color: var(--footer-text-color); 
+            font-weight: 400;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
         }
 
+        /* Responsive adjustments */
         @media (max-width: 600px) {
-            .container { padding: 30px 25px 25px 25px; }
-            h1 { font-size: 2em; }
-            .greeting-icon { font-size: 2.8em; }
-            p.message { font-size: 1em; }
-            button { padding: 13px 22px; font-size: 1em; }
+            .container {
+                padding: 30px 25px 25px 25px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            .greeting-icon {
+                font-size: 2.8em;
+            }
+            p.message {
+                font-size: 1em;
+            }
+            button {
+                padding: 13px 22px;
+                font-size: 1em;
+            }
+            .ad-container {
+                min-height: 250px; /* Ensure space on mobile too */
+            }
         }
     </style>
 </head>
 <body>
-    <canvas id="particles-canvas"></canvas>
-
     <div class="page-wrapper">
+        <!-- Top Ad Slot -->
         <div class="ad-container ad-top">
             <script type="text/javascript">
-                atOptions = {'key' : '58d55d5d48a6447673ab2f1bb1c7de82', 'format' : 'iframe', 'height' : 250, 'width' : 300, 'params' : {}};
+                atOptions = {
+                    'key' : '58d55d5d48a6447673ab2f1bb1c7de82',
+                    'format' : 'iframe',
+                    'height' : 250,
+                    'width' : 300,
+                    'params' : {}
+                };
             </script>
             <script type="text/javascript" src="//maintaintournamentslick.com/58d55d5d48a6447673ab2f1bb1c7de82/invoke.js"></script>
         </div>
 
-        <div class="container" id="mainCard"> <!-- Added ID for easier targeting -->
-            <div class="greeting-icon">💖</div> 
-            <h1 id="mainHeading">Hey Friend! 👋</h1>
+        <div class="container">
+            <div class="greeting-icon">馃挅</div> 
+            <h1 id="mainHeading">Hey Friend! 馃憢</h1>
             <p id="messageText" class="message"></p> 
+            
             <div class="input-group">
                 <label for="currentUserNameInput">Your Name:</label>
-                <input type="text" id="currentUserNameInput" placeholder="So they know it's you! 😄">
+                <input type="text" id="currentUserNameInput" placeholder="So they know it's you! 馃槃">
             </div>
+
             <button id="shareButton">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.66 1.34 3 3 3s3-1.34 3-3-1.34-3-3-3z"/></svg>
                 Share a Smile
             </button>
         </div>
 
+        <!-- Bottom Ad Slot -->
         <div class="ad-container ad-bottom">
             <script type="text/javascript">
-                atOptions = {'key' : '58d55d5d48a6447673ab2f1bb1c7de82', 'format' : 'iframe', 'height' : 250, 'width' : 300, 'params' : {}};
+                atOptions = { // You might use a different key for a second ad unit
+                    'key' : '58d55d5d48a6447673ab2f1bb1c7de82', // Using same key for example
+                    'format' : 'iframe',
+                    'height' : 250,
+                    'width' : 300,
+                    'params' : {}
+                };
             </script>
             <script type="text/javascript" src="//maintaintournamentslick.com/58d55d5d48a6447673ab2f1bb1c7de82/invoke.js"></script>
         </div>
-        <p class="footer-note">Spread kindness, one message at a time! 💌</p>
+
+        <p class="footer-note">Spread kindness, one message at a time! 馃拰</p>
     </div>
 
     <script>
-        function randomInRange(min, max) { return Math.random() * (max - min) + min; }
-
-        const canvas = document.getElementById('particles-canvas');
-        const ctx = canvas.getContext('2d');
-        let particlesArray = [];
-        const particleCount = 70; // Increased slightly for a fuller effect
-        const particleColors = ['rgba(124, 77, 255, 0.5)','rgba(255, 64, 129, 0.4)','rgba(142, 45, 226, 0.4)','rgba(230, 230, 255, 0.6)'];
-        let mouse = { x: null, y: null, radius: 100 }; // Mouse interaction radius
-
-        window.addEventListener('mousemove', (event) => {
-            mouse.x = event.clientX;
-            mouse.y = event.clientY;
-        });
-        window.addEventListener('mouseout', () => { // Reset mouse when it leaves window
-            mouse.x = null;
-            mouse.y = null;
-        });
-
-
-        function setCanvasSize() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-
-        class Particle {
-            constructor(x, y, directionX, directionY, size, color) {
-                this.x = x; this.y = y;
-                this.baseX = this.x; this.baseY = this.y; // For returning to original path
-                this.directionX = directionX; this.directionY = directionY;
-                this.size = size; this.color = color;
-                this.density = (Math.random() * 30) + 1; // How much it reacts to mouse
-            }
-            draw() {
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2, false);
-                ctx.fillStyle = this.color; ctx.fill();
-            }
-            update() {
-                // Mouse interaction
-                if (mouse.x !== null && mouse.y !== null) {
-                    let dx = mouse.x - this.x;
-                    let dy = mouse.y - this.y;
-                    let distance = Math.sqrt(dx * dx + dy * dy);
-                    let forceDirectionX = dx / distance;
-                    let forceDirectionY = dy / distance;
-                    let maxDistance = mouse.radius;
-                    let force = (maxDistance - distance) / maxDistance; // Stronger when closer
-                    
-                    if (distance < mouse.radius) {
-                        this.x -= forceDirectionX * force * this.density * 0.1; // Adjusted multiplier
-                        this.y -= forceDirectionY * force * this.density * 0.1;
-                    } else {
-                        // Gently return to original path or continue normal random movement
-                        if (this.x !== this.baseX) {
-                            let dxReturn = this.x - this.baseX;
-                            this.x -= dxReturn / 20; // Slower return
-                        }
-                        if (this.y !== this.baseY) {
-                            let dyReturn = this.y - this.baseY;
-                            this.y -= dyReturn / 20;
-                        }
-                    }
-                }
-                
-                // Wall collision and general movement
-                if (this.x > canvas.width + this.size || this.x < -this.size) {
-                    this.directionX = -this.directionX;
-                    this.baseX = Math.random() * canvas.width; // Reset base when hitting far walls
-                }
-                if (this.y > canvas.height + this.size || this.y < -this.size) {
-                    this.directionY = -this.directionY;
-                    this.baseY = Math.random() * canvas.height;
-                }
-                this.x += this.directionX;
-                this.y += this.directionY;
-
-                // Update base for next frame if not strongly influenced by mouse
-                if ( (mouse.x === null) || Math.sqrt( (mouse.x-this.x)**2 + (mouse.y-this.y)**2 ) > mouse.radius + 20) {
-                    this.baseX += this.directionX;
-                    this.baseY += this.directionY;
-                }
-                
-                this.draw();
-            }
-        }
-
-        function initParticles() {
-            particlesArray = []; setCanvasSize();
-            for (let i = 0; i < particleCount; i++) {
-                let size = randomInRange(1.5, 4.5); // Slightly larger particles
-                let x = Math.random() * canvas.width; let y = Math.random() * canvas.height;
-                let directionX = randomInRange(-0.2, 0.2); let directionY = randomInRange(-0.2, 0.2);
-                let color = particleColors[Math.floor(Math.random() * particleColors.length)];
-                particlesArray.push(new Particle(x, y, directionX, directionY, size, color));
-            }
-        }
-        function animateParticles() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            for (let i = 0; i < particlesArray.length; i++) particlesArray[i].update();
-            requestAnimationFrame(animateParticles);
-        }
-        initParticles(); animateParticles();
-        window.addEventListener('resize', () => { initParticles(); });
-
-        function triggerButtonConfetti() { /* ... (confetti code from previous step, ensure zIndex: 3000) ... */ 
-            if (typeof confetti !== 'function') { return; }
-            const btnMainColors = ['#7c4dff', '#ff4081', '#6a11cb', '#ffffff'];
-            const btnStarColors = ['#FFD700', '#FFFAA0', '#FFFACD'];
-            confetti({ particleCount: 70, spread: 80, origin: { y: 0.6, x: 0.5 }, colors: btnMainColors, zIndex: 3000 });
-            setTimeout(() => {
-                confetti({ particleCount: 40, angle: 60, spread: 65, origin: { x: 0.25, y: 0.65 }, colors: btnMainColors, zIndex: 3000 });
-                confetti({ particleCount: 40, angle: 120, spread: 65, origin: { x: 0.75, y: 0.65 }, colors: btnMainColors, zIndex: 3000 });
-            }, 120);
-            setTimeout(() => {
-                confetti({ particleCount: 15, spread: 55, startVelocity: 30, origin: { y: 0.55, x: 0.5 }, decay: 0.92, gravity: 0.7, scalar: 1.4, shapes: ['star'], colors: btnStarColors, zIndex: 3000 });
-            }, 250);
-        }
-        function triggerWelcomeConfetti() { /* ... (confetti code from previous step, ensure zIndex: 3000) ... */
-            if (typeof confetti !== 'function') { return; }
-            const welcomeMainClrs = ['#7c4dff', '#ff4081', '#6a11cb', '#8E2DE2'];
-            const welcomeHglClrs = ['#FFD700', '#ff4081', '#f8bbd0'];
-            function burst(oX, oY, pC = 60, spr = 80, sV = 28, angMin = 45, angMax = 135, del = 0) {
-                setTimeout(() => {
-                    confetti({ particleCount: pC, spread: spr, origin: { x: oX, y: oY }, colors: welcomeMainClrs, startVelocity: sV, angle: randomInRange(angMin, angMax), zIndex: 3000 });
-                    if (Math.random() > 0.5) {
-                        confetti({ particleCount: pC / 3, spread: spr + 20, origin: { x: oX, y: oY }, colors: welcomeHglClrs, scalar: randomInRange(0.8, 1.2), shapes: ['star', 'circle'], startVelocity: sV * 0.8, angle: randomInRange(angMin, angMax), zIndex: 3001 });
-                    }
-                }, del);
-            }
-            // Adjusted delays for welcome confetti to sync with content load
-            burst(0.5, 0.25, 80, 100, 30, 60, 120, 0); 
-            burst(0.2, 0.35, 50, 70, 25, 45, 90, 150); 
-            burst(0.8, 0.35, 50, 70, 25, 90, 135, 150);
-            burst(0.35, 0.45, 40, 60, 22, 60, 120, 350); 
-            burst(0.65, 0.45, 40, 60, 22, 60, 120, 350); 
-            burst(0.5, 0.5, 30, 120, 20, 0, 360, 500);
-        }
-
         document.addEventListener('DOMContentLoaded', () => {
-            const mainCard = document.getElementById('mainCard');
             const urlParams = new URLSearchParams(window.location.search);
             const receivedFromName = urlParams.get('name'); 
+            
             const pageTitleElement = document.querySelector('title');
             const ogTitleMeta = document.querySelector('meta[property="og:title"]');
             const ogDescriptionMeta = document.querySelector('meta[property="og:description"]');
+            
             const currentUserNameInput = document.getElementById('currentUserNameInput');
             const shareButton = document.getElementById('shareButton');
             const mainHeadingElement = document.getElementById('mainHeading');
             const messageTextElement = document.getElementById('messageText'); 
             const greetingIconElement = document.querySelector('.greeting-icon');
-            const defaultPageTitle = "A Friendly Hello Just For You! 😊";
-            const defaultOgTitle = "A Friendly Hello Just For You! 👋"; 
-            const defaultOgDescription = "Someone special is thinking of you and sent a little message. Click to see! ✨"; 
-            const defaultMainHeading = "Hey Friend! 👋";
-            const defaultMessageText = `Just a little hello to say you crossed my mind! 😊 Missing our chats and the good times. Hope you're doing awesome! ✨<br><br>Want to send a smile to another friend? Add your name below! 👇`;
+
+            const defaultPageTitle = "A Friendly Hello Just For You! 馃槉";
+            const defaultOgTitle = "A Friendly Hello Just For You! 馃憢"; 
+            const defaultOgDescription = "Someone special is thinking of you and sent a little message. Click to see! 鉁�"; 
+            const defaultMainHeading = "Hey Friend! 馃憢";
+            const defaultMessageText = `
+                Just a little hello to say you crossed my mind! 馃槉 Missing our chats and the good times. Hope you're doing awesome! 鉁�
+                <br><br>Want to send a smile to another friend? Add your name below! 馃憞
+            `;
+            
             const canonicalUrl = "https://friendship-forever.vercel.app/"; 
 
-            if (receivedFromN
+            if (receivedFromName) {
+                const decodedName = decodeURIComponent(receivedFromName);
+
+                greetingIconElement.innerHTML = '馃摤'; 
+                mainHeadingElement.innerHTML = `A Smile For You! 馃槃`; 
+                
+                messageTextElement.innerHTML = `
+                    Hey there! Your friend, <span class="highlight-name">${decodedName}</span>, sent this to brighten your day! They're thinking of you and missing your awesome friendship. 馃槉
+                    <br><br>Feel like sharing the cheer? Add <strong>your name</strong> below and pass it on! 馃挅
+                `;
+                
+                if (pageTitleElement) pageTitleElement.textContent = `${decodedName} sent you a friendly hello!`;
+                if (ogTitleMeta) ogTitleMeta.setAttribute('content', `Message from ${decodedName}! 馃憢`);
+                if (ogDescriptionMeta) ogDescriptionMeta.setAttribute('content', `${decodedName} is thinking of you! Click to see.`);
+
+                currentUserNameInput.placeholder = "Enter *your* name to send a new message!";
+
+            } else {
+                mainHeadingElement.innerHTML = defaultMainHeading;
+                messageTextElement.innerHTML = defaultMessageText;
+                greetingIconElement.innerHTML = '馃挅';
+
+                if (pageTitleElement) pageTitleElement.textContent = defaultPageTitle;
+                if (ogTitleMeta) ogTitleMeta.setAttribute('content', defaultOgTitle);
+                if (ogDescriptionMeta) ogDescriptionMeta.setAttribute('content', defaultOgDescription);
+            }
+
+            shareButton.addEventListener('click', () => {
+                const nameEnteredByCurrentUser = currentUserNameInput.value.trim();
+                if (!nameEnteredByCurrentUser) {
+                    alert('Please add your name so your friend knows who sent this smile! 馃槃');
+                    currentUserNameInput.focus();
+                    return;
+                }
+
+                const shareUrl = `${canonicalUrl}?name=${encodeURIComponent(nameEnteredByCurrentUser)}`;
+                
+                let shareDialogTitle = "Sending a Smile Your Way! 馃槉"; 
+                let shareDialogText = `Hey! Just sending a little smile because you crossed my mind. Thinking of you! 鉁� - From ${nameEnteredByCurrentUser}`;
+                
+                const shareData = {
+                    title: shareDialogTitle, 
+                    text: shareDialogText,   
+                    url: shareUrl,           
+                };
+
+                if (navigator.share) {
+                    navigator.share(shareData)
+                        .then(() => console.log('Smile shared successfully!'))
+                        .catch((error) => {
+                            console.error('Error sharing:', error);
+                            alert(`Could not open share dialog. Here's the link to copy: ${shareUrl}`);
+                        });
+                } else {
+                    alert(`Your browser doesn't support direct sharing. Please copy this link: ${shareUrl}`);
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
