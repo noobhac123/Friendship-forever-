@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Missing Our Friendship</title>
+    <title>Missing Our Friendship Chain</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
 
@@ -15,6 +15,7 @@
             --card-bg: #ffffff;
             --shadow-color: rgba(0, 0, 0, 0.1);
             --button-hover-bg: #4a0c9b;
+            --highlight-color: #ffc107; /* A bright color for highlighting names */
         }
 
         body {
@@ -48,19 +49,22 @@
         }
 
         h1 {
-            font-size: 2.2em;
+            font-size: 2.0em; /* Slightly smaller to accommodate longer text */
             color: var(--primary-color);
             margin-bottom: 15px;
             font-weight: 700;
         }
         
-        #friendNameDisplay {
+        .highlight-name {
             color: var(--secondary-color);
-            font-weight: 600;
+            font-weight: 700;
+            background-color: #e9f2ff; /* Light blueish background for name */
+            padding: 2px 6px;
+            border-radius: 4px;
         }
 
         p {
-            font-size: 1.1em;
+            font-size: 1.05em; /* Adjusted for readability */
             line-height: 1.7;
             margin-bottom: 25px;
             color: #555;
@@ -138,10 +142,10 @@
                 width: 95%;
             }
             h1 {
-                font-size: 1.8em;
+                font-size: 1.7em;
             }
             p {
-                font-size: 1em;
+                font-size: 0.95em;
             }
             button {
                 padding: 12px 20px;
@@ -154,11 +158,11 @@
 
     <div class="container">
         <h1 id="mainHeading">Missing Our Friendship!</h1>
-        <p id="messageText">Hey there! Life feels a little less bright without our usual chats and laughs. Just wanted to let you know I'm thinking of you and missing our awesome friendship. <span id="senderSignature"></span></p>
+        <p id="messageText">Hey there! Life feels a little less bright without our usual chats and laughs. Just wanted to let you know I'm thinking of you and missing our awesome friendship. ❤️</p>
         
         <div class="input-group">
-            <label for="senderNameInput">Your Name (So they know who sent this!):</label>
-            <input type="text" id="senderNameInput" placeholder="Enter your name">
+            <label for="currentUserNameInput">Your Name (This name will be shared):</label>
+            <input type="text" id="currentUserNameInput" placeholder="Enter your name here">
         </div>
 
         <button id="shareButton">
@@ -167,45 +171,44 @@
         </button>
     </div>
 
-    <p class="footer-note">Made with ❤️ for a special friend.</p>
+    <p class="footer-note">Spread the love! Made for special friends.</p>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const urlParams = new URLSearchParams(window.location.search);
-            const friendName = urlParams.get('name');
-            const senderNameInput = document.getElementById('senderNameInput');
+            const receivedFromName = urlParams.get('name'); // Name of the person who sent THIS link
+
+            const currentUserNameInput = document.getElementById('currentUserNameInput');
             const shareButton = document.getElementById('shareButton');
             const mainHeading = document.getElementById('mainHeading');
             const messageText = document.getElementById('messageText');
-            const senderSignature = document.getElementById('senderSignature');
 
-            if (friendName) {
-                // This page is being viewed by the recipient
+            if (receivedFromName) {
+                // This page is being viewed by someone who received a link
                 mainHeading.innerHTML = `A Message For You!`;
-                messageText.innerHTML = `Hey! <span id="friendNameDisplay">${decodeURIComponent(friendName)}</span> is thinking of you and wanted to send some love. They're missing your friendship! Remember all the good times? Reach out and reconnect!`;
-                senderNameInput.style.display = 'none'; // Hide input if name is in URL
-                document.querySelector('label[for="senderNameInput"]').style.display = 'none';
-                shareButton.style.display = 'none'; // Hide share button for recipient
+                messageText.innerHTML = `Hey! <span class="highlight-name">${decodeURIComponent(receivedFromName)}</span> sent you this message because they're thinking of you and missing your friendship! 😊<br><br>Want to send a similar thought to someone else? Enter <strong>your name</strong> below and click share!`;
             } else {
-                // This page is being viewed by the sender
-                // Keep default messages or allow sender to customize.
-                // For this example, the default text is fine.
+                // This is the initial page, or someone opened it directly
+                // Default message is already set in HTML
             }
 
             shareButton.addEventListener('click', () => {
-                const senderName = senderNameInput.value.trim();
-                if (!senderName) {
+                const currentSenderName = currentUserNameInput.value.trim();
+                if (!currentSenderName) {
                     alert('Please enter your name so your friend knows who sent this!');
-                    senderNameInput.focus();
+                    currentUserNameInput.focus();
                     return;
                 }
 
-                // The link that will be shared. It includes the sender's name as a URL parameter.
-                const shareUrl = `${window.location.origin}${window.location.pathname}?name=${encodeURIComponent(senderName)}`;
+                // The link that will be shared. It ALWAYS includes the name from the input field.
+                const shareUrl = `${window.location.origin}${window.location.pathname}?name=${encodeURIComponent(currentSenderName)}`;
+                
+                // Generic share text, personalized with the current sender's name
+                const shareDialogText = `Hey! Just wanted to say I'm missing our friendship. Thinking of you! - ${currentSenderName}`;
                 
                 const shareData = {
-                    title: 'Missing Our Friendship!',
-                    text: `Hey! Just wanted to say I'm missing our friendship. Thinking of you! - ${senderName}`,
+                    title: 'A Friendly Hello!', // Changed title slightly for subsequent shares
+                    text: shareDialogText,
                     url: shareUrl,
                 };
 
@@ -214,15 +217,10 @@
                         .then(() => console.log('Message shared successfully!'))
                         .catch((error) => {
                             console.error('Error sharing:', error);
-                            // Fallback for browsers that might fail (e.g. desktop Chrome without specific flags)
-                            // or if user cancels the share.
-                            // You could prompt to copy link manually here.
                             alert(`Could not open share dialog. You can copy this link: ${shareUrl}`);
                         });
                 } else {
-                    // Fallback for browsers that don't support Web Share API
                     alert(`Your browser doesn't support direct sharing. Please copy this link and send it to your friend: ${shareUrl}`);
-                    // Optionally, you could implement a "copy to clipboard" function here.
                 }
             });
         });
