@@ -4,23 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title>A Friendly Hello Just For You! 😊</title>
-    <meta name="description" content="Someone special is thinking of you and sent a little message. Click to see! ✨">
+    <!-- Primary Meta Tags -->
+    <title>A Friendly Hello Just For You! 馃槉</title>
+    <meta name="description" content="Someone special is thinking of you and sent a little message. Click to see! 鉁�">
 
+    <!-- Open Graph / Facebook Meta Tags -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://friendship-forever.vercel.app/"> 
-    <meta property="og:title" content="A Friendly Hello Just For You! 👋">
-    <meta property="og:description" content="Someone special is thinking of you and sent a little message. Click to see! ✨">
+    <meta property="og:title" content="A Friendly Hello Just For You! 馃憢">
+    <meta property="og:description" content="Someone special is thinking of you and sent a little message. Click to see! 鉁�">
     <meta property="og:image" content="https://friendship-forever.vercel.app/image.jpg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:site_name" content="Friendship Forever">
 
+    <!-- Twitter Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://friendship-forever.vercel.app/">
-    <meta name="twitter:title" content="A Friendly Hello Just For You! 👋">
-    <meta name="twitter:description" content="Someone special is thinking of you and sent a little message. Click to see! ✨">
+    <meta name="twitter:title" content="A Friendly Hello Just For You! 馃憢">
+    <meta name="twitter:description" content="Someone special is thinking of you and sent a little message. Click to see! 鉁�">
     <meta name="twitter:image" content="https://friendship-forever.vercel.app/image.jpg">
+    <!-- <meta name="twitter:creator" content="@yourtwitterhandle"> -->
+
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Pacifico&display=swap');
@@ -40,19 +45,20 @@
             --input-focus-border: var(--accent-color);
             --shadow-color: rgba(74, 0, 224, 0.15); 
             --button-text: #ffffff;
-            
-            /* General Share Button Colors (can be same as highlight accent) */
-            --share-button-bg-start: var(--highlight-accent);
-            --share-button-bg-end: var(--accent-color); 
-            --share-button-hover-bg-start: var(--accent-color);
-            --share-button-hover-bg-end: var(--highlight-accent);
-
-
+            --button-bg-start: var(--highlight-accent);
+            --button-bg-end: var(--accent-color); 
             --footer-text-color: rgba(255, 255, 255, 0.9);
-            --ad-placeholder-min-height: 250px; 
+
+            /* Ad Placeholder Styling (basic) - will be overridden by ad itself */
+            /* We can keep min-height for layout spacing if ad doesn't load */
+            --ad-placeholder-min-height: 250px; /* For 300x250 ad */
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
         body {
             font-family: 'Poppins', sans-serif;
@@ -82,13 +88,14 @@
             align-items: center;
         }
         
-        .ad-container { 
+        .ad-container { /* Changed from ad-placeholder to ad-container */
             width: 100%;
-            display: flex; 
+            display: flex; /* To center the 300px ad within the container */
             justify-content: center;
             align-items: center;
             margin: 20px 0;
-            min-height: var(--ad-placeholder-min-height); 
+            min-height: var(--ad-placeholder-min-height); /* Reserve space even if ad fails */
+            /* border: 1px dashed #ccc; */ /* Optional: for debugging ad space */
         }
 
         .container {
@@ -101,6 +108,8 @@
             animation: popInSmooth 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.2s both; 
             position: relative;
             z-index: 1;
+            /* margin-top: 10px;  Removed, ad-container handles spacing */
+            /* margin-bottom: 10px; Removed, ad-container handles spacing */
         }
 
         @keyframes popInSmooth {
@@ -123,6 +132,7 @@
             42% { transform: scale(1.2); }
             70% { transform: scale(1); }
         }
+
 
         h1 {
             font-family: 'Pacifico', cursive;
@@ -182,9 +192,8 @@
             background-color: #fff;
         }
 
-        /* General Share Button Style */
-        .general-share-button {
-            background: linear-gradient(135deg, var(--share-button-bg-start), var(--share-button-bg-end)); 
+        button {
+            background: linear-gradient(135deg, var(--button-bg-start), var(--button-bg-end)); 
             color: var(--button-text);
             border: none;
             padding: 14px 28px; 
@@ -192,24 +201,23 @@
             font-weight: 600;
             border-radius: 10px;
             cursor: pointer;
-            transition: all 0.3s ease; /* For background and transform */
+            transition: all 0.3s ease;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 9px;
             width: 100%;
             text-shadow: 0 1px 1px rgba(0,0,0,0.15);
         }
 
-        .general-share-button:hover {
-            background: linear-gradient(135deg, var(--share-button-hover-bg-start), var(--share-button-hover-bg-end));
+        button:hover {
             transform: translateY(-2px) scale(1.01);
-            box-shadow: 0 7px 14px rgba(74,0,224,0.2); /* Using existing shadow color */
+            box-shadow: 0 7px 14px rgba(74, 0, 224, 0.2);
         }
         
-        .general-share-button .share-icon svg { /* General share icon */
-            width: 20px; 
-            height: 20px;
+        button svg {
+            width: 19px;
+            height: 19px;
             fill: currentColor;
         }
 
@@ -221,8 +229,27 @@
             text-shadow: 0 1px 2px rgba(0,0,0,0.2);
         }
 
+        /* Responsive adjustments */
         @media (max-width: 600px) {
-            /* Responsive styles from before */
+            .container {
+                padding: 30px 25px 25px 25px;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            .greeting-icon {
+                font-size: 2.8em;
+            }
+            p.message {
+                font-size: 1em;
+            }
+            button {
+                padding: 13px 22px;
+                font-size: 1em;
+            }
+            .ad-container {
+                min-height: 250px; /* Ensure space on mobile too */
+            }
         }
     </style>
 </head>
@@ -243,22 +270,17 @@
         </div>
 
         <div class="container">
-            <div class="greeting-icon">💖</div> 
-            <h1 id="mainHeading">Hey Friend! 👋</h1>
+            <div class="greeting-icon">馃挅</div> 
+            <h1 id="mainHeading">Hey Friend! 馃憢</h1>
             <p id="messageText" class="message"></p> 
             
             <div class="input-group">
                 <label for="currentUserNameInput">Your Name:</label>
-                <input type="text" id="currentUserNameInput" placeholder="So they know it's you! 😄">
+                <input type="text" id="currentUserNameInput" placeholder="So they know it's you! 馃槃">
             </div>
 
-            <!-- General Share Button -->
-            <button id="generalShareButton" class="general-share-button">
-                <span class="share-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.66 1.34 3 3 3s3-1.34 3-3-1.34-3-3-3z"/>
-                    </svg>
-                </span>
+            <button id="shareButton">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.66 1.34 3 3 3s3-1.34 3-3-1.34-3-3-3z"/></svg>
                 Share a Smile
             </button>
         </div>
@@ -266,8 +288,8 @@
         <!-- Bottom Ad Slot -->
         <div class="ad-container ad-bottom">
             <script type="text/javascript">
-                atOptions = { 
-                    'key' : '58d55d5d48a6447673ab2f1bb1c7de82', 
+                atOptions = { // You might use a different key for a second ad unit
+                    'key' : '58d55d5d48a6447673ab2f1bb1c7de82', // Using same key for example
                     'format' : 'iframe',
                     'height' : 250,
                     'width' : 300,
@@ -277,7 +299,7 @@
             <script type="text/javascript" src="//maintaintournamentslick.com/58d55d5d48a6447673ab2f1bb1c7de82/invoke.js"></script>
         </div>
 
-        <p class="footer-note">Spread kindness, one message at a time! 💌</p>
+        <p class="footer-note">Spread kindness, one message at a time! 馃拰</p>
     </div>
 
     <script>
@@ -288,110 +310,79 @@
             const pageTitleElement = document.querySelector('title');
             const ogTitleMeta = document.querySelector('meta[property="og:title"]');
             const ogDescriptionMeta = document.querySelector('meta[property="og:description"]');
-            const ogUrlMeta = document.querySelector('meta[property="og:url"]'); 
-            const twitterUrlMeta = document.querySelector('meta[name="twitter:url"]'); 
             
             const currentUserNameInput = document.getElementById('currentUserNameInput');
-            const generalShareButton = document.getElementById('generalShareButton'); // Changed ID
+            const shareButton = document.getElementById('shareButton');
             const mainHeadingElement = document.getElementById('mainHeading');
             const messageTextElement = document.getElementById('messageText'); 
             const greetingIconElement = document.querySelector('.greeting-icon');
 
-            const defaultPageTitle = "A Friendly Hello Just For You! 😊";
-            const defaultOgTitle = "A Friendly Hello Just For You! 👋"; 
-            const defaultOgDescription = "Someone special is thinking of you and sent a little message. Click to see! ✨"; 
-            const defaultMainHeading = "Hey Friend! 👋";
+            const defaultPageTitle = "A Friendly Hello Just For You! 馃槉";
+            const defaultOgTitle = "A Friendly Hello Just For You! 馃憢"; 
+            const defaultOgDescription = "Someone special is thinking of you and sent a little message. Click to see! 鉁�"; 
+            const defaultMainHeading = "Hey Friend! 馃憢";
             const defaultMessageText = `
-                Just a little hello to say you crossed my mind! 😊 Missing our chats and the good times. Hope you're doing awesome! ✨
-                <br><br>Want to send a smile to another friend? Add your name below! 👇
+                Just a little hello to say you crossed my mind! 馃槉 Missing our chats and the good times. Hope you're doing awesome! 鉁�
+                <br><br>Want to send a smile to another friend? Add your name below! 馃憞
             `;
             
             const canonicalUrl = "https://friendship-forever.vercel.app/"; 
-            if (ogUrlMeta && ogUrlMeta.getAttribute('content') !== canonicalUrl) {
-                 ogUrlMeta.setAttribute('content', canonicalUrl);
-            }
-            if (twitterUrlMeta && twitterUrlMeta.getAttribute('content') !== canonicalUrl) {
-                twitterUrlMeta.setAttribute('content', canonicalUrl);
-            }
 
             if (receivedFromName) {
                 const decodedName = decodeURIComponent(receivedFromName);
-                greetingIconElement.innerHTML = '📬'; 
-                mainHeadingElement.innerHTML = `A Smile For You! 😄`; 
-                messageTextElement.innerHTML = `
-                    Hey there! Your friend, <span class="highlight-name">${decodedName}</span>, sent this to brighten your day! They're thinking of you and missing your awesome friendship. 😊
-                    <br><br>Feel like sharing the cheer? Add <strong>your name</strong> below and pass it on! 💖
-                `;
-                if (pageTitleElement) pageTitleElement.textContent = `${decodedName} sent you a friendly hello!`;
+
+                greetingIconElement.innerHTML = '馃摤'; 
+                mainHeadingElement.innerHTML = `A Smile For You! 馃槃`; 
                 
-                const currentUrlWithName = `${canonicalUrl}?name=${encodeURIComponent(decodedName)}`;
-                if (ogUrlMeta) ogUrlMeta.setAttribute('content', currentUrlWithName); 
-                if (twitterUrlMeta) twitterUrlMeta.setAttribute('content', currentUrlWithName); 
-                if (ogTitleMeta) ogTitleMeta.setAttribute('content', `Message from ${decodedName}! 👋`);
+                messageTextElement.innerHTML = `
+                    Hey there! Your friend, <span class="highlight-name">${decodedName}</span>, sent this to brighten your day! They're thinking of you and missing your awesome friendship. 馃槉
+                    <br><br>Feel like sharing the cheer? Add <strong>your name</strong> below and pass it on! 馃挅
+                `;
+                
+                if (pageTitleElement) pageTitleElement.textContent = `${decodedName} sent you a friendly hello!`;
+                if (ogTitleMeta) ogTitleMeta.setAttribute('content', `Message from ${decodedName}! 馃憢`);
                 if (ogDescriptionMeta) ogDescriptionMeta.setAttribute('content', `${decodedName} is thinking of you! Click to see.`);
+
                 currentUserNameInput.placeholder = "Enter *your* name to send a new message!";
+
             } else {
                 mainHeadingElement.innerHTML = defaultMainHeading;
                 messageTextElement.innerHTML = defaultMessageText;
-                greetingIconElement.innerHTML = '💖';
+                greetingIconElement.innerHTML = '馃挅';
+
                 if (pageTitleElement) pageTitleElement.textContent = defaultPageTitle;
                 if (ogTitleMeta) ogTitleMeta.setAttribute('content', defaultOgTitle);
                 if (ogDescriptionMeta) ogDescriptionMeta.setAttribute('content', defaultOgDescription);
-                if (ogUrlMeta) ogUrlMeta.setAttribute('content', canonicalUrl);
-                if (twitterUrlMeta) twitterUrlMeta.setAttribute('content', canonicalUrl);
             }
 
-            generalShareButton.addEventListener('click', () => { // Event listener on new button ID
+            shareButton.addEventListener('click', () => {
                 const nameEnteredByCurrentUser = currentUserNameInput.value.trim();
                 if (!nameEnteredByCurrentUser) {
-                    alert('Please add your name so your friend knows who sent this smile! 😄');
+                    alert('Please add your name so your friend knows who sent this smile! 馃槃');
                     currentUserNameInput.focus();
                     return;
                 }
 
-                const shareUrlWithParam = `${canonicalUrl}?name=${encodeURIComponent(nameEnteredByCurrentUser)}`;
+                const shareUrl = `${canonicalUrl}?name=${encodeURIComponent(nameEnteredByCurrentUser)}`;
                 
-                // --- Store original OG tags before attempting to update ---
-                const originalOgUrl = ogUrlMeta ? ogUrlMeta.getAttribute('content') : canonicalUrl;
-                const originalTwitterUrl = twitterUrlMeta ? twitterUrlMeta.getAttribute('content') : canonicalUrl;
-                const originalOgTitle = ogTitleMeta ? ogTitleMeta.getAttribute('content') : defaultOgTitle;
-                const originalOgDescription = ogDescriptionMeta ? ogDescriptionMeta.getAttribute('content') : defaultOgDescription;
-
-                // --- Temporarily update OG tags for the share action ---
-                if (ogUrlMeta) ogUrlMeta.setAttribute('content', shareUrlWithParam);
-                if (twitterUrlMeta) twitterUrlMeta.setAttribute('content', shareUrlWithParam);
-                if (ogTitleMeta) ogTitleMeta.setAttribute('content', `Message from ${nameEnteredByCurrentUser}! 👋`); // Personalized title for OG
-                if (ogDescriptionMeta) ogDescriptionMeta.setAttribute('content', `${nameEnteredByCurrentUser} is thinking of you! Click to see.`); // Personalized desc for OG
-                // --- End of temporary OG update ---
-
+                let shareDialogTitle = "Sending a Smile Your Way! 馃槉"; 
+                let shareDialogText = `Hey! Just sending a little smile because you crossed my mind. Thinking of you! 鉁� - From ${nameEnteredByCurrentUser}`;
+                
                 const shareData = {
-                    title: `A friendly hello from ${nameEnteredByCurrentUser}! 😊`, // This title is for the share dialog
-                    text: `Hey! ${nameEnteredByCurrentUser} sent you a friendly message. Check it out! ✨`, // This text is for the share dialog
-                    url: shareUrlWithParam,  // This URL contains the name for the recipient page
+                    title: shareDialogTitle, 
+                    text: shareDialogText,   
+                    url: shareUrl,           
                 };
-
-                function revertOgTags() {
-                    if (ogUrlMeta) ogUrlMeta.setAttribute('content', originalOgUrl);
-                    if (twitterUrlMeta) twitterUrlMeta.setAttribute('content', originalTwitterUrl);
-                    if (ogTitleMeta) ogTitleMeta.setAttribute('content', originalOgTitle);
-                    if (ogDescriptionMeta) ogDescriptionMeta.setAttribute('content', originalOgDescription);
-                }
 
                 if (navigator.share) {
                     navigator.share(shareData)
-                        .then(() => {
-                            console.log('Smile shared successfully!');
-                            revertOgTags();
-                        })
+                        .then(() => console.log('Smile shared successfully!'))
                         .catch((error) => {
                             console.error('Error sharing:', error);
-                            alert(`Could not open share dialog. Here's the link to copy: ${shareUrlWithParam}`);
-                            revertOgTags();
+                            alert(`Could not open share dialog. Here's the link to copy: ${shareUrl}`);
                         });
                 } else {
-                    alert(`Your browser doesn't support direct sharing. Please copy this link and send it to your friend: ${shareUrlWithParam}`);
-                    // No OG tags were changed for this specific fallback, so no explicit revert needed here
-                    // if they were already set correctly based on `receivedFromName`
+                    alert(`Your browser doesn't support direct sharing. Please copy this link: ${shareUrl}`);
                 }
             });
         });
